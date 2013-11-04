@@ -1,0 +1,74 @@
+<!-- Written by: Gustavo Maturana -->
+<!-- Date: October 31, 2013 -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="1dp"
+    android:layout_marginTop="1dp"
+    android:layout_marginLeft="1dp"
+    android:layout_marginRight="1dp"
+    android:background="#339966" >
+
+    <ImageButton
+        android:id="@+id/recipe_btn"
+        android:layout_width="103dip"
+        android:layout_height="49dip"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:adjustViewBounds="true"
+        android:background="#339966"
+        android:scaleType="fitCenter"
+        android:src="@drawable/recipe_btn_layout"
+        android:layout_marginBottom="1dp"
+    	android:layout_marginTop="1dp"
+    	android:layout_marginLeft="1dp"
+    	/>
+		<!-- android:scaleType="fitCenter" adjust picture to fit button -->
+    <ImageButton
+        android:id="@+id/search_btn"
+        android:layout_width="103dip"
+        android:layout_height="49dip"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:adjustViewBounds="true"
+        android:background="#339966"
+        android:scaleType="fitCenter"
+        android:src="@drawable/search_store_btn_layout" 
+        android:layout_marginBottom="1dp"
+    	android:layout_marginTop="1dp"
+        />
+
+    <ImageButton
+        android:id="@+id/edit_btn"
+        android:layout_width="103dip"
+        android:layout_height="49dip"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:adjustViewBounds="true"
+        android:background="#339966"
+        android:scaleType="fitCenter"
+        android:src="@drawable/edit_btn_layout"
+        android:layout_marginBottom="1dp"
+    	android:layout_marginTop="1dp"
+    	android:layout_marginRight="1dp"
+         />
+
+    <ListView
+        android:id="@+id/glist"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/recipe_btn"
+        android:layout_alignLeft="@+id/recipe_btn"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/edit_btn"
+        android:background="#ffffff"
+        android:divider="#b5b5b5"
+        android:dividerHeight="1dp" 
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="2dp"
+    	android:layout_marginRight="2dp"
+    	/>
+
+
+</RelativeLayout>

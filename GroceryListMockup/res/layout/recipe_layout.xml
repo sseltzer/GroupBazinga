@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="299dp"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_centerHorizontal="true"
+    android:padding="3dp"
+    android:background="#ffffff" >
+    
+   <!-- Recipe Image -->
+   <!-- (recipeImage) -->
+   <LinearLayout 
+       android:id="@+id/recipeImage"
+       android:layout_width="wrap_content" 
+           android:layout_height="wrap_content"
+           android:padding="2dp"
+           android:layout_alignParentLeft="true"
+           android:layout_marginRight="5dp"
+      >
+      <!-- Chicken.png Image is just a default -->
+      <!-- (recipeImage) -->
+      <ImageView 
+          android:id="@+id/foodImage"
+          android:layout_width="45dp"
+          android:layout_height="45dp"
+          android:src="@drawable/chicken"/>
+      
+   </LinearLayout>
+   
+   <!-- Recipe Title (songTitle)-->
+   <TextView 
+       android:id="@+id/recipeTitle"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignTop="@+id/recipeImage"
+       android:layout_toRightOf="@+id/recipeImage"
+       android:text="@string/recipe_name"
+       android:textSize="15dp"
+       android:textStyle="bold"
+       android:textColor="#7E0606"
+       android:typeface="serif"
+       
+       />
+   
+   <!-- Name of the author -->
+   <!-- (authorName) -->
+   <TextView
+       android:id="@+id/authorName"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:layout_below="@+id/recipeTitle"
+       android:layout_toRightOf="@+id/recipeImage"
+       android:layout_marginTop="2dp"
+       android:text="@string/recipe_author"
+       android:textSize="11dp"
+       android:textStyle="bold"
+       android:textColor="#000000"
+       android:typeface="serif"
+       />
+   
+
+
+</RelativeLayout>

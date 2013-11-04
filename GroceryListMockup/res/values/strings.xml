@@ -1,0 +1,20 @@
+<resources>
+
+    <!-- Labels used in application -->
+    <!-- Written by: Gustavo Maturana -->
+    <!-- file: strings.xml -->
+    <!-- Date: November, 3, 2013 -->
+    <string name="app_name">Grocery List</string>
+    
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">Grocery LIST</string>
+    <string name="recipe_btn">RECIPE</string>
+    <string name="search_btn">STORE SEARCH</string>
+    <string name="edit_btn">EDIT BUTTON</string>
+    <string name="desc">Description</string>
+    <string name="list_name">List Title</string>
+    <string name="about_label">About</string>
+    <string name="recipe_author">Recipe Author</string>
+    <string name="recipe_name">Name of Recipe</string>
+
+</resources>
