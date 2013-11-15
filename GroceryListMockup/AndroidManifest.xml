@@ -23,9 +23,76 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <!-- MainActivity -->
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+              <!--  <category android:name="android.intent.category.LAUNCHER" /> -->
+            
+            </intent-filter>
+        </activity>
+        
+        <!-- GroceryList Activity -->
+        <activity
+            android:name=".GroceryList"
+            android:label="@string/app_name"
+            android:parentActivityName=".MainActivity"
+            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"
+                />"
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+              <!--  <category android:name="android.intent.category.LAUNCHER" /> -->
+            
+            </intent-filter>
+        </activity>
+        
+        <!-- AboutClass Activity -->
+        <activity
+            android:name=".AboutClass" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+              <!--  <category android:name="android.intent.category.LAUNCHER" /> -->
+            
+            </intent-filter>
+        </activity>
+        
+        <!-- RecipeClass Activity -->
+        <activity
+            android:name=".RecipeClass"
+            android:label="@string/app_name"
+            android:parentActivityName=".MainActivity"
+            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"
+                />"
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+              <!--  <category android:name="android.intent.category.LAUNCHER" /> -->
+            
+            </intent-filter>
+        </activity>
+        
+        <!-- ViewRecipe Class Activity -->
+        <activity
+            android:name=".ViewRecipe"
+            android:label="@string/app_name"
+            android:parentActivityName=".RecipeClass"
+            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".RecipeClass"
+                />"
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

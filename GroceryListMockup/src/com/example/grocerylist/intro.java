@@ -1,6 +1,8 @@
-// Written by: Gustavo Maturana
-// Date: 11/01/13
-// Course: CEN4020
+/*
+ * Group: BAZINGA!
+ * @author: Gustavo Maturana
+ * date: 11/01/13
+*/
 
 package com.example.grocerylist;
 

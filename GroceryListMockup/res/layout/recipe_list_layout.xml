@@ -1,8 +1,5 @@
 <!-- Written by: Gustavo Maturana -->
-<!-- Date: 11/01/13-->
-<!-- File: list.xml -->
-<!-- Grocery List -->
-
+<!-- Date: October 31, 2013 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,7 +11,7 @@
     android:background="#339966" >
 
     <ImageButton
-        android:id="@+id/recipe_btn"
+        android:id="@+id/mylist_btn"
         android:layout_width="103dip"
         android:layout_height="49dip"
         android:layout_alignParentBottom="true"
@@ -22,7 +19,7 @@
         android:adjustViewBounds="true"
         android:background="#339966"
         android:scaleType="fitCenter"
-        android:src="@drawable/recipe_btn_layout"
+        android:src="@drawable/mylist_btn_layout"
         android:layout_marginBottom="1dp"
     	android:layout_marginTop="1dp"
     	android:layout_marginLeft="1dp"
@@ -40,13 +37,10 @@
         android:src="@drawable/search_store_btn_layout" 
         android:layout_marginBottom="1dp"
     	android:layout_marginTop="1dp"
-    	android:layout_marginLeft="1dp"
-    	android:layout_marginRight="1dp"
         />
 
     <ImageButton
-        android:id="@+id/additem_btn"
-        android:contentDescription="@string/desc"
+        android:id="@+id/edit_btn"
         android:layout_width="103dip"
         android:layout_height="49dip"
         android:layout_alignParentBottom="true"
@@ -54,11 +48,27 @@
         android:adjustViewBounds="true"
         android:background="#339966"
         android:scaleType="fitCenter"
-        android:src="@drawable/additem_btn_layout"
+        android:src="@drawable/edit_btn_layout"
         android:layout_marginBottom="1dp"
     	android:layout_marginTop="1dp"
     	android:layout_marginRight="1dp"
          />
+
+    <ListView
+        android:id="@+id/recipelist"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/mylist_btn"
+        android:layout_alignLeft="@+id/mylist_btn"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/edit_btn"
+        android:background="#ffffff"
+        android:divider="#b5b5b5"
+        android:dividerHeight="1dp" 
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="2dp"
+    	android:layout_marginRight="2dp"
+    	/>
 
 
 </RelativeLayout>

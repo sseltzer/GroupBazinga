@@ -11,55 +11,75 @@ public final class R {
     public static final class attr {
     }
     public static final class drawable {
-        public static final int back_btn=0x7f020000;
-        public static final int chicken=0x7f020001;
-        public static final int edit=0x7f020002;
-        public static final int edit_btn_layout=0x7f020003;
-        public static final int edit_pressed=0x7f020004;
-        public static final int file=0x7f020005;
-        public static final int ic_action_search=0x7f020006;
-        public static final int ic_launcher=0x7f020007;
-        public static final int recipe=0x7f020008;
-        public static final int recipe2=0x7f020009;
-        public static final int recipe_btn_layout=0x7f02000a;
-        public static final int recipe_pressed=0x7f02000b;
-        public static final int search=0x7f02000c;
-        public static final int search_store_btn_layout=0x7f02000d;
-        public static final int splash=0x7f02000e;
-        public static final int store_search=0x7f02000f;
-        public static final int store_search_pressed=0x7f020010;
+        public static final int add_btn=0x7f020000;
+        public static final int add_btn_layout=0x7f020001;
+        public static final int add_btn_pressed=0x7f020002;
+        public static final int additem=0x7f020003;
+        public static final int additem_btn_layout=0x7f020004;
+        public static final int additem_pressed=0x7f020005;
+        public static final int back_btn=0x7f020006;
+        public static final int chicken=0x7f020007;
+        public static final int edit=0x7f020008;
+        public static final int edit_btn_layout=0x7f020009;
+        public static final int edit_pressed=0x7f02000a;
+        public static final int file=0x7f02000b;
+        public static final int ic_action_search=0x7f02000c;
+        public static final int ic_launcher=0x7f02000d;
+        public static final int mylist=0x7f02000e;
+        public static final int mylist_btn_layout=0x7f02000f;
+        public static final int mylist_pressed=0x7f020010;
+        public static final int recipe=0x7f020011;
+        public static final int recipe2=0x7f020012;
+        public static final int recipe_btn_layout=0x7f020013;
+        public static final int recipe_pressed=0x7f020014;
+        public static final int row_corners=0x7f020015;
+        public static final int search=0x7f020016;
+        public static final int search_r_btn=0x7f020017;
+        public static final int search_store_btn_layout=0x7f020018;
+        public static final int splash=0x7f020019;
+        public static final int store_search=0x7f02001a;
+        public static final int store_search_pressed=0x7f02001b;
     }
     public static final class id {
-        public static final int about=0x7f070013;
+        public static final int about=0x7f070018;
+        public static final int additem_btn=0x7f07000a;
         public static final int authorName=0x7f070010;
-        public static final int backBotton=0x7f070006;
-        public static final int checkBox=0x7f07000c;
-        public static final int edit_btn=0x7f070002;
+        public static final int checkBox=0x7f07000b;
+        public static final int college_label=0x7f070004;
+        public static final int course_label=0x7f070002;
+        public static final int edit_btn=0x7f070007;
         public static final int foodImage=0x7f07000e;
-        public static final int glist=0x7f070003;
-        public static final int introscreen=0x7f070004;
-        public static final int listTitle=0x7f07000b;
-        public static final int menu_settings=0x7f070011;
+        public static final int glist=0x7f070008;
+        public static final int group_label=0x7f070001;
+        public static final int introscreen=0x7f070009;
+        public static final int listTitle=0x7f07000c;
+        public static final int menu_settings=0x7f070016;
+        public static final int mylist_btn=0x7f070011;
+        public static final int okBtn=0x7f070000;
         public static final int recipeImage=0x7f07000d;
         public static final int recipeTitle=0x7f07000f;
-        public static final int recipe_btn=0x7f070000;
-        public static final int search_Store=0x7f070012;
-        public static final int search_btn=0x7f070001;
-        public static final int tableRow1=0x7f070005;
-        public static final int tableRow2=0x7f070008;
-        public static final int tableRow3=0x7f070009;
-        public static final int tableRow4=0x7f07000a;
-        public static final int textView1=0x7f070007;
+        public static final int recipe_btn=0x7f070005;
+        public static final int recipelist=0x7f070012;
+        public static final int search=0x7f070015;
+        public static final int searchText=0x7f070014;
+        public static final int search_Store=0x7f070017;
+        public static final int search_btn=0x7f070006;
+        public static final int tableRow1=0x7f070013;
+        public static final int year=0x7f070003;
     }
     public static final class layout {
-        public static final int activity_main=0x7f030000;
-        public static final int intro=0x7f030001;
-        public static final int list=0x7f030002;
-        public static final int list_layout=0x7f030003;
-        public static final int recipe_layout=0x7f030004;
+        public static final int about_layout=0x7f030000;
+        public static final int activity_main=0x7f030001;
+        public static final int intro=0x7f030002;
+        public static final int list=0x7f030003;
+        public static final int list_layout=0x7f030004;
+        public static final int recipe_layout=0x7f030005;
+        public static final int recipe_list_layout=0x7f030006;
+        public static final int view_recipe_page_layout=0x7f030007;
     }
     public static final class menu {
         public static final int activity_main=0x7f060000;
+        public static final int recipe_list_layout=0x7f060001;
     }
     public static final class string {
         public static final int about_label=0x7f040008;
@@ -69,14 +89,19 @@ public final class R {
  Date: November, 3, 2013 
          */
         public static final int app_name=0x7f040000;
+        public static final int course=0x7f04000c;
         public static final int desc=0x7f040006;
         public static final int edit_btn=0x7f040005;
+        public static final int fsu=0x7f04000f;
+        public static final int group=0x7f04000d;
         public static final int list_name=0x7f040007;
         public static final int menu_settings=0x7f040001;
+        public static final int ok_button=0x7f04000b;
         public static final int recipe_author=0x7f040009;
         public static final int recipe_btn=0x7f040003;
         public static final int recipe_name=0x7f04000a;
         public static final int search_btn=0x7f040004;
+        public static final int term=0x7f04000e;
         public static final int title_activity_main=0x7f040002;
     }
     public static final class style {
