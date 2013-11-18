@@ -21,16 +21,16 @@ public class Retriever extends AsyncTask<String, Void, String> {
     for (String url : urls) {
       HttpClient placesClient = new DefaultHttpClient();
       try {
-        HttpGet placesGet = new HttpGet(url);
-        HttpResponse placesResponse = placesClient.execute(placesGet);
+        HttpGet httpGet = new HttpGet(url);
+        HttpResponse placesResponse = placesClient.execute(httpGet);
         StatusLine placeSearchStatus = placesResponse.getStatusLine();
         if (placeSearchStatus.getStatusCode() == 200) {
-          HttpEntity placesEntity = placesResponse.getEntity();
-          InputStream placesContent = placesEntity.getContent();
-          InputStreamReader placesInput = new InputStreamReader(placesContent);
-          BufferedReader placesReader = new BufferedReader(placesInput);
+          HttpEntity httpEntity = placesResponse.getEntity();
+          InputStream inputStream = httpEntity.getContent();
+          InputStreamReader placesInput = new InputStreamReader(inputStream);
+          BufferedReader bufferedReader = new BufferedReader(placesInput);
           String lineIn;
-          while ((lineIn = placesReader.readLine()) != null)
+          while ((lineIn = bufferedReader.readLine()) != null)
             responseBuilder.append(lineIn);
         }
       } catch (Exception e) {
@@ -39,5 +39,4 @@ public class Retriever extends AsyncTask<String, Void, String> {
     }
     return responseBuilder.toString();
   }
-
 }
