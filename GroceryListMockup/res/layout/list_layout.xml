@@ -5,7 +5,8 @@
     android:layout_centerHorizontal="true"
     android:background="#FFFFFF"
     android:orientation="horizontal"
-    android:padding="3dp" >
+    android:padding="3dp"
+    android:descendantFocusability="blocksDescendants">
 
     <!-- Grocery List Title (listTitle) -->
     <!-- Check Box in front of List -->
