@@ -8,47 +8,64 @@
     android:layout_marginTop="1dp"
     android:layout_marginLeft="1dp"
     android:layout_marginRight="1dp"
-    android:background="#339966" >
+    android:background="@drawable/row_corners" >
 
-    <ImageButton
+    <Button
         android:id="@+id/recipe_btn"
-        android:layout_width="103dip"
-        android:layout_height="49dip"
+        android:layout_width="110dip"
+        android:layout_height="50dip"
+        android:layout_weight="1"
+        android:text="@string/recipe_btn_label"
+        android:textSize="12sp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:adjustViewBounds="true"
-        android:background="#339966"
+        android:background="@drawable/row_corners"
         android:scaleType="fitCenter"
-        android:src="@drawable/recipe_btn_layout"
+        android:padding="5dp"
+        android:drawableTop="@drawable/recipes"
+        android:textColor="#000000"
         android:layout_marginBottom="1dp"
     	android:layout_marginTop="1dp"
     	android:layout_marginLeft="1dp"
     	/>
 		<!-- android:scaleType="fitCenter" adjust picture to fit button -->
-    <ImageButton
+    <Button
         android:id="@+id/search_btn"
-        android:layout_width="103dip"
-        android:layout_height="49dip"
+        android:layout_width="110dip"
+        android:layout_height="50dip"
+         android:layout_weight="1"
+        android:text="@string/search_btn_label"
+        android:textSize="12sp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:adjustViewBounds="true"
-        android:background="#339966"
+        android:background="@drawable/row_corners"
         android:scaleType="fitCenter"
-        android:src="@drawable/search_store_btn_layout" 
+        android:padding="5dp"
+        android:textColor="#000000"
+        android:drawableTop="@drawable/store_search"
+        
         android:layout_marginBottom="1dp"
     	android:layout_marginTop="1dp"
         />
 
-    <ImageButton
+    <Button
         android:id="@+id/edit_btn"
-        android:layout_width="103dip"
-        android:layout_height="49dip"
+        android:layout_width="110dip"
+        android:layout_height="50dip"
+         android:layout_weight="1"
+        android:text="@string/edit_btn_label"
+        android:textSize="12sp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:adjustViewBounds="true"
-        android:background="#339966"
+        android:background="@drawable/row_corners"
         android:scaleType="fitCenter"
-        android:src="@drawable/edit_btn_layout"
+        android:padding="5dp"
+        android:textColor="#000000"
+        android:drawableTop="@drawable/edit"
+        
         android:layout_marginBottom="1dp"
     	android:layout_marginTop="1dp"
     	android:layout_marginRight="1dp"

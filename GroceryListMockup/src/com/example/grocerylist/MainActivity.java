@@ -8,7 +8,6 @@ package com.example.grocerylist;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,7 +26,7 @@ import android.graphics.Color;
 public class MainActivity extends Activity {
 	
 	ListView gList; // Grocery List
-	ImageButton recipeBtn, sLocatorBtn, editBtn;
+	Button recipeBtn, sLocatorBtn, editBtn; // Main Menu buttons
 	ListAdapter recipeAdtr; // Recipe Adapter
 	ListAdapter listAdtr; // Grocery List Adapter
 	Button aboutBtn, searchBtn, settingsBtn;
@@ -61,7 +60,6 @@ public class MainActivity extends Activity {
         	
         	public void onItemClick(AdapterView<?>parent, View view, int position, long id)
         	{
-        	  Log.d("asdf", "Click Listener");
 				Intent i = new Intent(MainActivity.this, GroceryList.class);
 				startActivity(i);
 				// Closing Grocery List
@@ -70,9 +68,9 @@ public class MainActivity extends Activity {
 		});
         
         
-        recipeBtn =(ImageButton)findViewById(R.id.recipe_btn);
-        sLocatorBtn =(ImageButton)findViewById(R.id.search_btn);
-        editBtn = (ImageButton)findViewById(R.id.edit_btn);
+        recipeBtn =(Button)findViewById(R.id.recipe_btn);
+        sLocatorBtn =(Button)findViewById(R.id.search_btn);
+        editBtn = (Button)findViewById(R.id.edit_btn);
         
         // Android Menu Buttons
         aboutBtn = (Button)findViewById(R.id.about);
@@ -81,6 +79,8 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
+				
+			recipeBtn.setBackgroundColor(R.drawable.button_pressed);
 			/* Changes Activity.
 			 * Intent will send you to a new screen (recipe_list_layout)
 			 */
@@ -94,9 +94,24 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
+			editBtn.setBackgroundColor(R.drawable.button_pressed);
 			// changes the layout of the listView. It will display all grocery lists
 				
 				gList.setAdapter(listAdtr);
+			}
+		});
+        
+        sLocatorBtn.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				sLocatorBtn.setBackgroundColor(R.drawable.button_pressed);
+				sLocatorBtn.setBackgroundColor(R.drawable.button_pressed);
+				/*
+				 * Intent
+				 */
+				
 			}
 		});
         

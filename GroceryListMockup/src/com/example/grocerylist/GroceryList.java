@@ -17,7 +17,7 @@ import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
+import android.widget.Button;
 import android.widget.ListView;
  
 public class GroceryList extends Activity {
@@ -26,7 +26,7 @@ public class GroceryList extends Activity {
  * When the use click in any of the items that are shown in the list in the main screen
  * the user will be rerouted to this class 
  */
-	ImageButton backBtn;
+	Button addRecipeBtn;
  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +39,9 @@ public class GroceryList extends Activity {
         actionBar.setSubtitle("My List");
         actionBar.setDisplayHomeAsUpEnabled(true);
         
+        
+        // Button Initialization
+        addRecipeBtn = (Button)findViewById(R.id.addRecipe_btn);
 
     }
     @Override
@@ -54,5 +57,4 @@ public class GroceryList extends Activity {
     	return true;
     }
 
- 
 }

@@ -4,7 +4,7 @@
         android:orderInCategory="100"
         android:showAsAction="never" />
     <item android:id="@+id/search_Store"
-    	android:title="@string/search_btn"
+    	android:title="@string/search_btn_label"
         android:orderInCategory="100"
         android:showAsAction="never"/>
     <item android:id="@+id/about"

@@ -16,12 +16,12 @@ import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
+import android.widget.Button;
 import android.widget.ListView;
  
 public class RecipeClass extends Activity {
  
-	ImageButton mylistBtn;
+	Button mylistBtn;
 	ListView recipeList;
 	ArrayAdapter<String> recipeAdptr;
 	
@@ -53,7 +53,7 @@ public class RecipeClass extends Activity {
         /* Set Adapter */
         recipeList.setAdapter(recipeAdptr);
         
-        mylistBtn = (ImageButton)findViewById(R.id.mylist_btn);
+        mylistBtn = (Button)findViewById(R.id.mylist_btn);
         
         mylistBtn.setOnClickListener(new View.OnClickListener() {
 			

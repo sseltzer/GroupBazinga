@@ -55,7 +55,6 @@ public class ViewRecipe extends Activity {
         actionBar.setSubtitle((CharSequence)recipe);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        
     }
     /*
      * (non-Javadoc)
