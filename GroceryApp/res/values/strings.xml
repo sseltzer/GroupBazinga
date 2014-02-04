@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">RecipeBuddy</string>
+    <string name="action_settings">Settings</string>
+    <string name="splash">Splash</string>
+    <string name="title">Main</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="listTitle">Recipes</string>
+    <string name="title_activity_recipe_viewer">RecipeViewer</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="recipeImage">Recipe Image</string>
+
+</resources>
