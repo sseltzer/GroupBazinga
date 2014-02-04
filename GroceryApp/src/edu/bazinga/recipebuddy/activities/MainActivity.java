@@ -13,8 +13,8 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import edu.bazinga.recipebuddy.R;
-import edu.bazinga.recipebuddy.api.recipe.Recipe;
-import edu.bazinga.recipebuddy.api.recipe.RecipeAPI;
+import edu.bazinga.recipebuddy.api.services.YummlyAPIManager;
+import edu.bazinga.recipebuddy.data.Recipe;
 
 public class MainActivity extends Activity {
 
@@ -42,7 +42,7 @@ public class MainActivity extends Activity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    RecipeAPI recipeAPI = new RecipeAPI();
+    YummlyAPIManager recipeAPI = new YummlyAPIManager();
     recipes = recipeAPI.getRecipes(null);
 
     ArrayList<String> listNames = new ArrayList<String>();

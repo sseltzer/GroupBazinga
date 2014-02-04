@@ -8,8 +8,8 @@ import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
 import edu.bazinga.recipebuddy.R;
-import edu.bazinga.recipebuddy.api.common.ImageRetriever;
-import edu.bazinga.recipebuddy.api.recipe.Recipe;
+import edu.bazinga.recipebuddy.api.retrievers.ImageRetriever;
+import edu.bazinga.recipebuddy.data.Recipe;
 
 public class RecipeViewer extends Activity {
 
