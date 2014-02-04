@@ -14,7 +14,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import android.os.AsyncTask;
 
 //http://mobile.tutsplus.com/tutorials/android/android-sdk-working-with-google-maps-google-places-integration/
-public class Retriever extends AsyncTask<String, Void, String> {
+public class JSONRetriever extends AsyncTask<String, Void, String> {
   StringBuilder responseBuilder = new StringBuilder();
 
   @Override

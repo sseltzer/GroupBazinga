@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import edu.bazinga.recipebuddy.api.common.Retriever;
+import edu.bazinga.recipebuddy.api.common.JSONRetriever;
 
 public class RecipeAPI {
   
@@ -22,7 +22,7 @@ public class RecipeAPI {
   private String getJSONResponse(String query) {
     String jsonResponse = null;
     try {
-      Retriever ret = new Retriever();
+      JSONRetriever ret = new JSONRetriever();
       AsyncTask<String, Void, String> task = ret.execute(query);
       jsonResponse = task.get();
     } catch (Exception e) {

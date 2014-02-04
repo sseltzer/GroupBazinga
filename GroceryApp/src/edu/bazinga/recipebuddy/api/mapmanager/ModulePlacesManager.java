@@ -17,7 +17,7 @@ import android.os.Bundle;
 import com.google.android.gms.maps.model.LatLng;
 
 import edu.bazinga.recipebuddy.R;
-import edu.bazinga.recipebuddy.api.common.Retriever;
+import edu.bazinga.recipebuddy.api.common.JSONRetriever;
 
 
 public class ModulePlacesManager {
@@ -38,7 +38,7 @@ public class ModulePlacesManager {
   }
   public ArrayList<Place> query(QueryType queryType, LatLng location, int distance) throws InterruptedException, ExecutionException {
     //if (queryMap.containsKey(queryType)) return queryMap.get(queryType);
-    Retriever placesRetriever = new Retriever();
+    JSONRetriever placesRetriever = new JSONRetriever();
     ArrayList<Place> queryList = null;
     try {
       //Log.d("debug", "Query: "+ buildQuery(queryType, location, distance));
