@@ -9,7 +9,7 @@ import org.json.JSONObject;
 import android.os.AsyncTask;
 import android.util.Log;
 import edu.bazinga.recipebuddy.api.retrievers.JSONRetriever;
-import edu.bazinga.recipebuddy.data.Recipe;
+import edu.bazinga.recipebuddy.data.packets.Recipe;
 
 public class YummlyAPIManager {
   

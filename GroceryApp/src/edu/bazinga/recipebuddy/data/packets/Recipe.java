@@ -1,4 +1,4 @@
-package edu.bazinga.recipebuddy.data;
+package edu.bazinga.recipebuddy.data.packets;
 
 import android.os.Parcel;
 import android.os.Parcelable;

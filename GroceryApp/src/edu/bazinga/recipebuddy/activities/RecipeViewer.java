@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import edu.bazinga.recipebuddy.R;
 import edu.bazinga.recipebuddy.api.retrievers.ImageRetriever;
-import edu.bazinga.recipebuddy.data.Recipe;
+import edu.bazinga.recipebuddy.data.packets.Recipe;
 
 public class RecipeViewer extends Activity {
 

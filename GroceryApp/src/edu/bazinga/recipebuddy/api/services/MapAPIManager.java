@@ -30,7 +30,7 @@ import static com.google.android.gms.maps.GoogleMap.MAP_TYPE_SATELLITE;
 
 import edu.bazinga.recipebuddy.R;
 import edu.bazinga.recipebuddy.api.services.PlacesAPIManager.QueryType;
-import edu.bazinga.recipebuddy.data.Place;
+import edu.bazinga.recipebuddy.data.packets.Place;
 import edu.bazinga.recipebuddy.views.PlaceInfo;
 
 

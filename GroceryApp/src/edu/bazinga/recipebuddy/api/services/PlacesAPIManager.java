@@ -18,7 +18,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 import edu.bazinga.recipebuddy.R;
 import edu.bazinga.recipebuddy.api.retrievers.JSONRetriever;
-import edu.bazinga.recipebuddy.data.Place;
+import edu.bazinga.recipebuddy.data.packets.Place;
 
 
 public class PlacesAPIManager {

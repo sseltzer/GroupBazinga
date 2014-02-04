@@ -14,7 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import edu.bazinga.recipebuddy.R;
 import edu.bazinga.recipebuddy.api.services.YummlyAPIManager;
-import edu.bazinga.recipebuddy.data.Recipe;
+import edu.bazinga.recipebuddy.data.packets.Recipe;
 
 public class MainActivity extends Activity {
 
