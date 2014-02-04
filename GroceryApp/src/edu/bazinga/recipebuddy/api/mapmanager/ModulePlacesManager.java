@@ -13,6 +13,9 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+
+import com.google.android.gms.maps.model.LatLng;
+
 import edu.bazinga.recipebuddy.R;
 import edu.bazinga.recipebuddy.api.common.Retriever;
 
