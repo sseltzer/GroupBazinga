@@ -16,6 +16,8 @@ import android.os.AsyncTask;
 public class Retriever extends AsyncTask<String, Void, String> {
   StringBuilder responseBuilder = new StringBuilder();
 
+  String asdf = null;
+  
   @Override
   protected String doInBackground(String... urls) {
     for (String url : urls) {
