@@ -1,41 +1,45 @@
 package edu.bazinga.recipebuddy.data.packets;
 
+import android.annotation.SuppressLint;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
 import java.util.Iterator;
-
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-public class JsonExample {
 
-	public static void main(String[] args) 
+public class JsonExample
+{
+
+	@SuppressLint("UseValueOf")
+	@SuppressWarnings({ "unchecked", "null" })
+	public static void JSONExample() 
 	{		
+		Recipe r = new Recipe();
+	
 			//Write JSON to file
 			JSONObject obj = new JSONObject();
-			obj.put("name", "mkyong.com");
-			obj.put("age", new Integer(100));
-		 
+			
+			obj.put("Recipe_Name", r.getRecipeName());
+			obj.put("Recipe_ID", r.getId());
+			obj.put("Rating",r.getRating());
+					 
 			JSONArray list = new JSONArray();
-			list.add("msg 1");
-			list.add("msg 2");
-			list.add("msg 3");
+			list.add(r.getIngredients());
+			list.add(r.getIngredients());
+			list.add(r.getIngredients());
 		 
-			obj.put("messages", list);
+			obj.put("ingredients", list);
 		 
 			try 
-			{
-		 
+			{		 
 				FileWriter file = new FileWriter("c:\\test.json");
 				file.write(obj.toJSONString());
 				file.flush();
-				file.close();
-		 
+				file.close();		 
 			} 
 			catch (IOException e) 
 			{
@@ -55,14 +59,17 @@ public class JsonExample {
 		 
 				JSONObject jsonObject = (JSONObject) obj2;
 		 
-				String name = (String) jsonObject.get("name");
+				String name = (String) jsonObject.get("Recipe_Name");
 				System.out.println(name);
 		 
-				long age = (Long) jsonObject.get("age");
-				System.out.println(age);
+				String id = (String) jsonObject.get("Recipe_ID");
+				System.out.println(id);
+				
+				String rating = (String) jsonObject.get("Rating");
+				System.out.println(rating);
 		 
 				// loop array
-				JSONArray msg = (JSONArray) jsonObject.get("messages");
+				JSONArray msg = (JSONArray) jsonObject.get("ingredients");
 				Iterator<String> iterator = msg.iterator();
 				while (iterator.hasNext()) {
 					System.out.println(iterator.next());
@@ -80,8 +87,7 @@ public class JsonExample {
 			catch (ParseException e) 
 			{
 				e.printStackTrace();
-			}
-		
+			}		
 
 	}
 
