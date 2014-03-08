@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="299dp"
+    android:layout_width="fill_parent"
     android:layout_height="40dp"
     android:layout_centerHorizontal="true"
     android:background="#FFFFFF"
@@ -9,7 +9,8 @@
     android:descendantFocusability="blocksDescendants">
     <TextView
         android:id="@+id/listTitle"
-        android:layout_width="240dip"
+        android:background="@drawable/notebook_format"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
@@ -17,6 +18,8 @@
         android:textColor="#000000"
         android:textSize="15sp"
         android:textStyle="bold"
-        android:typeface="serif"/>
+        android:typeface="serif"
+        android:paddingLeft="25dp"
+        android:paddingTop="8dp"/>
 
 </RelativeLayout>

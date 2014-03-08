@@ -9,25 +9,6 @@
     tools:context=".RecipeViewer" >
 
     <TextView
-        android:id="@+id/recipeName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:ems="10" />
-
-    <ImageView
-        android:id="@+id/recipeImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/recipeName"
-        android:layout_below="@+id/recipeName"
-        android:contentDescription="@string/recipeImage"
-        android:minHeight="180dp"
-        android:minWidth="180dp"
-        android:src="@drawable/ic_launcher" />
-
-    <TextView
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,13 +16,35 @@
         android:layout_below="@+id/recipeImage"
         android:ems="10" />
 
+    <ImageView
+        android:id="@+id/recipeImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/recipeName"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/recipeImage"
+        android:minHeight="180dp"
+        android:minWidth="180dp"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/recipeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:textColor="#084B8A"
+        android:textSize="20dp"
+        android:ems="10" />
+
     <TextView
         android:id="@+id/ingredients"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
         android:layout_below="@+id/time"
-        android:ems="10"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="71dp"
+        android:ems="10" />
 
 </RelativeLayout>

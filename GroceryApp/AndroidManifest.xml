@@ -48,13 +48,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+         <!-- Main Activity -->
         <activity
             android:name="edu.bazinga.recipebuddy.activities.MainActivity"
             android:label="@string/title_activity_main" >
-        </activity>
+        </activity> -->
+       <!-- RecipeView -->
         <activity
             android:name="edu.bazinga.recipebuddy.activities.RecipeViewer"
             android:label="@string/title_activity_recipe_viewer" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+              <!--  <category android:name="android.intent.category.LAUNCHER" /> -->
+            
+            </intent-filter>
         </activity>
         
         <meta-data

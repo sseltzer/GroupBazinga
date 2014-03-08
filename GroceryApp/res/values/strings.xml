@@ -10,5 +10,6 @@
     <string name="title_activity_recipe_viewer">RecipeViewer</string>
     <string name="hello_world">Hello world!</string>
     <string name="recipeImage">Recipe Image</string>
+    <string name="menu_insert">Add Item</string>
 
 </resources>
