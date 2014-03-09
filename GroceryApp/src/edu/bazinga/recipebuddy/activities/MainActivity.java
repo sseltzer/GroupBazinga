@@ -75,7 +75,7 @@ public class MainActivity extends Activity {
     
     listView = (ListView) findViewById(R.id.listView);
     listAdapter = new MyCustomAdapter(this,R.layout.recipe_list,listNames);
-   // listAdapter = new ArrayAdapter<String>(this, R.layout.recipelist, R.id.listTitle, listNames);
+    //listAdapter = new ArrayAdapter<String>(this, R.layout.recipelist, R.id.listTitle, listNames);
     listView.setAdapter(listAdapter);
     listView.setOnItemClickListener(getOnItemClickListener());
   }
