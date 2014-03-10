@@ -13,6 +13,8 @@ import edu.bazinga.recipebuddy.data.packets.Recipe;
 
 public class RecipeViewer extends Activity {
 
+	
+	
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -25,7 +27,7 @@ public class RecipeViewer extends Activity {
     TextView ingredients = (TextView) findViewById(R.id.ingredients);
     
     recipeName.setText(recipe.getRecipeName());
-    time.setText(recipe.getTotalTimeInSeconds());
+    time.setText(Time(recipe.getTotalTimeInSeconds()));
     ingredients.setText(recipe.getIngredients());
     
     try {
@@ -55,5 +57,40 @@ public class RecipeViewer extends Activity {
     getMenuInflater().inflate(R.menu.recipe_viewer, menu);
     return true;
   }
-
+  public String Time (String n)
+  {
+	  String result = "";
+	  if (n.equals("null"))
+	  {
+		  return result = "Preparation Time is not available";
+	  }
+	  else
+	  {
+		  double number = Double.parseDouble(n);;
+	  
+		  int num = (int) (number);
+	  
+		  int hours = 0;
+		  int min = 0;
+	  
+		  min = num/60;
+	  
+		  if (min > 60)
+		  {
+			  hours = min/60;
+			  min = min%60;
+			  result = "Cook Time: "+ hours +"hr " + min +"min."; 
+		  }
+		  if (min == 60)
+		  {
+			  result = "Cook Time: "+ min + "min.";
+		  }
+		  else
+		  {
+			  result = "Cook Time: "+ min + "min.";
+		  }
+	  
+		  return result;
+	  }
+  }
 }

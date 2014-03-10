@@ -81,7 +81,7 @@ public class MainActivity extends Activity {
     listView.setOnItemClickListener(getOnItemClickListener());
   }
   
-  private String Time (String n)
+  public String Time (String n)
   {
 	  String result = "";
 	  if (n.equals("null"))
@@ -135,8 +135,7 @@ public class MainActivity extends Activity {
   			return true;
   		case R.id.action_about:
   		{
-  			// Getting a null pointer Why?
-  			Intent i = new Intent(this, AboutClass.class);
+  			Intent i = new Intent(MainActivity.this, AboutClass.class);
 			startActivity(i);
 			finish();
 			return true;
@@ -150,7 +149,7 @@ public class MainActivity extends Activity {
   
  /*
   * Added on March 8, 2014
-  * @author: Gus Maturan
+  * @author: Gus Maturana
   * CustomAdapter will display the images and the name of the recipe
   */
   

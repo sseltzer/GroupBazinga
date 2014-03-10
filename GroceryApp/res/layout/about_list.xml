@@ -41,7 +41,6 @@
        android:textStyle="bold"
        android:textColor="#000066"
        android:typeface="serif"
-       
        />
    
    <!-- Description -->
