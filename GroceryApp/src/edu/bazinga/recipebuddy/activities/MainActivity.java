@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -125,7 +126,27 @@ public class MainActivity extends Activity {
     getMenuInflater().inflate(R.menu.main, menu);
     return true;
   }
-  
+  // Handels item selections
+  @Override
+	public boolean onOptionsItemSelected (MenuItem item){
+  	switch(item.getItemId()){
+  	
+  		case R.id.action_settings:
+  			return true;
+  		case R.id.action_about:
+  		{
+  			// Getting a null pointer Why?
+  			Intent i = new Intent(this, AboutClass.class);
+			startActivity(i);
+			finish();
+			return true;
+  		}
+
+  	//
+  	}
+	return false;
+
+  }
   
  /*
   * Added on March 8, 2014
@@ -175,5 +196,6 @@ public class MainActivity extends Activity {
       
       
   } // end MyCustomAdapter
+
 
 }
