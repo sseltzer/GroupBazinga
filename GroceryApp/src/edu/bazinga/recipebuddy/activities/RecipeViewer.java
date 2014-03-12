@@ -1,10 +1,13 @@
 package edu.bazinga.recipebuddy.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 import edu.bazinga.recipebuddy.R;
@@ -92,5 +95,22 @@ public class RecipeViewer extends Activity {
 	  
 		  return result;
 	  }
+  }
+  @Override
+  public boolean onOptionsItemSelected(MenuItem menuItem)
+  {   
+  	switch(menuItem.getItemId()){
+  		case android.R.id.home:
+  			Intent intent = new Intent(this, MainActivity.class);
+  			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+  			startActivity(intent);
+  			break; 
+  		case R.id.action_about:
+  			Intent i = new Intent(this, AboutClass.class);
+  			startActivity(i);
+  			finish();
+  			return true;
+  	}
+  	return true;
   }
 }

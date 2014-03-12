@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.content.Loader;
 import android.content.CursorLoader;
@@ -16,6 +17,7 @@ public class MyListView extends ListActivity {
 	private  int lItemNumber = 1;
 	private GroceryList lDbHelper;
 	public static final int ID_ = Menu.FIRST;
+	private ListView list;
 	
 	
 	@Override
@@ -25,6 +27,7 @@ public class MyListView extends ListActivity {
         setContentView(R.layout.activity_main);
         lDbHelper = new GroceryList(this);
         lDbHelper.Open();
+        list = (ListView) findViewById(R.id.listView);
         fillData();
     }
 	
@@ -70,7 +73,8 @@ public class MyListView extends ListActivity {
        
         SimpleCursorAdapter notes =
             new SimpleCursorAdapter(this, R.layout.recipelist, c, from, to);
-        setListAdapter(notes);
+        //setListAdapter(notes);
+        list.setAdapter(notes);
     }
 	
 	
