@@ -1,5 +1,5 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-
+	<!-- Settings Button -->
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
@@ -10,5 +10,18 @@
         android:id="@+id/action_about"
         android:orderInCategory="200"
         android:title="@string/about_page"/>
+
+    <item
+        android:id="@+id/action_favorite"
+        android:icon="@drawable/ic_action_favorite"
+        android:title="@string/action_favorite"
+        android:showAsAction="ifRoom"
+        />
+	<item 
+	    android:id="@+id/action_directions"
+	    android:icon="@drawable/ic_action_directions"
+	    android:title="@string/action_directions"
+	    android:showAsAction="ifRoom"
+	    />
 
 </menu>

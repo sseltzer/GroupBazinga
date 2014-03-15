@@ -2,35 +2,69 @@ package edu.bazinga.recipebuddy.activities;
 
 
 import edu.bazinga.recipebuddy.R;
+import android.app.Activity;
+import android.app.Fragment;
 import android.app.ListActivity;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.ListView;
 import android.support.v4.widget.SimpleCursorAdapter;
+import android.content.Intent;
 import android.content.Loader;
 import android.content.CursorLoader;
 
-public class MyListView extends ListActivity {
+public class MyListView extends Activity {
+///ListActivity {
 
-	private  int lItemNumber = 1;
-	private GroceryList lDbHelper;
-	public static final int ID_ = Menu.FIRST;
-	private ListView list;
+	// private  int lItemNumber = 1;
+	// private GroceryList lDbHelper;
+	// public static final int ID_ = Menu.FIRST;
+	// private ListView list;
+	Button recipeBtn, storeSearchBtn, addNewListBtn;
+	
 	
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) 
 	{
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        lDbHelper = new GroceryList(this);
-        lDbHelper.Open();
-        list = (ListView) findViewById(R.id.listView);
-        fillData();
+        setContentView(R.layout.mylist);
+       // lDbHelper = new GroceryList(this);
+       // lDbHelper.Open();
+       // list = (ListView) findViewById(R.id.listView);
+       // fillData();
+        
+
+        
+        
     }
+	@Override
+		public boolean onOptionsItemSelected (MenuItem item){
+	  	switch(item.getItemId()){
+
+	  	}
+	  	return true;
+	  }
 	
+/*	  @Override
+	public boolean onOptionsItemSelected (MenuItem item){
+  	switch(item.getItemId()){
+  	
+  		case R.id.action_settings:
+  			return true;
+  		case R.id.action_about:
+  		{
+  			Intent i = new Intent(MainActivity.this, AboutClass.class);
+			startActivity(i);
+			finish();
+			return true;
+  		}
+
+  	//
+  	}
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) 
 	{
@@ -77,5 +111,5 @@ public class MyListView extends ListActivity {
         list.setAdapter(notes);
     }
 	
-	
+	*/
 }

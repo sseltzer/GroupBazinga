@@ -16,7 +16,8 @@
        android:layout_height="wrap_content"
        android:layout_alignParentLeft="true"
        android:layout_marginRight="5dp"
-       android:padding="2dp" >
+       android:padding="2dp" 
+       android:orientation="horizontal">
 
        <!-- gets image of page -->
        <!-- (page_image) -->

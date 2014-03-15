@@ -9,6 +9,8 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -56,7 +58,7 @@ public class AboutClass extends Activity {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.about_app);
 	    setTitle("About Recipe Buddy");	// Changes title of screen
-	    
+	    getActionBar().setDisplayHomeAsUpEnabled(true); // Enables back home button
 	    	    
 	    listView = (ListView) findViewById(R.id.about_list_view);
 	    listAdapter = new MyCustomAdapter(AboutClass.this,R.layout.about_list,Description);
@@ -100,5 +102,21 @@ public class AboutClass extends Activity {
 	       }
 	           
 	   } // end MyCustomAdapter
+
+	   @Override
+	   public boolean onOptionsItemSelected(MenuItem menuItem)
+	   {   
+	   	switch(menuItem.getItemId()){
+	   		case android.R.id.home:
+	   			Intent intent = new Intent(this, MainActivity.class);
+	   			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	   			startActivity(intent);
+	   			break; 
+	   		default:
+	   			break;
+
+	   	}
+	   	return true;
+	   }
 
 }

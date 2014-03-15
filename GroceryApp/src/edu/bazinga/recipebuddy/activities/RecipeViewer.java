@@ -23,6 +23,7 @@ public class RecipeViewer extends Activity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_recipe_viewer);
     
+    getActionBar().setDisplayHomeAsUpEnabled(true);
     Recipe recipe = getIntent().getExtras().getParcelable("selected");
     
     TextView recipeName = (TextView) findViewById(R.id.recipeName);
