@@ -1,25 +1,19 @@
 package edu.bazinga.recipebuddy.activities;
 
 
-import java.util.ArrayList;
-
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.content.Context;
 import edu.bazinga.recipebuddy.R;
 
 
@@ -58,7 +52,7 @@ public class AboutClass extends Activity {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.about_app);
 	    setTitle("About Recipe Buddy");	// Changes title of screen
-	    getActionBar().setDisplayHomeAsUpEnabled(true); // Enables back home button
+	    //getActionBar().setDisplayHomeAsUpEnabled(true); // Enables back home button
 	    	    
 	    listView = (ListView) findViewById(R.id.about_list_view);
 	    listAdapter = new MyCustomAdapter(AboutClass.this,R.layout.about_list,Description);

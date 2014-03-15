@@ -1,20 +1,11 @@
 package edu.bazinga.recipebuddy.activities;
 
 
-import edu.bazinga.recipebuddy.R;
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.ListActivity;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.ListView;
-import android.support.v4.widget.SimpleCursorAdapter;
-import android.content.Intent;
-import android.content.Loader;
-import android.content.CursorLoader;
+import edu.bazinga.recipebuddy.R;
 
 public class MyListView extends Activity {
 ///ListActivity {
