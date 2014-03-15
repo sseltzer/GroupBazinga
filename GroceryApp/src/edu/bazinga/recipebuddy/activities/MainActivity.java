@@ -7,8 +7,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -19,7 +21,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.content.Context;
 import edu.bazinga.recipebuddy.R;
-import edu.bazinga.recipebuddy.api.services.YummlyAPIManager;
+import edu.bazinga.recipebuddy.api.services.YummlyManager;
 import edu.bazinga.recipebuddy.api.retrievers.ImageRetriever;
 import edu.bazinga.recipebuddy.data.packets.Recipe;
 
@@ -29,8 +31,7 @@ public class MainActivity extends Activity {
 
   private ListView listView;
   private ListAdapter listAdapter;
-  private ArrayList<Recipe> recipes;
-
+  private static ArrayList<Recipe> recipes;
   
   private AdapterView.OnItemClickListener getOnItemClickListener() {
     return new AdapterView.OnItemClickListener() {
@@ -66,9 +67,9 @@ public class MainActivity extends Activity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     setTitle("MY RECIPES");	// Changes title of screen
-    YummlyAPIManager recipeAPI = new YummlyAPIManager();
-    recipes = recipeAPI.getRecipes(null);
-
+    YummlyManager recipeAPI = new YummlyManager();
+    if (recipes == null) recipes = recipeAPI.getRecipes("beef stew");
+    Log.d("asdf", "recipes length: " + recipes.size());
     
     ArrayList<String> listNames = new ArrayList<String>();
     for (Recipe recipe : recipes) listNames.add(recipe.getRecipeName());
@@ -80,7 +81,7 @@ public class MainActivity extends Activity {
     listView.setOnItemClickListener(getOnItemClickListener());
   }
   
-  private String Time (String n)
+  public String Time (String n)
   {
 	  String result = "";
 	  if (n.equals("null"))
@@ -125,11 +126,30 @@ public class MainActivity extends Activity {
     getMenuInflater().inflate(R.menu.main, menu);
     return true;
   }
-  
+  // Handels item selections
+  @Override
+	public boolean onOptionsItemSelected (MenuItem item){
+  	switch(item.getItemId()){
+  	
+  		case R.id.action_settings:
+  			return true;
+  		case R.id.action_about:
+  		{
+  			Intent i = new Intent(MainActivity.this, AboutClass.class);
+			startActivity(i);
+			finish();
+			return true;
+  		}
+
+  	//
+  	}
+	return false;
+
+  }
   
  /*
   * Added on March 8, 2014
-  * @author: Gus Maturan
+  * @author: Gus Maturana
   * CustomAdapter will display the images and the name of the recipe
   */
   
@@ -175,5 +195,6 @@ public class MainActivity extends Activity {
       
       
   } // end MyCustomAdapter
+
 
 }

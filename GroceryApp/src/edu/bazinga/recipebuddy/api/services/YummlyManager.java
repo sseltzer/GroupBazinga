@@ -8,19 +8,20 @@ import org.json.JSONObject;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import edu.bazinga.recipebuddy.api.query.YummlyQueryBuilder;
 import edu.bazinga.recipebuddy.api.retrievers.JSONRetriever;
 import edu.bazinga.recipebuddy.data.packets.Recipe;
 
-public class YummlyAPIManager {
+public class YummlyManager {
+  
+  private static YummlyQueryBuilder qb = YummlyQueryBuilder.getInstance();
   
   public ArrayList<Recipe> getRecipes(String query) {
-    return parseResponse(getJSONResponse(buildQuery(query)));
+    return parseResponse(getJSONResponse(qb.buildQuery(query)));
   }
   
-  private String buildQuery(String query) {
-    return "http://api.yummly.com/v1/api/recipes?_app_id=7cd13182&_app_key=c7bec9ff978723d19d5ff32d450bd1ab&q=onion+soup";
-  }
   private String getJSONResponse(String query) {
+    Log.d("asdf", "Querying: " + query);
     String jsonResponse = null;
     try {
       JSONRetriever ret = new JSONRetriever();

@@ -4,10 +4,15 @@
     			android:id= "@+id/splashanim" >
     			 >
 	<!-- List of items used for flash screen animation-list -->    
-    <item android:drawable="@drawable/splash2" android:duration="200" />
-    <item android:drawable="@drawable/splash3" android:duration="200" />
-    <item android:drawable="@drawable/splash4" android:duration="200" />
-    <item android:drawable="@drawable/splasha" android:duration="1200" />
+    <item android:drawable="@drawable/logo_splash1" android:duration="100" />
+    <item android:drawable="@drawable/logo_splash2" android:duration="100" />
+    <item android:drawable="@drawable/logo_splash3" android:duration="100" />
+    <item android:drawable="@drawable/logo_splash4" android:duration="100" />
+    <item android:drawable="@drawable/logo_splash5" android:duration="100" />
+    <item android:drawable="@drawable/logo_splash6" android:duration="100" />
+    <item android:drawable="@drawable/logo_splash7" android:duration="100" />
+    <item android:drawable="@drawable/logo_splash8" android:duration="100" />
+    <item android:drawable="@drawable/logo_splash9" android:duration="1000" />
     <item android:drawable="@drawable/splashb" android:duration="1800" />
     
 </animation-list>

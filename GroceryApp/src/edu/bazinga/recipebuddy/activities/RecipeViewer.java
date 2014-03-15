@@ -1,10 +1,13 @@
 package edu.bazinga.recipebuddy.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 import edu.bazinga.recipebuddy.R;
@@ -13,11 +16,14 @@ import edu.bazinga.recipebuddy.data.packets.Recipe;
 
 public class RecipeViewer extends Activity {
 
+	
+	
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_recipe_viewer);
     
+    getActionBar().setDisplayHomeAsUpEnabled(true);
     Recipe recipe = getIntent().getExtras().getParcelable("selected");
     
     TextView recipeName = (TextView) findViewById(R.id.recipeName);
@@ -25,7 +31,7 @@ public class RecipeViewer extends Activity {
     TextView ingredients = (TextView) findViewById(R.id.ingredients);
     
     recipeName.setText(recipe.getRecipeName());
-    time.setText(recipe.getTotalTimeInSeconds());
+    time.setText(Time(recipe.getTotalTimeInSeconds()));
     ingredients.setText(recipe.getIngredients());
     
     try {
@@ -55,5 +61,57 @@ public class RecipeViewer extends Activity {
     getMenuInflater().inflate(R.menu.recipe_viewer, menu);
     return true;
   }
-
+  public String Time (String n)
+  {
+	  String result = "";
+	  if (n.equals("null"))
+	  {
+		  return result = "Preparation Time is not available";
+	  }
+	  else
+	  {
+		  double number = Double.parseDouble(n);;
+	  
+		  int num = (int) (number);
+	  
+		  int hours = 0;
+		  int min = 0;
+	  
+		  min = num/60;
+	  
+		  if (min > 60)
+		  {
+			  hours = min/60;
+			  min = min%60;
+			  result = "Cook Time: "+ hours +"hr " + min +"min."; 
+		  }
+		  if (min == 60)
+		  {
+			  result = "Cook Time: "+ min + "min.";
+		  }
+		  else
+		  {
+			  result = "Cook Time: "+ min + "min.";
+		  }
+	  
+		  return result;
+	  }
+  }
+  @Override
+  public boolean onOptionsItemSelected(MenuItem menuItem)
+  {   
+  	switch(menuItem.getItemId()){
+  		case android.R.id.home:
+  			Intent intent = new Intent(this, MainActivity.class);
+  			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+  			startActivity(intent);
+  			break; 
+  		case R.id.action_about:
+  			Intent i = new Intent(this, AboutClass.class);
+  			startActivity(i);
+  			finish();
+  			return true;
+  	}
+  	return true;
+  }
 }

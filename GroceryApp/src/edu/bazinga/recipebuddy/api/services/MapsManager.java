@@ -29,14 +29,14 @@ import static com.google.android.gms.maps.GoogleMap.MAP_TYPE_NORMAL;
 import static com.google.android.gms.maps.GoogleMap.MAP_TYPE_SATELLITE;
 
 import edu.bazinga.recipebuddy.R;
-import edu.bazinga.recipebuddy.api.services.PlacesAPIManager.QueryType;
+import edu.bazinga.recipebuddy.api.services.PlacesManager.QueryType;
 import edu.bazinga.recipebuddy.data.packets.Place;
 import edu.bazinga.recipebuddy.views.PlaceInfo;
 
 
-public class MapAPIManager {
+public class MapsManager {
   
-  private static MapAPIManager instance = null;
+  private static MapsManager instance = null;
   //private final String MAPSKEY;
   
   private LinearLayout currentAnchor;
@@ -46,8 +46,8 @@ public class MapAPIManager {
   private Spinner distanceSpinner;
   private Button searchButton;
   private QueryType lastQuery;
-  private PlacesAPIManager mPm;
-  private LocationAPIManager mLm;
+  private PlacesManager mPm;
+  private LocationsManager mLm;
   //private ArrayList<Place> places;
   
   
@@ -72,9 +72,9 @@ public class MapAPIManager {
     }
   };
   
-  private MapAPIManager(Context context, Bundle savedInstanceState) {
-    mPm = PlacesAPIManager.requestInstance(context, savedInstanceState);
-    mLm = LocationAPIManager.requestInstance(context, savedInstanceState);
+  private MapsManager(Context context, Bundle savedInstanceState) {
+    mPm = PlacesManager.requestInstance(context, savedInstanceState);
+    mLm = LocationsManager.requestInstance(context, savedInstanceState);
     try {
       MapsInitializer.initialize(context);
     } catch (GooglePlayServicesNotAvailableException e) {
@@ -88,8 +88,8 @@ public class MapAPIManager {
     
     generateView(context, savedInstanceState);
   }
-  public static MapAPIManager requestInstance(Context context, Bundle savedInstanceState) {
-    if (instance == null) instance = new MapAPIManager(context, savedInstanceState);
+  public static MapsManager requestInstance(Context context, Bundle savedInstanceState) {
+    if (instance == null) instance = new MapsManager(context, savedInstanceState);
     return instance;
   }
   

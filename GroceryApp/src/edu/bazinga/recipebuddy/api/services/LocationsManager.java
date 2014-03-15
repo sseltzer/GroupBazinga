@@ -7,18 +7,18 @@ import android.os.Bundle;
 
 import com.google.android.gms.maps.model.LatLng;
 
-public class LocationAPIManager {
+public class LocationsManager {
   
-  private static LocationAPIManager instance = null;
+  private static LocationsManager instance = null;
   
   private LocationManager locationManager;
   
-  private LocationAPIManager(Context context, Bundle savedInstanceState) {
+  private LocationsManager(Context context, Bundle savedInstanceState) {
     locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
   }
   
-  public static LocationAPIManager requestInstance(Context context, Bundle savedInstanceState) {
-    if (instance == null) instance = new LocationAPIManager(context, savedInstanceState);
+  public static LocationsManager requestInstance(Context context, Bundle savedInstanceState) {
+    if (instance == null) instance = new LocationsManager(context, savedInstanceState);
     return instance;
   }
   public LatLng getLatLng() {

@@ -1,62 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<RelativeLayout android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
     android:layout_centerHorizontal="true"
-    android:padding="3dp"
-    android:background="#FFFFCC" >
-    
-   <!-- Recipe Image -->
-   <!-- (recipeImage) -->
-   <LinearLayout 
-       android:id="@+id/recipeImage"
-       android:layout_width="wrap_content" 
-           android:layout_height="wrap_content"
-           android:padding="2dp"
-           android:layout_alignParentLeft="true"
-           android:layout_marginRight="5dp"
-      >
-      <!-- gbicon.png Image is just a default -->
-      <!-- (recipeImage) -->
-      <ImageView 
-          android:id="@+id/foodImage"
-          android:layout_width="45dp"
-          android:layout_height="45dp"
-          android:src="@drawable/gbicon"/>
-      
-   </LinearLayout>
-   
-   <!-- Recipe Title (recipeTitle)-->
-   <TextView 
-       android:id="@+id/recipeTitle"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_alignTop="@+id/recipeImage"
-       android:layout_toRightOf="@+id/recipeImage"
-       android:text="recipe title"
-       android:textSize="14sp"
-       android:textStyle="bold"
-       android:textColor="#000066"
-       android:typeface="serif"
-       
-       />
-   
-   <!-- Name of the author -->
-   <!-- (authorName) -->
-   <TextView
-       android:id="@+id/authorName"
-       android:layout_width="fill_parent"
-       android:layout_height="wrap_content"
-       android:layout_below="@+id/recipeTitle"
-       android:layout_toRightOf="@+id/recipeImage"
-       android:layout_marginTop="2dp"
-       android:text="cook time"
-       android:textSize="12sp"
-       android:textColor="#404040"
-       android:typeface="serif"
-       />
-   
+    android:background="#FFFFCC"
+    android:orientation="horizontal"
+    android:padding="3dp" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:android1="http://schemas.android.com/apk/res/android">
 
+    <!-- Recipe Image -->
+    <!-- (recipeImage) -->
+
+    <LinearLayout
+        android:id="@+id/recipeImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="5dp"
+        android:padding="2dp" >
+
+        <!-- gbicon.png Image is just a default -->
+        <!-- (recipeImage) -->
+
+        <ImageView
+            android:id="@+id/foodImage"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/gbicon" />
+    </LinearLayout>
+
+    <!-- Recipe Title (recipeTitle) -->
+
+    <TextView
+        android:id="@+id/recipeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/recipeImage"
+        android:layout_toRightOf="@+id/recipeImage"
+        android:text="recipe title"
+        android:textColor="#000066"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:typeface="serif" />
+
+    <!-- Name of the author -->
+    <!-- (authorName) -->
+
+    <TextView
+        android:id="@+id/authorName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/recipeTitle"
+        android:layout_marginTop="2dp"
+        android:layout_toRightOf="@+id/recipeImage"
+        android:text="cook time"
+        android:textColor="#404040"
+        android:textSize="12sp"
+        android:typeface="serif" />
 
 </RelativeLayout>

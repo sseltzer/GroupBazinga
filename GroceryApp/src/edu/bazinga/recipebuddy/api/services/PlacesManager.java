@@ -21,14 +21,14 @@ import edu.bazinga.recipebuddy.api.retrievers.JSONRetriever;
 import edu.bazinga.recipebuddy.data.packets.Place;
 
 
-public class PlacesAPIManager {
+public class PlacesManager {
   
-  private static PlacesAPIManager instance = null;
+  private static PlacesManager instance = null;
   
   private final String PLACESKEY;
   private EnumMap<QueryType, ArrayList<Place>> queryMap;
   
-  private PlacesAPIManager(Context context, Bundle savedInstanceState) {
+  private PlacesManager(Context context, Bundle savedInstanceState) {
     PLACESKEY = context.getString(R.string.placeskey);
      
     queryMap = new EnumMap<QueryType, ArrayList<Place>>(QueryType.class);
@@ -60,8 +60,8 @@ public class PlacesAPIManager {
     return (int) (Integer.parseInt(miles) * 1609.34);
   }
   
-  public static PlacesAPIManager requestInstance(Context context, Bundle savedInstanceState) {
-    if (instance == null) instance = new PlacesAPIManager(context, savedInstanceState);
+  public static PlacesManager requestInstance(Context context, Bundle savedInstanceState) {
+    if (instance == null) instance = new PlacesManager(context, savedInstanceState);
     return instance;
   }
   // UTF-8 Fix from here: http://stackoverflow.com/questions/13153625/android-google-maps-search-by-keywords
