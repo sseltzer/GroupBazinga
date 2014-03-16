@@ -23,5 +23,10 @@
 	    android:title="@string/action_directions"
 	    android:showAsAction="ifRoom"
 	    />
-
+	<item 
+	    android:id="@+id/action_list"
+	    android:icon="@drawable/ic_action_directions"
+	    android:title="@string/action_list"
+	    android:showAsAction="ifRoom"
+	    />
 </menu>

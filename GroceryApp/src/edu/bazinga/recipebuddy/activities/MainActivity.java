@@ -68,7 +68,8 @@ public class MainActivity extends Activity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     setTitle("MY RECIPES");	// Changes title of screen
-    YummlyManager recipeAPI = new YummlyManager();
+    @SuppressWarnings("unused")
+	YummlyManager recipeAPI = new YummlyManager();
     recipes = new ArrayList<Recipe>();
     //if (recipes == null) recipes = recipeAPI.getRecipes("beef stew");
     Log.d("asdf", "recipes length: " + recipes.size());
@@ -77,8 +78,8 @@ public class MainActivity extends Activity {
     for (Recipe recipe : recipes) listNames.add(recipe.getRecipeName());
     
     listView = (ListView) findViewById(R.id.listView);
-    listAdapter = new MyCustomAdapter(this,R.layout.recipe_list,listNames);
-    //listAdapter = new ArrayAdapter<String>(this, R.layout.recipelist, R.id.listTitle, listNames);
+    //listAdapter = new MyCustomAdapter(this,R.layout.recipe_list,listNames);
+    listAdapter = new ArrayAdapter<String>(this, R.layout.recipelist, R.id.listTitle, listNames);
     listView.setAdapter(listAdapter);
     listView.setOnItemClickListener(getOnItemClickListener());
   }
@@ -137,14 +138,24 @@ public class MainActivity extends Activity {
   		case R.id.action_settings:
   			return true;
   		case R.id.action_about:
+  		{
   			i = new Intent(MainActivity.this, AboutClass.class);
   			startActivity(i);
   			finish();
   			return true;
+  		}
   		case R.id.action_directions:
-        i = new Intent(MainActivity.this, MapsActivity.class);
-        startActivity(i);
-        return true;
+  		{
+  			i = new Intent(MainActivity.this, MapsActivity.class);
+  			startActivity(i);
+  			return true;
+  		}
+  		case R.id.action_list:
+  		{
+  			i = new Intent(MainActivity.this, MyListView.class);
+  			startActivity(i);
+  			return true;
+  		}
   	}
 	return false;
 
