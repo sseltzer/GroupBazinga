@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -68,7 +69,8 @@ public class MainActivity extends Activity {
     setContentView(R.layout.activity_main);
     setTitle("MY RECIPES");	// Changes title of screen
     YummlyManager recipeAPI = new YummlyManager();
-    if (recipes == null) recipes = recipeAPI.getRecipes("beef stew");
+    recipes = new ArrayList<Recipe>();
+    //if (recipes == null) recipes = recipeAPI.getRecipes("beef stew");
     Log.d("asdf", "recipes length: " + recipes.size());
     
     ArrayList<String> listNames = new ArrayList<String>();
@@ -129,19 +131,20 @@ public class MainActivity extends Activity {
   // Handels item selections
   @Override
 	public boolean onOptionsItemSelected (MenuItem item){
+    Intent i;
+    
   	switch(item.getItemId()){
-  	
   		case R.id.action_settings:
   			return true;
   		case R.id.action_about:
-  		{
-  			Intent i = new Intent(MainActivity.this, AboutClass.class);
-			startActivity(i);
-			finish();
-			return true;
-  		}
-
-  	//
+  			i = new Intent(MainActivity.this, AboutClass.class);
+  			startActivity(i);
+  			finish();
+  			return true;
+  		case R.id.action_directions:
+        i = new Intent(MainActivity.this, MapsActivity.class);
+        startActivity(i);
+        return true;
   	}
 	return false;
 

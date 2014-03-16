@@ -100,6 +100,7 @@ public class PlacesManager {
   
   public enum QueryType {
     FOOD("food|restaurant|cafe"),
+    GROCERY("grocery_or_supermarket"),
     SHOPPING("store|book_store|clothing_store|convenience_store|electronics_store|department_store|shopping_mall"),
     SCHOOLS("school"),
     MUSEUMS("museums"),

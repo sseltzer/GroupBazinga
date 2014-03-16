@@ -45,7 +45,7 @@ public class MapsManager {
   private Spinner layerSpinner;
   private Spinner distanceSpinner;
   private Button searchButton;
-  private QueryType lastQuery;
+  private QueryType lastQuery = QueryType.GROCERY;
   private PlacesManager mPm;
   private LocationsManager mLm;
   //private ArrayList<Place> places;
@@ -126,6 +126,7 @@ public class MapsManager {
     if (currentAnchor != null || anchor == null) return;
     currentAnchor = anchor;
     anchor.addView(layout);
+    animateNewLatLng(mLm.getLatLng());
   }
   public void requestDetach(LinearLayout anchor) {
     if (currentAnchor == null || !currentAnchor.equals(anchor)) return;
