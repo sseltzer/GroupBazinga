@@ -3,6 +3,7 @@ package edu.bazinga.recipebuddy.activities;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
@@ -12,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,10 +20,10 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.content.Context;
 import edu.bazinga.recipebuddy.R;
-import edu.bazinga.recipebuddy.api.services.YummlyManager;
 import edu.bazinga.recipebuddy.api.retrievers.ImageRetriever;
+import edu.bazinga.recipebuddy.api.services.YummlyManager;
+import edu.bazinga.recipebuddy.data.packets.GroceryItem;
 import edu.bazinga.recipebuddy.data.packets.Recipe;
 
 
@@ -82,6 +82,19 @@ public class MainActivity extends Activity {
     listAdapter = new ArrayAdapter<String>(this, R.layout.recipelist, R.id.listTitle, listNames);
     listView.setAdapter(listAdapter);
     listView.setOnItemClickListener(getOnItemClickListener());
+    
+    /* Leave this here for reference, it's not needed anymore.
+    GroceryItem item = new GroceryItem();
+    item.setItemName("itemName 01");
+    item.setQuantity("5");
+    Log.d("recipe", item.toString());
+    Log.d("recipe", item.toJSON());
+    //{"quantity":"5","itemName":"itemName 01"}
+    //  "{\"quantity\":\"5\",\"itemName\":\"itemName 01\"}"
+    GroceryItem newItem = new GroceryItem();
+    newItem.fromJSON("{\"quantity\":\"7\",\"itemName\":\"itemName 03\"}");
+    Log.d("recipe", newItem.toString());
+    */
   }
   
   public String Time (String n)

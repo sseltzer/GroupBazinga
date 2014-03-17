@@ -37,11 +37,12 @@ public class Recipe implements Parcelable {
     this.rating             = in.readString();
     this.bigUrl             = in.readString();
   }
+  
   @Override
   public int describeContents() {
-    // TODO Auto-generated method stub
     return 0;
   }
+  
   @Override
   public void writeToParcel(Parcel out, int flags) {
     out.writeString(id);
