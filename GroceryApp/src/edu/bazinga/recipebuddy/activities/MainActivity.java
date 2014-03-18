@@ -45,6 +45,7 @@ public class MainActivity extends Activity {
         for (Recipe recipe : recipes) if (recipe.getRecipeName().equals(viewText)) selected = recipe;
         Intent i = new Intent(MainActivity.this, RecipeViewer.class);
         i.putExtra("selected", selected);
+        
         startActivity(i);
       }
     };
