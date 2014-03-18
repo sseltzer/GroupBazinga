@@ -12,13 +12,32 @@
         android:id="@+id/action_about"
         android:orderInCategory="200"
         android:title="@string/about_page"/>
-    <!-- Favorite Button -->
     <item
         android:id="@+id/action_favorite"
+        android:orderInCategory="300"
+        android:title="@string/action_favorite"
+        />
+    <!-- Favorite Button -->
+    <item
+        android:id="@+id/action_add"
         android:icon="@drawable/ic_action_favorite"
         android:title="@string/action_favorite"
         android:showAsAction="ifRoom"
         />
+    	<!-- Edit Button -->
+	<item 
+	    android:id="@+id/sample"
+	    android:icon="@drawable/ic_action_edit"
+	    android:title="@string/action_recipes"
+	    android:showAsAction="ifRoom"
+	    />
+		<!-- Recipe Button -->
+	<item 
+	    android:id="@+id/action_recipes"
+	    android:icon="@drawable/ic_action_recipe"
+	    android:title="@string/action_recipes"
+	    android:showAsAction="ifRoom"
+	    />
     <!-- Store Search Button -->
 	<item 
 	    android:id="@+id/action_directions"
@@ -26,19 +45,9 @@
 	    android:title="@string/action_directions"
 	    android:showAsAction="ifRoom"
 	    />
-	<!-- Recipe Button -->
-	<item 
-	    android:id="@+id/action_recipes"
-	    android:icon="@drawable/ic_action_recipe"
-	    android:title="@string/action_recipes"
-	    android:showAsAction="ifRoom"
-	    />
-	<item 
-	    android:id="@+id/sample"
-	    android:icon="@drawable/ic_action_recipe"
-	    android:title="@string/action_recipes"
-	    android:showAsAction="ifRoom"
-	    />
+
+
+
 
 	
 </menu>

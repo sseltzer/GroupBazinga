@@ -11,6 +11,12 @@
         android:orderInCategory="200"
         android:title="@string/about_page"/>
 
+    <item 
+	    android:id="@+id/action_list"
+	    android:icon="@drawable/ic_action_list"
+	    android:title="@string/action_list"
+	    android:showAsAction="ifRoom"
+	    />
     <item
         android:id="@+id/action_favorite"
         android:icon="@drawable/ic_action_favorite"
@@ -23,10 +29,5 @@
 	    android:title="@string/action_directions"
 	    android:showAsAction="ifRoom"
 	    />
-	<item 
-	    android:id="@+id/action_list"
-	    android:icon="@drawable/ic_action_directions"
-	    android:title="@string/action_list"
-	    android:showAsAction="ifRoom"
-	    />
+
 </menu>
