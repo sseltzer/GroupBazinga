@@ -1,6 +1,7 @@
 package edu.bazinga.recipebuddy.activities;
 
 import edu.bazinga.recipebuddy.R;
+import edu.bazinga.recipebuddy.data.collections.DataManager;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,10 +14,12 @@ public class Splash extends Activity {
 
   private static int INTRO_TIME_OUT = 3600;
   
+  
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.splash);
+		
 		
 	final ImageView splashImageView = (ImageView)findViewById(R.id.splashImageView);
 	splashImageView.setBackgroundResource(R.drawable.splashanimation);

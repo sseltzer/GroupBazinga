@@ -23,6 +23,7 @@ import android.widget.TextView;
 import edu.bazinga.recipebuddy.R;
 import edu.bazinga.recipebuddy.api.retrievers.ImageRetriever;
 import edu.bazinga.recipebuddy.api.services.YummlyManager;
+import edu.bazinga.recipebuddy.data.collections.DataManager;
 import edu.bazinga.recipebuddy.data.packets.GroceryItem;
 import edu.bazinga.recipebuddy.data.packets.Recipe;
 
@@ -30,9 +31,11 @@ import edu.bazinga.recipebuddy.data.packets.Recipe;
 
 public class MainActivity extends Activity {
 
+  
   private ListView listView;
   private ListAdapter listAdapter;
-  private static ArrayList<Recipe> recipes;
+  private static ArrayList<Recipe> recipes; 
+  
   
   private AdapterView.OnItemClickListener getOnItemClickListener() {
     return new AdapterView.OnItemClickListener() {
@@ -44,8 +47,7 @@ public class MainActivity extends Activity {
         Recipe selected = null;
         for (Recipe recipe : recipes) if (recipe.getRecipeName().equals(viewText)) selected = recipe;
         Intent i = new Intent(MainActivity.this, RecipeViewer.class);
-        i.putExtra("selected", selected);
-        
+        i.putExtra("selected", selected);        
         startActivity(i);
       }
     };
@@ -66,6 +68,7 @@ public class MainActivity extends Activity {
   
   @Override
   protected void onCreate(Bundle savedInstanceState) {
+    
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     setTitle("MY RECIPES");	// Changes title of screen

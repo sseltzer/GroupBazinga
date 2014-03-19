@@ -36,6 +36,9 @@ public class DataManager {
     loadFile();
   }
   
+  public void Test(){
+    writeFile(null);
+  }
   private void writeFile(JSONObject jsonObject)  {
     //String appDataStr = appData.toJSONString();
     String fileData = " {\"ingredients\":[\"Hot Peppers\",\"Hot Peppers\",\"Hot Peppers\"],\"Rating\":\"Five Stars\",\"Recipe_ID\":\"101015\",\"Recipe_Name\":\"Onion Soup\"} ";
@@ -83,11 +86,7 @@ public class DataManager {
       e.printStackTrace();
     }
   }
-
-  private InputStream openFileInput(String string) {
-    // TODO Auto-generated method stub
-    return null;
-  }
+ 
   
  
 }
