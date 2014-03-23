@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
   
   private ListView listView;
   private ListAdapter listAdapter;
-  private static ArrayList<Recipe> recipes; 
+  private static ArrayList<Recipe> recipes;   
   
   
   private AdapterView.OnItemClickListener getOnItemClickListener() {
@@ -67,8 +67,8 @@ public class MainActivity extends Activity {
 	  }
   
   @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    
+  protected void onCreate(Bundle savedInstanceState) {    
+  
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     setTitle("MY RECIPES");	// Changes title of screen

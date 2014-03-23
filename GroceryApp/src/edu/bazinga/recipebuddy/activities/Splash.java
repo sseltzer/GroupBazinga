@@ -13,6 +13,7 @@ import android.graphics.drawable.AnimationDrawable;
 public class Splash extends Activity {
 
   private static int INTRO_TIME_OUT = 3600;
+  private DataManager DM = new DataManager();
   
   
 	@Override

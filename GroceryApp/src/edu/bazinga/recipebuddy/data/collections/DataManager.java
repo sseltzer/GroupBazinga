@@ -17,23 +17,32 @@ import java.io.ObjectOutputStream;
 
 
 
+
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class DataManager {
+import android.app.Activity;
+import android.content.Context;
+
+public class DataManager extends Activity {
   
+ 
   private static DataManager instance = null;
-  String file = "CEN4021";
+  String file = "CEN4021.txt";
   
   public static DataManager getInstance() {
-    if (instance == null) instance = new DataManager();
+    instance = null;
+    //if (instance == null) instance = new DataManager();
     return instance;
   }
   
   private ApplicationData appData = null;
   
-  private DataManager() {
-    loadFile();
+  public DataManager() {
+  //  loadFile();
+    
+    writeFile(null);
   }
   
   public void Test(){
@@ -42,7 +51,8 @@ public class DataManager {
   private void writeFile(JSONObject jsonObject)  {
     //String appDataStr = appData.toJSONString();
     String fileData = " {\"ingredients\":[\"Hot Peppers\",\"Hot Peppers\",\"Hot Peppers\"],\"Rating\":\"Five Stars\",\"Recipe_ID\":\"101015\",\"Recipe_Name\":\"Onion Soup\"} ";
-    JSONObject jsonObjectTest = null;                             
+    JSONObject jsonObjectTest = null;    
+    FileOutputStream out;
    
       try {
         jsonObjectTest = new JSONObject(fileData);
@@ -51,9 +61,7 @@ public class DataManager {
       }
     
     try {
-      FileOutputStream out = new FileOutputStream(file);
-   //   Researching on how to use ObjectOutput stream to write JSON object 
-   //   directly to the file with out converting to a string
+      out = openFileOutput(file, Context.MODE_PRIVATE);
       ObjectOutputStream oos = new ObjectOutputStream(out);   
       oos.writeObject(jsonObjectTest); //object would go here
       oos.close();
