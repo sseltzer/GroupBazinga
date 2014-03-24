@@ -13,8 +13,7 @@ import android.graphics.drawable.AnimationDrawable;
 public class Splash extends Activity {
 
   private static int INTRO_TIME_OUT = 3600;
-  private DataManager DM = new DataManager();
-  
+  private DataManager DM;
   
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,5 +45,7 @@ public class Splash extends Activity {
         finish();
       }
     }, INTRO_TIME_OUT);
+    
+    DM = new DataManager(this);
 	}
 }
