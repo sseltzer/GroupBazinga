@@ -26,6 +26,8 @@ public class GroceryList {
   
   public JSONObject toJSON() throws JSONException {
     //TODO
+    // JSON example 
+    //  {"ingredients":["Hot Peppers","Hot Peppers","Hot Peppers"],"Rating":"Five Stars","Recipe_ID":"101015","Recipe_Name":"Onion Soup"} 
     return null;
   }
   

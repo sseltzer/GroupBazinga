@@ -1,10 +1,13 @@
 package edu.bazinga.recipebuddy.data.collections;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
 
 import org.json.JSONException;
@@ -17,7 +20,7 @@ import android.util.Log;
 public class DataManager {
 
   private static DataManager instance = null;
-  String file = "CEN4021.txt";
+  String file = "CEN4021222.txt";
 
   public static DataManager getInstance() {
     instance = null;
@@ -30,7 +33,7 @@ public class DataManager {
   public DataManager(Activity activity) {
     writeFile(activity, null);
     
-    //loadFile();
+    loadFile(activity);
   }
 
   private void writeFile(Activity activity, JSONObject jsonObject) {
@@ -44,12 +47,14 @@ public class DataManager {
     } catch (JSONException e1) {
       e1.printStackTrace();
     }
-    
+    BufferedOutputStream stream;
     try {
       out = activity.openFileOutput(file, Context.MODE_PRIVATE);
-      ObjectOutputStream oos = new ObjectOutputStream(out);
-      oos.writeObject(jsonObjectTest); // object would go here
-      oos.close();
+      stream = new BufferedOutputStream(out);
+      stream.write(fileData.getBytes());
+      stream.close();
+      out.close();
+   
     } catch (FileNotFoundException e) {
       e.printStackTrace();
     } catch (IOException e) {
@@ -59,19 +64,26 @@ public class DataManager {
     
   }
 
-  private void loadFile() {
+  private void loadFile(Activity activity) {
 
     String fileData = null;
     BufferedReader in = null;
 
     try {
-      in = new BufferedReader(new FileReader(file));
+      InputStream inputStream = activity.openFileInput(file);
+      
+      if ( inputStream != null) {
+        
+      InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+      in = new BufferedReader(inputStreamReader);
       fileData = in.readLine(); // Read the first line from the file
       Log.d("recipe", fileData);
       in.close();
+      }
     } catch (IOException e) {
       e.printStackTrace();
     }
+  /*
 
     JSONObject jsonObject;
     try {
@@ -79,7 +91,7 @@ public class DataManager {
       appData.loadFromJSON(jsonObject);
     } catch (JSONException e) {
       e.printStackTrace();
-    }
+    }*/
   }
 
 }
