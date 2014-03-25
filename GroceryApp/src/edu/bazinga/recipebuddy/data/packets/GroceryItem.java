@@ -8,7 +8,9 @@ public class GroceryItem {
   private String itemName;
   private String quantity;
   
-  public GroceryItem() {
+  public GroceryItem(String itemName, String quantity) {
+    this.itemName = itemName;
+    this.quantity = quantity;
   }
 
   public String getItemName() {
@@ -34,12 +36,10 @@ public class GroceryItem {
   }
   
   public static GroceryItem fromJSON(JSONObject jsonObject) throws JSONException {
-    GroceryItem groceryItem = new GroceryItem();
+    String itemName = jsonObject.get("itemName").toString();
+    String quantity = jsonObject.get("quantity").toString();
     
-    groceryItem.setItemName(jsonObject.get("itemName").toString());
-    groceryItem.setQuantity(jsonObject.get("quantity").toString());
-    
-    return groceryItem;
+    return new GroceryItem(itemName, quantity);
   }
   
   @Override

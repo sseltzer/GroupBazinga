@@ -11,8 +11,13 @@ public class GroceryList {
   private String listName = null;
   private ArrayList<GroceryItem> groceryItems = null;
   
-  public GroceryList() {
+  public GroceryList(String listName) {
+    this.listName = listName;
     groceryItems = new ArrayList<GroceryItem>();
+  }
+  public GroceryList(String listName, ArrayList<GroceryItem> groceryItems) {
+    this.listName = listName;
+    this.groceryItems = new ArrayList<GroceryItem>(groceryItems);
   }
   
   public String getListName() {
@@ -39,16 +44,14 @@ public class GroceryList {
   }
   
   public static GroceryList fromJSON(JSONObject jsonObject) throws JSONException {
-    GroceryList groceryList = new GroceryList();                                  // Create a new GroceryList object.
-    
-    groceryList.setListName(jsonObject.getString("listName"));                    // Get the name out of the JSON object and assign our new list object it's name.
+    String listName = jsonObject.getString("listName");                           // Get the name out of the JSON object and assign our new list object it's name.
     
     ArrayList<GroceryItem> groceryItems = new ArrayList<GroceryItem>();           // Create a new collection of our items.
     JSONArray jsonGroceryItems = jsonObject.getJSONArray("groceryItems");         // Get our array of json grocery items .
     for (int i = 0; i < jsonGroceryItems.length(); ++i) {                         // Loop through the array of json items and convert them to grocery items.
       groceryItems.add(GroceryItem.fromJSON(jsonGroceryItems.getJSONObject(i)));  // Create the grocery item out of the json object from the array.
     }
-    groceryList.addGroceryItems(groceryItems);                                    // Assign our grocery items list to our new grocery list.
-    return groceryList;                                                           // Return our new grocery list.
+    
+    return new GroceryList(listName, groceryItems);                               // Return our new grocery list.
   }
 }
