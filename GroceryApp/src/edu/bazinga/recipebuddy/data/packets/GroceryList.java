@@ -11,17 +11,24 @@ public class GroceryList {
   private String listName = null;
   private ArrayList<GroceryItem> groceryItems = null;
   
+  public GroceryList() {
+    groceryItems = new ArrayList<GroceryItem>();
+  }
+  
   public String getListName() {
     return listName;
   }
   public void setListName(String listName) {
     this.listName = listName;
   }
-  public ArrayList<GroceryItem> getGroceryItems() {
-    return groceryItems;
+  public void addGroceryItem(GroceryItem groceryItem) {
+    groceryItems.add(groceryItem);
   }
-  public void setGroceryItems(ArrayList<GroceryItem> groceryItems) {
-    this.groceryItems = groceryItems;
+  public void addGroceryItems(ArrayList<GroceryItem> groceryItems) {
+    this.groceryItems.addAll(groceryItems);
+  }
+  public void removeGroceryItem(int i) {
+    groceryItems.remove(i);
   }
   
   public JSONObject toJSON() throws JSONException {
@@ -41,7 +48,7 @@ public class GroceryList {
     for (int i = 0; i < jsonGroceryItems.length(); ++i) {                         // Loop through the array of json items and convert them to grocery items.
       groceryItems.add(GroceryItem.fromJSON(jsonGroceryItems.getJSONObject(i)));  // Create the grocery item out of the json object from the array.
     }
-    groceryList.setGroceryItems(groceryItems);                                    // Assign our grocery items list to our new grocery list.
+    groceryList.addGroceryItems(groceryItems);                                    // Assign our grocery items list to our new grocery list.
     return groceryList;                                                           // Return our new grocery list.
   }
 }

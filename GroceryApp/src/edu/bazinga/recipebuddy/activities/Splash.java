@@ -1,19 +1,19 @@
 package edu.bazinga.recipebuddy.activities;
 
-import edu.bazinga.recipebuddy.R;
-import edu.bazinga.recipebuddy.data.collections.DataManager;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageView;
-import android.graphics.drawable.AnimationDrawable;
+import edu.bazinga.recipebuddy.R;
+import edu.bazinga.recipebuddy.data.collections.DataManager;
 
 
 public class Splash extends Activity {
 
   private static int INTRO_TIME_OUT = 3600;
-  private DataManager DM;
+  private DataManager dataManager;
   
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,6 @@ public class Splash extends Activity {
       }
     }, INTRO_TIME_OUT);
     
-    DM = new DataManager(this);
+    dataManager = DataManager.getInstance(this); 
 	}
 }

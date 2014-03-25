@@ -22,17 +22,15 @@ public class DataManager {
   private static DataManager instance = null;
   String file = "CEN4021222.txt";
 
-  public static DataManager getInstance() {
-    instance = null;
-    // if (instance == null) instance = new DataManager();
+  public static DataManager getInstance(Activity activity) {
+    if (instance == null) instance = new DataManager(activity);
     return instance;
   }
 
   private ApplicationData appData = null;
 
-  public DataManager(Activity activity) {
+  private DataManager(Activity activity) {
     writeFile(activity, null);
-    
     loadFile(activity);
   }
 
@@ -60,8 +58,6 @@ public class DataManager {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    
-    
   }
 
   private void loadFile(Activity activity) {
