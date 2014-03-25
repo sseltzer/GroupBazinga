@@ -39,8 +39,23 @@ public class GroceryList {
   public JSONObject toJSON() throws JSONException {
     //TODO
     // JSON example 
+    //JSONArray
+    //JSONObject
+    JSONObject ret = new JSONObject();
+    
+    JSONArray array = new JSONArray();
+    //groceryItems is a dynamic array list
+    for (int i=0; i<groceryItems.size(); ++i )
+    {
+      array.put(groceryItems.get(i).toJSON());// add each index of groceryItems array into JSONArray array
+    
+    }
+     
+    ret.put("listName", listName); //"listName" in quotes is used to find specific information in the object at future time
+    ret.put("groceryItems", array); //array of JSONArray objects get put into the JSONObject ret
+    //"groceryItems" in quotes, is used to find specific information in the object at future time.
     //  {"ingredients":["Hot Peppers","Hot Peppers","Hot Peppers"],"Rating":"Five Stars","Recipe_ID":"101015","Recipe_Name":"Onion Soup"} 
-    return null;
+    return ret;
   }
   
   public static GroceryList fromJSON(JSONObject jsonObject) throws JSONException {
