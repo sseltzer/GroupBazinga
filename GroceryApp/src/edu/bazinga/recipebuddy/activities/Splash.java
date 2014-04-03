@@ -1,13 +1,20 @@
 package edu.bazinga.recipebuddy.activities;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.ImageView;
 import edu.bazinga.recipebuddy.R;
 import edu.bazinga.recipebuddy.data.collections.DataManager;
+import edu.bazinga.recipebuddy.data.packets.FavoriteRecipe;
+import edu.bazinga.recipebuddy.data.packets.GroceryItem;
+import edu.bazinga.recipebuddy.data.packets.GroceryList;
+import edu.bazinga.recipebuddy.error.RecipeBuddyException;
 
 
 public class Splash extends Activity {
@@ -46,6 +53,28 @@ public class Splash extends Activity {
       }
     }, INTRO_TIME_OUT);
     
-    dataManager = DataManager.getInstance(this); 
+    try {
+      dataManager = DataManager.getInstance(this);
+    } catch (RecipeBuddyException e) {
+      Log.d("recipe", e.getMessage());
+      e.printStackTrace();
+    }
+    
+    ArrayList<GroceryItem> items = new ArrayList<GroceryItem>();
+    items.add(new GroceryItem("item0", "0"));
+    items.add(new GroceryItem("item1", "1"));
+    items.add(new GroceryItem("item2", "2"));
+    GroceryList list = new GroceryList("Our Grocery List", items);
+    dataManager.getAppData().addGroceryList(list);
+    
+    FavoriteRecipe favorite = new FavoriteRecipe("123", "Everyone Loves Onions", "http://someURL.com");
+    dataManager.getAppData().addFavorite(favorite);
+    
+    try {
+      dataManager.writeFile(this);
+    } catch (RecipeBuddyException e) {
+      Log.d("recipe", e.getMessage());
+      e.printStackTrace();
+    }
 	}
 }

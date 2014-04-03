@@ -37,7 +37,6 @@ import edu.bazinga.recipebuddy.views.PlaceInfo;
 public class MapsManager {
   
   private static MapsManager instance = null;
-  //private final String MAPSKEY;
   
   private LinearLayout currentAnchor;
   private LinearLayout layout;
@@ -48,10 +47,11 @@ public class MapsManager {
   private QueryType lastQuery = QueryType.GROCERY;
   private PlacesManager mPm;
   private LocationsManager mLm;
-  //private ArrayList<Place> places;
   
   
   private OnItemSelectedListener onItemSelectedListener = new OnItemSelectedListener() {
+    // This is the selected item listener for the distance dropdown - once a distance is selected,
+    // re-search Google Places with the selected distance.
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
       if (parent.equals(layerSpinner)) {
@@ -66,6 +66,7 @@ public class MapsManager {
     }
   };
   private OnClickListener onClickListener = new OnClickListener() {
+    // Listener for when the update button is pressed, re-search.
     @Override
     public void onClick(View v) {
       doSearch();
@@ -73,27 +74,31 @@ public class MapsManager {
   };
   
   private MapsManager(Context context, Bundle savedInstanceState) {
+    // This is the private constructor for the singleton maps service.
+    // Obtain an instance of the places and locations managers.
     mPm = PlacesManager.requestInstance(context, savedInstanceState);
     mLm = LocationsManager.requestInstance(context, savedInstanceState);
+    // Initialize the Google Maps object from the Google Play Services Lib.
     try {
       MapsInitializer.initialize(context);
     } catch (GooglePlayServicesNotAvailableException e) {
       e.printStackTrace();
     }
-    //MAPSKEY = context.getString(R.string.mapkey);
-    
+    // Initialize String constants from the abstracted Strings file in the res directory.
     MapMode.NORMAL.setModeStr(context.getString(R.string.normal));
     MapMode.HYBRID.setModeStr(context.getString(R.string.hybrid));
     MapMode.SATELLITE.setModeStr(context.getString(R.string.satellite));
-    
+    // Create our Maps view using the Google Play Services Lib.
     generateView(context, savedInstanceState);
   }
   public static MapsManager requestInstance(Context context, Bundle savedInstanceState) {
+    // This object is a singleton service, this is a lazy init getInstance function.
     if (instance == null) instance = new MapsManager(context, savedInstanceState);
     return instance;
   }
   
   private void generateView(Context context, Bundle savedInstanceState) {
+    // Using our anchor point (the layout object), create our view and attach our spinners and update button.
     layout = new LinearLayout(context);
     layout.setOrientation(LinearLayout.VERTICAL);
     LinearLayout linearLayout = new LinearLayout(context);
@@ -123,12 +128,14 @@ public class MapsManager {
   }
   
   public void requestAttach(LinearLayout anchor) {
+    // Attach the view to the layout.
     if (currentAnchor != null || anchor == null) return;
     currentAnchor = anchor;
     anchor.addView(layout);
     animateNewLatLng(mLm.getLatLng());
   }
   public void requestDetach(LinearLayout anchor) {
+    // Detach the view from the layout.
     if (currentAnchor == null || !currentAnchor.equals(anchor)) return;
     currentAnchor.removeView(layout);
     currentAnchor = null;
@@ -136,6 +143,7 @@ public class MapsManager {
   }
   
   private void setLayer(MapMode mapMode) {
+    // Set our map mode satellite, hybrid with street maps, or normal maps.
     if (mapView == null) return;
     GoogleMap map = mapView.getMap();
     if (map == null) return;
@@ -146,16 +154,18 @@ public class MapsManager {
     }
   }
   public void animateNewLatLng(LatLng latLng) {
+    // Animate our view to the given location (used when the GPS button is pressed, or latlng changes).
     CameraPosition cameraPosition = new CameraPosition.Builder().target(latLng).zoom(11).build();
     mapView.getMap().animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
   }
   
   public void markUp(QueryType queryType, ArrayList<Place> places) {
+    // Add the pins to the map from the Google Places Query.
     if (places == null) return;
     lastQuery = queryType;
     //this.places = places;
     for(Place place : places) {
-      //Log.d("debug", "Place: " + place.getNameStr() + " Address: " + place.getAddressStr() + " LatLng: " + place.getLatLng());
+      //Log.d("recipe", "Place: " + place.getNameStr() + " Address: " + place.getAddressStr() + " LatLng: " + place.getLatLng());
       MarkerOptions options = new MarkerOptions();
       options.title(place.getNameStr());
       options.snippet(place.getAddressStr());
@@ -164,6 +174,7 @@ public class MapsManager {
     }
   }
   public void doSearch() {
+    // Clear the map and perform another search using Google Places and map up the pins on the map.
     int distance = mPm.stringMilesToMeters((String) distanceSpinner.getSelectedItem());
     mapView.getMap().clear();
     try {
@@ -175,6 +186,8 @@ public class MapsManager {
     }
   }
   public void onCreate(Context context, Bundle savedInstanceState) {
+    // Forward the application lifecycle functions from the activity to update the Google Play Services Lib objects.
+    // THIS IS REQURED FOR THE MAP TO FUNCTION.
     try {
       MapsInitializer.initialize(context);
     } catch (GooglePlayServicesNotAvailableException e) {
@@ -190,14 +203,20 @@ public class MapsManager {
     setLayer(MapMode.getMapModeFromString((String) layerSpinner.getSelectedItem()));
   }
   public void onResume() {
+    // Forward the application lifecycle functions from the activity to update the Google Play Services Lib objects.
+    // THIS IS REQURED FOR THE MAP TO FUNCTION.
     mapView.onResume();
   }
 
   public void onPause() {
+    // Forward the application lifecycle functions from the activity to update the Google Play Services Lib objects.
+    // THIS IS REQURED FOR THE MAP TO FUNCTION.
     mapView.onPause();
   }
 
   public void onDestroy() {
+    // Forward the application lifecycle functions from the activity to update the Google Play Services Lib objects.
+    // THIS IS REQURED FOR THE MAP TO FUNCTION.
     requestDetach(currentAnchor);
     mapView.onDestroy();
     layout.removeView(mapView);
@@ -205,14 +224,18 @@ public class MapsManager {
   }
 
   public void onLowMemory() {
+    // Forward the application lifecycle functions from the activity to update the Google Play Services Lib objects.
+    // THIS IS REQURED FOR THE MAP TO FUNCTION.
     mapView.onLowMemory();
   }
   public void onSaveInstanceState(Bundle outState) {
+    // Forward the application lifecycle functions from the activity to update the Google Play Services Lib objects.
+    // THIS IS REQURED FOR THE MAP TO FUNCTION.
     mapView.onSaveInstanceState(outState);
-    //outState.putParcelableArrayList("places", places);
   }
   
   public enum MapMode {
+    // Map our string constants for use with the Google Play Services Lib.
     NORMAL,
     HYBRID,
     SATELLITE;

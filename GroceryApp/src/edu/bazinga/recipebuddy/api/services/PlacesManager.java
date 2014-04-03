@@ -30,19 +30,19 @@ public class PlacesManager {
   
   private PlacesManager(Context context, Bundle savedInstanceState) {
     PLACESKEY = context.getString(R.string.placeskey);
-     
     queryMap = new EnumMap<QueryType, ArrayList<Place>>(QueryType.class);
   }
   
   public ArrayList<Place> query(QueryType queryType, LatLng location) throws InterruptedException, ExecutionException {
+ // Perform a query with a default of 2000 meters.
     return query(queryType, location, 2000);
   }
   public ArrayList<Place> query(QueryType queryType, LatLng location, int distance) throws InterruptedException, ExecutionException {
-    //if (queryMap.containsKey(queryType)) return queryMap.get(queryType);
+    // Perform a query with the given distance. 
     JSONRetriever placesRetriever = new JSONRetriever();
     ArrayList<Place> queryList = null;
     try {
-      //Log.d("debug", "Query: "+ buildQuery(queryType, location, distance));
+      //Log.d("recipe", "Query: "+ buildQuery(queryType, location, distance));
       AsyncTask<String, Void, String> task = placesRetriever.execute(buildQuery(queryType, location, distance));
       String retStr = task.get();
       queryList = parseResonse(retStr);
@@ -56,16 +56,19 @@ public class PlacesManager {
   }
   
   public int stringMilesToMeters(String miles) {
+    // Convert miles to meters for use in the query.
     miles = miles.substring(0, miles.indexOf(" "));
     return (int) (Integer.parseInt(miles) * 1609.34);
   }
   
   public static PlacesManager requestInstance(Context context, Bundle savedInstanceState) {
+    // This object is a singleton service, this is a lazy init getInstance function.
     if (instance == null) instance = new PlacesManager(context, savedInstanceState);
     return instance;
   }
   // UTF-8 Fix from here: http://stackoverflow.com/questions/13153625/android-google-maps-search-by-keywords
   private String buildQuery(QueryType queryType, LatLng location, int distance) throws UnsupportedEncodingException {
+    // Build a simple query string to send to Google Places.
     return "https://maps.googleapis.com/maps/api/place/search/json?" + 
         "location=" + location.latitude + "," + location.longitude +
         "&radius=" + distance +
@@ -73,7 +76,9 @@ public class PlacesManager {
         "&sensor=true" +
         "&key=" + PLACESKEY;
   }
+  
   private ArrayList<Place> parseResonse(String json) {
+    // Parse the JSON return response. This JSON format is specific to the response from Google Places.
     ArrayList<Place> placeList = new ArrayList<Place>();
     try {
       JSONObject entries = new JSONObject(json);
@@ -99,12 +104,12 @@ public class PlacesManager {
   }
   
   public enum QueryType {
+    // A few selections of search queries. Only GROCERY is used at the moment.
     FOOD("food|restaurant|cafe"),
     GROCERY("grocery_or_supermarket"),
     SHOPPING("store|book_store|clothing_store|convenience_store|electronics_store|department_store|shopping_mall"),
     SCHOOLS("school"),
-    MUSEUMS("museums"),
-    NIGHTLIFE("bar|night_club");
+    MUSEUMS("museums");
     private String queryStr;
     private QueryType(String queryStr) {
       this.queryStr = queryStr;
