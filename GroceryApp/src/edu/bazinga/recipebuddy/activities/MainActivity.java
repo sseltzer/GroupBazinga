@@ -41,10 +41,14 @@ import edu.bazinga.recipebuddy.data.packets.Recipe;
 public class MainActivity extends FragmentActivity {
 
    // FragmentCollectionPackage FCPackage;
-    ViewPager viewPager;
+    private ViewPager viewPager;
     Intent i;
-    //Fragment myList = new 
-   // Tab my_list_tab = actionBar.newTab();
+    private TabAdapter tabAdapter;
+    
+    private int icon_tabs[] = {	R.drawable.ic_action_list,
+    							R.drawable.ic_action_recipe,
+    							R.drawable.ic_action_favorite
+    							};
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,10 +59,13 @@ public class MainActivity extends FragmentActivity {
        /* FCPackage =
                 new FragmentCollectionPackage(
                         getSupportFragmentManager());
-        viewPager = (ViewPager) findViewById(R.id.pager);
-        viewPager.setAdapter(FCPackage);*/
         
+        viewPager.setAdapter(FCPackage);*/
         final ActionBar actionBar = getActionBar();
+        viewPager = (ViewPager) findViewById(R.id.pager);
+        tabAdapter = new TabAdapter(getSupportFragmentManager());
+        
+        
         // Sets title of main application
         actionBar.setTitle("RECIPE BUDDY");
 
@@ -68,42 +75,11 @@ public class MainActivity extends FragmentActivity {
         // Create a tab listener that is called when the user changes tabs.
         ActionBar.TabListener tabListener = new ActionBar.TabListener() {
             
-        	public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-                // show the given tab
-		        switch (tab.getPosition())
-		        {
-		            case 0:
-		                // My List
-		            	actionBar.setSubtitle("MY LIST");
-		                break;
-
-		            case 1:
-		                // Recipes
-		            	actionBar.setSubtitle("RECIPES");
-		                break;
-		                
-		            case 2:
-		            	// Favorites
-		            	actionBar.setSubtitle("FAVORITES");
-		            	break;
-
-		            default:
-		                break;
-		        }
-            }
-           
-            public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
-                // hide the given tab
-            }
-            
-            public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-                // probably ignore this event
-            }
-            
-			@Override
+        	@Override
 			public void onTabReselected(Tab tab,
 					android.app.FragmentTransaction ft) {
 				// TODO Auto-generated method stub
+        		viewPager.setCurrentItem(tab.getPosition());
 		        switch (tab.getPosition())
 		        {
 		            case 0:
@@ -130,6 +106,8 @@ public class MainActivity extends FragmentActivity {
 			public void onTabSelected(Tab tab,
 					android.app.FragmentTransaction ft) {
 				// TODO Auto-generated method stub
+				
+				viewPager.setCurrentItem(tab.getPosition());
 		        switch (tab.getPosition())
 		        {
 		            case 0:
@@ -161,9 +139,22 @@ public class MainActivity extends FragmentActivity {
 				
 			}
         };
+        viewPager.setOnPageChangeListener(
+                new ViewPager.SimpleOnPageChangeListener() {
+                    @Override
+                    public void onPageSelected(int position) {
+                        // When swiping between pages, select the
+                        // corresponding tab.
+                        getActionBar().setSelectedNavigationItem(position);
+                    }
+                });
 
         // Add 3 tabs, specifying the tab's icons and TabListener
-        
+        for(int icons : icon_tabs)
+        {
+        	actionBar.addTab(actionBar.newTab().setIcon(icons).setTabListener(tabListener));
+        }
+        /*
         //My List Tab
         Tab my_list_tab = actionBar.newTab();
         //my_list_tab.setText("My List");
@@ -184,7 +175,7 @@ public class MainActivity extends FragmentActivity {
         favorites_tab.setIcon(R.drawable.ic_action_favorite);	// Places Icon on Tab
         favorites_tab.setTabListener(tabListener);
         actionBar.addTab(favorites_tab);
-        
+        */
         
     }
     /*
@@ -214,21 +205,6 @@ public class MainActivity extends FragmentActivity {
 		}
     }; */
 
-    // this is just for reference only
-  private Bitmap getBitmap(String url) {
-	    Bitmap bitmap = null;
-	    try {
-	      ImageRetriever ret = new ImageRetriever();
-	      AsyncTask<String, Void, Bitmap> task = ret.execute(url);
-	      bitmap = task.get();
-	    } catch (Exception e) {
-	      // Ignore this one. This should never go wrong. Stack trace if it does.
-	      e.printStackTrace();
-	    }
-	    return bitmap;
-	  }
-
-  
   public String Time (String n)
   {
 	  String result = "";

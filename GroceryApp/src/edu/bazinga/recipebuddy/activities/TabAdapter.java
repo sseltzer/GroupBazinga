@@ -18,12 +18,12 @@ public class TabAdapter extends FragmentPagerAdapter {
         case 0:
             // My List
             return new TopRatedFragment();
-     /*   case 1:
+        case 1:
             // Recipes
            return new MyListClass();
         case 2:
             // Favorites
-            return new RecipeViewer(); */
+            return new RecipeBookActivity(); 
         }
  		
         return null;

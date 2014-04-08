@@ -1,26 +1,27 @@
-package edu.bazinga.recipebuddy.activities;
 
+package edu.bazinga.recipebuddy.activities;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
-import android.app.Fragment;
+import edu.bazinga.recipebuddy.R;
+import edu.bazinga.recipebuddy.data.packets.GroceryList;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import edu.bazinga.recipebuddy.R;
+
 import edu.bazinga.recipebuddy.data.packets.GroceryItem;
 import edu.bazinga.recipebuddy.data.packets.GroceryList;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.app.Activity;
+import android.widget.Button;
 
 public class MyListClass extends Fragment {
 	 
@@ -31,9 +32,9 @@ public class MyListClass extends Fragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
           Bundle savedInstanceState) {
 
-      View rootView = inflater.inflate(R.layout.recipe_list, container, false);
+      View myListView = inflater.inflate(R.layout.mylist, container, false);
        
-      return rootView;
+      return myListView;
   }
   public boolean onCreateOptionsMenu(Menu menu) {
   	// Inflate the menu; this adds items to the action bar if it is present.
