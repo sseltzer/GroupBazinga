@@ -2,12 +2,19 @@ package edu.bazinga.recipebuddy.activities;
 
 import java.util.ArrayList;
 
+import android.app.ActionBar;
+import android.app.ActionBar.Tab;
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,6 +26,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TabHost;
+import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 import edu.bazinga.recipebuddy.R;
 import edu.bazinga.recipebuddy.api.retrievers.ImageRetriever;
@@ -29,30 +38,183 @@ import edu.bazinga.recipebuddy.data.packets.Recipe;
 
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity {
 
-  
-  private ListView listView;
-  private ListAdapter listAdapter;
-  private static ArrayList<Recipe> recipes;   
-  
-  
-  private AdapterView.OnItemClickListener getOnItemClickListener() {
-    return new AdapterView.OnItemClickListener() {
-      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+   // FragmentCollectionPackage FCPackage;
+    ViewPager viewPager;
+    Intent i;
+    //Fragment myList = new 
+   // Tab my_list_tab = actionBar.newTab();
+
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // ViewPager and its adapters use support library
+        // fragments, so use getSupportFragmentManager.
+       /* FCPackage =
+                new FragmentCollectionPackage(
+                        getSupportFragmentManager());
+        viewPager = (ViewPager) findViewById(R.id.pager);
+        viewPager.setAdapter(FCPackage);*/
         
-      //  String viewText = (String) ((TextView)view.findViewById(R.id.listTitle)).getText();
-        String viewText = (String) ((TextView)view.findViewById(R.id.recipeTitle)).getText();
-        System.out.println(viewText);
-        Recipe selected = null;
-        for (Recipe recipe : recipes) if (recipe.getRecipeName().equals(viewText)) selected = recipe;
-        Intent i = new Intent(MainActivity.this, RecipeViewer.class);
-        i.putExtra("selected", selected);        
-        startActivity(i);
-      }
-    };
-  }
-  
+        final ActionBar actionBar = getActionBar();
+        // Sets title of main application
+        actionBar.setTitle("RECIPE BUDDY");
+
+        // tabs will be displayed in the action bar
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+        // Create a tab listener that is called when the user changes tabs.
+        ActionBar.TabListener tabListener = new ActionBar.TabListener() {
+            
+        	public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+                // show the given tab
+		        switch (tab.getPosition())
+		        {
+		            case 0:
+		                // My List
+		            	actionBar.setSubtitle("MY LIST");
+		                break;
+
+		            case 1:
+		                // Recipes
+		            	actionBar.setSubtitle("RECIPES");
+		                break;
+		                
+		            case 2:
+		            	// Favorites
+		            	actionBar.setSubtitle("FAVORITES");
+		            	break;
+
+		            default:
+		                break;
+		        }
+            }
+           
+            public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+                // hide the given tab
+            }
+            
+            public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+                // probably ignore this event
+            }
+            
+			@Override
+			public void onTabReselected(Tab tab,
+					android.app.FragmentTransaction ft) {
+				// TODO Auto-generated method stub
+		        switch (tab.getPosition())
+		        {
+		            case 0:
+		                // My List
+		            	actionBar.setSubtitle("MY LIST");
+		                break;
+
+		            case 1:
+		                // Recipes
+		            	actionBar.setSubtitle("RECIPES");
+		                break;
+		                
+		            case 2:
+		            	// Favorites
+		            	actionBar.setSubtitle("FAVORITES");
+		            	break;
+
+		            default:
+		                break;
+		        }
+			}
+
+			@Override
+			public void onTabSelected(Tab tab,
+					android.app.FragmentTransaction ft) {
+				// TODO Auto-generated method stub
+		        switch (tab.getPosition())
+		        {
+		            case 0:
+		                // My List
+		            	actionBar.setSubtitle("MY LIST");
+		    	       
+		                break;
+
+		            case 1:
+		                // Recipes
+		            	actionBar.setSubtitle("RECIPES");
+		                break;
+		                
+		            case 2:
+		            	// Favorites
+		            	actionBar.setSubtitle("FAVORITES");
+		            	break;
+
+		            default:
+		                break;
+		        }
+				
+			}
+
+			@Override
+			public void onTabUnselected(Tab tab,
+					android.app.FragmentTransaction ft) {
+				// TODO Auto-generated method stub
+				
+			}
+        };
+
+        // Add 3 tabs, specifying the tab's icons and TabListener
+        
+        //My List Tab
+        Tab my_list_tab = actionBar.newTab();
+        //my_list_tab.setText("My List");
+        my_list_tab.setIcon(R.drawable.ic_action_list);			// Places Icon on Tab
+        my_list_tab.setTabListener(tabListener);
+        actionBar.addTab(my_list_tab);
+        
+        // Recipes Tab
+        Tab recipes_tab = actionBar.newTab();
+        //recipes_tab.setText("Recipes");
+        recipes_tab.setIcon(R.drawable.ic_action_recipe);		// Places Icon on Tab
+        recipes_tab.setTabListener(tabListener);
+        actionBar.addTab(recipes_tab);
+        
+        // Favorites Tab
+        Tab favorites_tab = actionBar.newTab();
+        //favorites_tab.setText("Favorites");
+        favorites_tab.setIcon(R.drawable.ic_action_favorite);	// Places Icon on Tab
+        favorites_tab.setTabListener(tabListener);
+        actionBar.addTab(favorites_tab);
+        
+        
+    }
+    /*
+    ActionBar.TabListener tabListener = new ActionBar.TabListener() {
+        public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+            // When the tab is selected, switch to the
+            // corresponding page in the ViewPager.
+            viewPager.setCurrentItem(tab.getPosition());
+        }
+
+		@Override
+		public void onTabReselected(Tab tab, android.app.FragmentTransaction ft) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onTabSelected(Tab tab, android.app.FragmentTransaction ft) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onTabUnselected(Tab tab, android.app.FragmentTransaction ft) {
+			// TODO Auto-generated method stub
+			
+		}
+    }; */
+
+    // this is just for reference only
   private Bitmap getBitmap(String url) {
 	    Bitmap bitmap = null;
 	    try {
@@ -65,41 +227,7 @@ public class MainActivity extends Activity {
 	    }
 	    return bitmap;
 	  }
-  
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {    
-  
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    setTitle("MY RECIPES");	// Changes title of screen
-    @SuppressWarnings("unused")
-	YummlyManager recipeAPI = new YummlyManager();
-    recipes = new ArrayList<Recipe>();
-    //if (recipes == null) recipes = recipeAPI.getRecipes("beef stew");
-    Log.d("asdf", "recipes length: " + recipes.size());
-    
-    ArrayList<String> listNames = new ArrayList<String>();
-    for (Recipe recipe : recipes) listNames.add(recipe.getRecipeName());
-    
-    listView = (ListView) findViewById(R.id.listView);
-    //listAdapter = new MyCustomAdapter(this,R.layout.recipe_list,listNames);
-    listAdapter = new ArrayAdapter<String>(this, R.layout.recipelist, R.id.listTitle, listNames);
-    listView.setAdapter(listAdapter);
-    listView.setOnItemClickListener(getOnItemClickListener());
-    
-    /* Leave this here for reference, it's not needed anymore.
-    GroceryItem item = new GroceryItem();
-    item.setItemName("itemName 01");
-    item.setQuantity("5");
-    Log.d("recipe", item.toString());
-    Log.d("recipe", item.toJSON());
-    //{"quantity":"5","itemName":"itemName 01"}
-    //  "{\"quantity\":\"5\",\"itemName\":\"itemName 01\"}"
-    GroceryItem newItem = new GroceryItem();
-    newItem.fromJSON("{\"quantity\":\"7\",\"itemName\":\"itemName 03\"}");
-    Log.d("recipe", newItem.toString());
-    */
-  }
+
   
   public String Time (String n)
   {
@@ -139,13 +267,16 @@ public class MainActivity extends Activity {
 	  
 	  
   } 
-
+  /*
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     // Inflate the menu; this adds items to the action bar if it is present.
     getMenuInflater().inflate(R.menu.main, menu);
     return true;
-  }
+  } */
+}
+/*
+
   // Handels item selections
   @Override
 	public boolean onOptionsItemSelected (MenuItem item){
@@ -183,7 +314,7 @@ public class MainActivity extends Activity {
   * @author: Gus Maturana
   * CustomAdapter will display the images and the name of the recipe
   */
-  
+  /*
   public class MyCustomAdapter extends ArrayAdapter<String> 
   {
       public MyCustomAdapter(Context context, int textViewResourceId, ArrayList<String> objects) 
@@ -228,4 +359,4 @@ public class MainActivity extends Activity {
   } // end MyCustomAdapter
 
 
-}
+} */
