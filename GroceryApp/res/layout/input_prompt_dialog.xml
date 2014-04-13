@@ -1,0 +1,28 @@
+<!-- @Author: Gus A. Maturana -->
+<!-- File Name: input_prompt_dialog.xml -->
+<!-- layout for input -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				android:id="@+id/layout_root"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:orientation="vertical"
+				android:padding="10dp" >
+
+    <TextView
+    	android:id="@+id/Label"
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:text="@string/prompt"
+    	android:textAppearance="?android:attr/textAppearanceLarge" />
+    	
+    <EditText
+    	android:id="@+id/input"
+    	android:layout_width="match_parent"
+    	android:inputType="text"
+    	android:layout_height="wrap_content" >
+    	
+        <requestFocus />
+    </EditText>
+</LinearLayout>
+    
+    

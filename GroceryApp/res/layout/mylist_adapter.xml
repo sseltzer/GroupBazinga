@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_centerHorizontal="true"
+    android:padding="3dp"
+    android:background="#FFFFCC" >
+    
+
+   
+   <!-- Page Title (pageTitle)-->
+   <TextView 
+       android:id="@+id/shoppinglist"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="@string/about_page"
+       android:textSize="14sp"
+       android:textStyle="bold"
+       android:textColor="#000066"
+       android:typeface="serif"
+       android:layout_marginLeft="10dp"
+       />
+   
+
+
+</RelativeLayout>

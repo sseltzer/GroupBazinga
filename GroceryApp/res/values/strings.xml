@@ -24,6 +24,7 @@
     <string name="action_delete">Delete Item</string>
     <string name="action_recipes">Recipes</string>
     <string name="action_list">My List</string>
+    <string name="prompt">Grocery List</string>
     
 
 </resources>
