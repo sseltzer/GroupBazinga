@@ -1,10 +1,12 @@
 package edu.bazinga.recipebuddy.activities;
 
+import edu.bazinga.recipebuddy.R;
 import android.app.ActionBar.Tab;
 import android.app.ActionBar.TabListener;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.text.Html;
  
 public class FragmentTabListener<T extends Fragment> implements TabListener {
 private Fragment mFragment;
@@ -35,6 +37,36 @@ mfragmentContainerId = fragmentContainerId;
 public void onTabSelected(Tab tab, android.app.FragmentTransaction ft) {
 FragmentTransaction sft = mActivity.getSupportFragmentManager().beginTransaction();
 // Check if the fragment is already initialized
+switch (tab.getPosition())
+{
+	case 0:
+    	// My List
+		// access the actionbar of the MainActivity.java and changes the subtitle
+		mActivity.getActionBar().setSubtitle(Html.fromHtml("<font color=\"#848484\">" + "My List" + "</font>"));
+  
+    	break;
+
+	case 1:
+    	// Recipes
+		// access the actionbar of the MainActivity.java and changes the subtitle
+		mActivity.getActionBar().setSubtitle(Html.fromHtml("<font color=\"#848484\">" + "Recipes" + "</font>"));
+    	break;
+    
+	case 2:
+		// Favorites
+		// access the actionbar of the MainActivity.java and changes the subtitle
+		mActivity.getActionBar().setSubtitle(Html.fromHtml("<font color=\"#848484\">" + "Favorites " + "</font>"));
+		break;
+		
+	case 3:
+		// Search
+		// access the actionbar of the MainActivity.java and changes the subtitle
+		mActivity.getActionBar().setSubtitle(Html.fromHtml("<font color=\"#848484\">" + "Search" + "</font>"));
+		break;
+
+	default:
+		break;
+}
 if (mFragment == null) {
 // If not, instantiate and add it to the activity
 mFragment = Fragment.instantiate(mActivity, mClass.getName());

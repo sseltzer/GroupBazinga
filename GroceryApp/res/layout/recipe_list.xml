@@ -56,13 +56,4 @@
         android:textSize="12sp"
         android:typeface="serif" />
 
-    <RatingBar
-        android1:id="@+id/favorate_check"
-        style="?android:attr/ratingBarStyleSmall"
-        android1:layout_width="wrap_content"
-        android1:layout_height="wrap_content"
-        android1:layout_alignParentRight="true"
-        android1:layout_alignTop="@+id/recipeTitle"
-        android1:numStars="1" />
-
 </RelativeLayout>

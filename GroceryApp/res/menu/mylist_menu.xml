@@ -17,14 +17,14 @@
         android:orderInCategory="300"
         android:title="@string/action_favorite"
         />
-    <!-- Favorite Button -->
+    <!-- Add Button -->
     <item
         android:id="@+id/action_add"
-        android:icon="@drawable/ic_action_favorite"
-        android:title="@string/action_favorite"
+        android:icon="@drawable/ic_action_add"
+        android:title="@string/aciton_add"
         android:showAsAction="ifRoom"
         />
-    	<!-- Edit Button -->
+    <!-- Edit Button -->
 	<item 
 	    android:id="@+id/sample"
 	    android:icon="@drawable/ic_action_edit"
@@ -46,8 +46,4 @@
 	    android:showAsAction="ifRoom"
 	    />
 
-
-
-
-	
 </menu>
