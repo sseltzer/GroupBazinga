@@ -45,22 +45,22 @@ public class MainActivity extends FragmentActivity {
     Intent i;
     private TabAdapter tabAdapter;
     
-    private int icon_tabs[] = {	R.drawable.ic_action_list,
-    							R.drawable.ic_action_recipe,
-    							R.drawable.ic_action_favorite
-    							};
+	private int icon_tabs[] = {	
+			R.drawable.ic_action_list,
+			R.drawable.ic_action_recipe,
+			R.drawable.ic_action_favorite,
+			android.R.drawable.ic_menu_search
+	};
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        setupTabs();
+        
         // ViewPager and its adapters use support library
         // fragments, so use getSupportFragmentManager.
-       /* FCPackage =
-                new FragmentCollectionPackage(
-                        getSupportFragmentManager());
-        
-        viewPager.setAdapter(FCPackage);*/
+
+        /*
         final ActionBar actionBar = getActionBar();
         viewPager = (ViewPager) findViewById(R.id.pager);
         tabAdapter = new TabAdapter(getSupportFragmentManager());
@@ -205,6 +205,59 @@ public class MainActivity extends FragmentActivity {
 		}
     }; */
 
+    private void setupTabs() {
+		ActionBar actionBar = getActionBar();
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		actionBar.setDisplayShowTitleEnabled(true);
+
+		Tab tab1 = actionBar
+				.newTab()
+				.setText("MY LIST")
+				.setIcon(icon_tabs[0])
+				.setTag("my list")
+				.setTabListener(
+						new FragmentTabListener<TopRatedFragment>(R.id.main_fragment, this, "first",
+								TopRatedFragment.class));
+
+		actionBar.addTab(tab1);
+		actionBar.selectTab(tab1);
+
+		Tab tab2 = actionBar
+				.newTab()
+				.setText("RECIPES")
+				.setIcon(icon_tabs[1])
+				.setTag("recipes")
+				.setTabListener(
+						new FragmentTabListener<MyListClass>(R.id.main_fragment, this, "second",
+								MyListClass.class));
+
+		actionBar.addTab(tab2);
+		
+		
+		Tab tab3 = actionBar
+				.newTab()
+				.setText("FAVORITES")
+				.setIcon(icon_tabs[2])
+				.setTag("favorites")
+				.setTabListener(
+						new FragmentTabListener<RecipeBookActivity>(R.id.main_fragment, this, "third",
+								RecipeBookActivity.class));
+
+		actionBar.addTab(tab3);		
+		
+		Tab tab4 = actionBar
+				.newTab()
+				.setText("SEARCH")
+				.setIcon(icon_tabs[3])
+				.setTag("search")
+				.setTabListener(
+						new FragmentTabListener<SearchFragment>(R.id.main_fragment, this, "fourth",
+								SearchFragment.class));
+
+		actionBar.addTab(tab4);
+
+	}
+    
   public String Time (String n)
   {
 	  String result = "";
