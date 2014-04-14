@@ -35,6 +35,9 @@ public class GroceryList {
   public void removeGroceryItem(int i) {
     groceryItems.remove(i);
   }
+  public ArrayList<GroceryItem> getGroceryItems() {
+    return groceryItems;
+  }
   
   public JSONObject toJSON() throws JSONException {
     JSONObject ret = new JSONObject();

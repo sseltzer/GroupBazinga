@@ -37,7 +37,7 @@ public class MyListClass extends Fragment {
 	 
 	  private ListView listView;
 	  private ListAdapter listAdapter;
-	  private static GroceryList grocerylist;
+	  private static GroceryList grocerylist = new GroceryList("");
 	  
 	 // final Context context = MainActivity.class;
 	  private String inputString = "";
@@ -53,6 +53,7 @@ public class MyListClass extends Fragment {
       
       // Setup
        listView = (ListView)myListView.findViewById(R.id.shoppingListView);
+       listView.setVisibility(View.VISIBLE);
        
       return myListView;
   }
@@ -125,19 +126,17 @@ public class MyListClass extends Fragment {
   		.setPositiveButton("OK", new DialogInterface.OnClickListener(){
   			public void onClick(DialogInterface dialog, int id)
   			{
-  				int size = 1;
   				inputString = inputText.getText().toString();
   				Log.d("str",inputString);
   				
-  				grocerylist = new GroceryList(inputString);
-  				//grocerylist.setListName(inputString);
+  				//grocerylist = new GroceryList(inputString);
+  				grocerylist.setListName(inputString);
   				ArrayList<String> listNames = new ArrayList<String>();
-  				//for (int i = 0; i < size; i++)
-  				//{
-  					listNames.add(inputString);
+  				
+  					listNames.add(grocerylist.getListName());
   					//listNames.add(inputString);
-  					size++;
-  				//} 
+  					
+  			
   		        listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.mylist_adapter, R.id.shoppinglist, listNames);
   		       // listAdapter = new MyAdapter(R.layout.recipe_list,listNames);
   		        listView.setAdapter(listAdapter);

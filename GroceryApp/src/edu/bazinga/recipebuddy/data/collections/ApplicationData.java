@@ -34,6 +34,9 @@ public class ApplicationData {
   public void removeFavorites(int i) {
     favorites.remove(i);
   }
+  public ArrayList<FavoriteRecipe> getFavorites() {
+    return favorites;
+  }
   
   public void addGroceryList(GroceryList groceryList) {
     groceryLists.add(groceryList);
@@ -43,6 +46,9 @@ public class ApplicationData {
   }
   public void removeGroceryList(int i) {
     groceryLists.remove(i);
+  }
+  public ArrayList<GroceryList> getGroceryList() {
+    return groceryLists;
   }
     
   public JSONObject toJSON() throws JSONException {

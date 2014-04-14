@@ -17,15 +17,17 @@ public class YummlyManager {
   private static YummlyQueryBuilder qb = YummlyQueryBuilder.getInstance();
   
   public ArrayList<Recipe> getRecipes(String query) {
+    Log.d("recipe", "Querying: " + query);
     return parseResponse(getJSONResponse(qb.buildQuery(query)));
   }
   
   private String getJSONResponse(String query) {
-    Log.d("asdf", "Querying: " + query);
+    Log.d("recipe", "Querying: " + query);
     String jsonResponse = null;
     try {
       JSONRetriever ret = new JSONRetriever();
       AsyncTask<String, Void, String> task = ret.execute(query);
+      Thread.sleep(1000);
       jsonResponse = task.get();
     } catch (Exception e) {
       // Ignore this one. This should never go wrong. Stack trace if it does.
@@ -35,25 +37,27 @@ public class YummlyManager {
   }
   
   private ArrayList<Recipe> parseResponse(String jsonResponse) {
-    Log.d("asdf", "Parsing");
+    Log.d("recipe", "Parsing");
     ArrayList<Recipe> list = new ArrayList<Recipe>();
     try {
       JSONObject entries = new JSONObject(jsonResponse);
       JSONArray attribution = entries.getJSONArray("matches");
+      Log.d("recipe", "Number of items found: " + attribution.length());
+      Log.d("recipe", "Response: " + jsonResponse);
       for (int i = 0; i < attribution.length(); ++i) {
         JSONObject match = attribution.getJSONObject(i);
         Recipe item = new Recipe();
-        
         item.setId(match.getString("id"));
-        item.setIngredients(match.getString("ingredients"));
-        item.setTotalTimeInSeconds(match.getString("totalTimeInSeconds"));
-        item.setRecipeName(match.getString("recipeName"));
-        item.setSmallImageUrls(match.getString("smallImageUrls"));
-        item.setSourceDisplayName(match.getString("sourceDisplayName"));
-        item.setFlavors(match.getString("flavors"));
-        item.setRating(match.getString("rating"));
-        JSONObject bigUrl = match.getJSONObject("imageUrlsBySize");
-        item.setBigUrl(bigUrl.getString("90"));
+        item.setIngredients(match.optString("ingredients"));
+        item.setTotalTimeInSeconds(match.optString("totalTimeInSeconds"));
+        item.setRecipeName(match.optString("recipeName"));
+        item.setSmallImageUrls(match.optString("smallImageUrls"));
+        item.setSourceDisplayName(match.optString("sourceDisplayName"));
+        item.setFlavors(match.optString("flavors"));
+        item.setRating(match.optString("rating"));
+        JSONObject bigUrl = match.optJSONObject("imageUrlsBySize");
+        if (bigUrl != null) item.setBigUrl(bigUrl.optString("90"));
+        else item.setBigUrl("");
         list.add(item);
       }
     } catch (JSONException e) {
