@@ -1,13 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    
-   	<!-- Settings Button -->
+     
+<!--Settings Button-->
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="@string/action_settings"/>
-    <!-- About Button -->
+   <!--  About Button -->
     <item
         android:id="@+id/action_about"
         android:orderInCategory="200"
@@ -17,14 +16,14 @@
         android:orderInCategory="300"
         android:title="@string/action_favorite"
         />
-    <!-- Add Button -->
+   <!--  Add Button -->
     <item
         android:id="@+id/action_add"
         android:icon="@drawable/ic_action_add"
-        android:title="@string/aciton_add"
+        android:title="@string/action_add"
         android:showAsAction="ifRoom"
         />
-    <!-- Edit Button -->
+   <!--  Edit Button -->
 	<item 
 	    android:id="@+id/sample"
 	    android:icon="@drawable/ic_action_edit"
@@ -44,6 +43,5 @@
 	    android:icon="@drawable/ic_action_directions"
 	    android:title="@string/action_directions"
 	    android:showAsAction="ifRoom"
-	    />
-
+	    /> 
 </menu>
