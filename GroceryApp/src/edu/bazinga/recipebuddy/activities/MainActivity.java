@@ -45,22 +45,24 @@ public class MainActivity extends FragmentActivity {
     private ViewPager viewPager;
     Intent i;
     private TabAdapter tabAdapter;
-    
+    private ViewPager	mViewPager;
 	private int icon_tabs[] = {	
 			R.drawable.ic_action_list,
 			R.drawable.ic_action_recipe,
 			R.drawable.ic_action_favorite,
 			android.R.drawable.ic_menu_search
 	};
-
+	MyListClass mMylistClass;
+	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setupTabs();
         
         // Formats main title
-        getActionBar().setTitle(Html.fromHtml("<font style =\"bold\" color=\"#0174DF\">" + "RECIPE" + "</font>"+
+        getActionBar().setTitle(Html.fromHtml("<font face =\"Arial\" color=\"#0174DF\">" + "RECIPE" + "</font>"+
         		"<font color=\"#DF7401\">"+ " BUDDY" + "</font>"));
+        
 
 
     }
@@ -107,7 +109,6 @@ public class MainActivity extends FragmentActivity {
 		// Search tab
 		Tab tab4 = actionBar
 				.newTab()
-				.setText("SEARCH")
 				.setIcon(icon_tabs[3])
 				.setTag("search")
 				.setTabListener(
@@ -156,6 +157,31 @@ public class MainActivity extends FragmentActivity {
 	  
 	  
   } 
+  
+  // New stuff?
+  /*
+  @Override
+  protected void onSaveInstanceState(Bundle outState) {
+     FragmentManager manager = getFragmentManager();
+     manager.putFragment(outState, MyListClass.TAG, mMyFragment);
+  }
+  
+  private void instantiateFragments(Bundle inState) {
+	   FragmentManager manager = getFragmentManager();
+	   FragmentTransaction transaction = manager.beginTransaction();
+
+	   if (inState != null) {
+	      mMyFragment = (MyFragment) manager.getFragment(inState, MyFragment.TAG);
+	   } else {
+	      mMyFragment = new MyFragment();
+	      transaction.add(R.id.main_fragment, mMyFragment, MyFragment.TAG);
+	      transaction.commit();
+	   }
+	}
+  @Override
+  protected void onRestoreInstanceState(Bundle inState) {
+     instantiateFragments(inState);
+  } */
   /*
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {

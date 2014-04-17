@@ -86,7 +86,7 @@ public class RecipeBookActivity extends Fragment{
 	       @SuppressWarnings("unused")
 	   		YummlyManager recipeAPI = new YummlyManager();
 	       recipes = new ArrayList<Recipe>();
-	       if (recipes == null) recipes = recipeAPI.getRecipes("beef stew");
+	       if (recipes == null) recipes = recipeAPI.getRecipes("soup");
 	       //Log.d("asdf", "recipes length: " + recipes.size());
 	       
 	       ArrayList<String> listNames = new ArrayList<String>();

@@ -14,6 +14,7 @@ private final FragmentActivity mActivity;
 private final String mTag;
 private final Class<T> mClass;
 private final int mfragmentContainerId;
+
 // This version defaults to replacing the entire activity content area
 // new FragmentTabListener<SomeFragment>(this, "first", SomeFragment.class))
 public FragmentTabListener(FragmentActivity activity, String tag, Class<T> clz) {
@@ -90,4 +91,6 @@ sft.commit();
 public void onTabReselected(Tab tab, android.app.FragmentTransaction ft) {
 // User selected the already selected tab. Usually do nothing.
 }
+
+
 }

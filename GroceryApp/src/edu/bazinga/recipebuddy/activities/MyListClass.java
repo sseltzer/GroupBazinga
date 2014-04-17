@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import edu.bazinga.recipebuddy.R;
 import edu.bazinga.recipebuddy.activities.RecipeBookActivity.MyCustomAdapter;
+import edu.bazinga.recipebuddy.data.collections.ApplicationData;
 import edu.bazinga.recipebuddy.data.packets.GroceryList;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -38,11 +39,14 @@ public class MyListClass extends Fragment {
 	  private ListView listView;
 	  private ListAdapter listAdapter;
 	  private static GroceryList grocerylist = new GroceryList("");
+	  private static ApplicationData applicationList = new ApplicationData();
+	  ArrayList<GroceryList> listNames = new ArrayList<GroceryList>();
 	  
 	 // final Context context = MainActivity.class;
 	  private String inputString = "";
 	  private EditText inputText;
 	  private ListView list;
+	  private String TAG;
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
           Bundle savedInstanceState) {
@@ -128,19 +132,21 @@ public class MyListClass extends Fragment {
   			{
   				inputString = inputText.getText().toString();
   				Log.d("str",inputString);
-  				
+  				int size = 0;
   				//grocerylist = new GroceryList(inputString);
   				grocerylist.setListName(inputString);
-  				ArrayList<String> listNames = new ArrayList<String>();
+  				applicationList.addGroceryList(grocerylist);
   				
-  					listNames.add(grocerylist.getListName());
-  					//listNames.add(inputString);
-  					
+  				
+  				//listNames.add(grocerylist.get());
+  				//listNames.add(inputString);
+  				listNames.addAll(applicationList.getGroceryList());
+  				//listNames.add(grocerylist.getListName());
   			
-  		        listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.mylist_adapter, R.id.shoppinglist, listNames);
-  		       // listAdapter = new MyAdapter(R.layout.recipe_list,listNames);
+  		       // listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.mylist_adapter, R.id.shoppinglist, applicationList.getGroceryList());
+  		       listAdapter = new MyAdapter(R.layout.recipe_list,listNames);
   		        listView.setAdapter(listAdapter);
-  		        
+  		        size++;
   			}
   		})
   		.setNegativeButton("Cancel",
@@ -156,15 +162,26 @@ public class MyListClass extends Fragment {
 
   }
   
+
+  public void setCustomTag(String tag)
+  {
+      this.TAG = "MY_LIST_CLASS_TAG";
+  }
+
+  public String getCustomTag()
+  {
+      return TAG;
+  }
+  
   /*
    * Added on March 8, 2014
    * @author: Gus Maturana
    * CustomAdapter will display the images and the name of the recipe
    */
-  /* 
-   public class MyAdapter extends ArrayAdapter<String> 
+  
+   public class MyAdapter extends ArrayAdapter<GroceryList> 
    {
-       public MyAdapter (int textViewResourceId, ArrayList<String> objects) 
+       public MyAdapter (int textViewResourceId, ArrayList<GroceryList> objects) 
        {
            super(getActivity(), textViewResourceId, objects);
        }
@@ -173,21 +190,22 @@ public class MyListClass extends Fragment {
        public View getView(int position, View convertView, ViewGroup parent)
        {
            
-     	  ArrayList<String> listNames = new ArrayList<String>();
-    	  listNames.add(grocerylist.getListName());
+     	  ArrayList<String> List = new ArrayList<String>();
+     	 for (GroceryList grocery: listNames)
+    	  List.add(grocery.getListName());
      	    
      	  // Inflate the layout, mainlvitem.xml, in each row.
            LayoutInflater inflater = getActivity().getLayoutInflater();
-           View row = inflater.inflate(R.layout.recipe_list, parent, false);
+           View row = inflater.inflate(R.layout.mylist_adapter, parent, false);
 
            // Declare and define the TextView, "item." This is where
            // the name of each recipe will appear.
-           TextView item = (TextView)row.findViewById(R.id.recipeTitle);
-           item.setText(listNames.get(position));
+           TextView item = (TextView)row.findViewById(R.id.shoppinglist);
+           item.setText(List.get(position));
 
            return row;
        }
        
        
-   } // end MyCustomAdapter */
+   } // end MyCustomAdapter 
 }
