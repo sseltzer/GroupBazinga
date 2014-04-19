@@ -54,11 +54,11 @@ public class MyListClass extends Fragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
           Bundle savedInstanceState) {
 	  
-	  View myListView = super.onCreateView(inflater, container, savedInstanceState);
+	  //View myListView = super.onCreateView(inflater, container, savedInstanceState);
 	  // Creates option menu
 	  setHasOptionsMenu(true);	// The onCreateOptionsMenu must not return a boolean in order to work
 	  
-	  myListView = inflater.inflate(R.layout.mylist, container, false);
+	  View myListView = inflater.inflate(R.layout.mylist, container, false);
       
       // Setup
        listView = (ListView)myListView.findViewById(R.id.shoppingListView);
@@ -134,9 +134,8 @@ public class MyListClass extends Fragment {
 	  				//adapter.notifyDataSetChanged();
 	  				return true;
 	  		case R.id.action_delete:
-  				//CrimeLab.get(getActivity()).deleteCrime(crime);
-  				//adapter.notifyDataSetChanged();
-	  			
+	  			//grocerylist.removeGroceryItem(position);
+	  			applicationList.removeGroceryList(position);
   				return true;
 	  		case R.id.action_go_list_contents:
   				//CrimeLab.get(getActivity()).deleteCrime(crime);
@@ -182,7 +181,7 @@ public class MyListClass extends Fragment {
   				//listNames.add(grocerylist.getListName());
   			
   		       // listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.mylist_adapter, R.id.shoppinglist, applicationList.getGroceryList());
-  		       listAdapter = new MyAdapter(R.layout.recipe_list,listNames);
+  		       listAdapter = new MyAdapter(R.layout.recipe_list,applicationList.getGroceryList());
   		       listView.setAdapter(listAdapter);
   		      
   			}
@@ -212,7 +211,7 @@ public class MyListClass extends Fragment {
 	  	alertDialogBuilder.setView(inputView);
 	  	inputText = (EditText)inputView.findViewById(R.id.input);
 	  	String tmp = " " + position;
-	  	inputText.setText(tmp);
+	  	inputText.setText(listNames.get(position).getListName());
 	  	
 	  	
 	  	alertDialogBuilder
@@ -235,7 +234,7 @@ public class MyListClass extends Fragment {
 	  				//listNames.add(grocerylist.getListName());
 	  			
 	  		       // listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.mylist_adapter, R.id.shoppinglist, applicationList.getGroceryList());
-	  		       listAdapter = new MyAdapter(R.layout.recipe_list,listNames);
+	  		       listAdapter = new MyAdapter(R.layout.mylist_adapter,applicationList.getGroceryList());
 	  		       listView.setAdapter(listAdapter);
 	  		      
 	  			}
@@ -281,7 +280,7 @@ public class MyListClass extends Fragment {
        {
            
      	  ArrayList<String> List = new ArrayList<String>();
-     	 for (GroceryList grocery: listNames)
+     	 for (GroceryList grocery: applicationList.getGroceryList())
     	  List.add(grocery.getListName());
      	    
      	  // Inflate the layout, mainlvitem.xml, in each row.
