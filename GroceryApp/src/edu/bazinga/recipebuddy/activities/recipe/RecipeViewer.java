@@ -1,4 +1,4 @@
-package edu.bazinga.recipebuddy.activities;
+package edu.bazinga.recipebuddy.activities.recipe;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 import edu.bazinga.recipebuddy.R;
+import edu.bazinga.recipebuddy.activities.main.MainActivity;
+import edu.bazinga.recipebuddy.activities.support.AboutClass;
 import edu.bazinga.recipebuddy.api.retrievers.ImageRetriever;
 import edu.bazinga.recipebuddy.data.packets.Recipe;
 

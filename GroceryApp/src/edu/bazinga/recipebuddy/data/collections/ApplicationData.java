@@ -8,12 +8,13 @@ import org.json.JSONObject;
 
 import edu.bazinga.recipebuddy.data.packets.FavoriteRecipe;
 import edu.bazinga.recipebuddy.data.packets.GroceryList;
+import edu.bazinga.recipebuddy.data.packets.Recipe;
 
 public class ApplicationData {
   
   private ArrayList<FavoriteRecipe> favorites;
   private ArrayList<GroceryList> groceryLists;
-  
+  private ArrayList<Recipe> queries;
   
   public ApplicationData() {
     favorites = new ArrayList<FavoriteRecipe>();
@@ -22,6 +23,7 @@ public class ApplicationData {
   public ApplicationData(ArrayList<FavoriteRecipe> favorites, ArrayList<GroceryList> groceryLists) {
     this.favorites = favorites;
     this.groceryLists = groceryLists;
+    this.queries = new ArrayList<Recipe>();
   }
   
   
@@ -49,6 +51,16 @@ public class ApplicationData {
   }
   public ArrayList<GroceryList> getGroceryList() {
     return groceryLists;
+  }
+  
+  public void setNewQueries(ArrayList<Recipe> queries) {
+    this.queries = queries;
+  }
+  public void addQueries(ArrayList<Recipe> queries) {
+    queries.addAll(queries);
+  }
+  public ArrayList<Recipe> getQueries() {
+    return queries;
   }
     
   public JSONObject toJSON() throws JSONException {

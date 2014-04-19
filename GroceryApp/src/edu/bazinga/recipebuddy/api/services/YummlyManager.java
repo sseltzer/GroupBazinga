@@ -10,15 +10,32 @@ import android.os.AsyncTask;
 import android.util.Log;
 import edu.bazinga.recipebuddy.api.query.YummlyQueryBuilder;
 import edu.bazinga.recipebuddy.api.retrievers.JSONRetriever;
+import edu.bazinga.recipebuddy.data.collections.DataManager;
 import edu.bazinga.recipebuddy.data.packets.Recipe;
+import edu.bazinga.recipebuddy.error.RecipeBuddyException;
 
 public class YummlyManager {
   
   private static YummlyQueryBuilder qb = YummlyQueryBuilder.getInstance();
+  private String lastQuery = "";
   
-  public ArrayList<Recipe> getRecipes(String query) {
+  int maxResult = 20;
+  int page = 1;
+  
+  
+  public void getRecipes(String query) throws RecipeBuddyException {
     Log.d("recipe", "Querying: " + query);
-    return parseResponse(getJSONResponse(qb.buildQuery(query)));
+    DataManager data = DataManager.getInstance();
+    query += "?maxResult=" + maxResult + "&requirePictures=true&start=" + (page * maxResult);
+    ArrayList<Recipe> queries = parseResponse(getJSONResponse(qb.buildQuery(query)));
+    if (query.equals(lastQuery)) {
+      data.getAppData().addQueries(queries);
+      page++;
+    } else {
+      data.getAppData().setNewQueries(queries);
+      page = 1;
+    }
+    lastQuery = query;
   }
   
   private String getJSONResponse(String query) {
@@ -27,7 +44,6 @@ public class YummlyManager {
     try {
       JSONRetriever ret = new JSONRetriever();
       AsyncTask<String, Void, String> task = ret.execute(query);
-      Thread.sleep(1000);
       jsonResponse = task.get();
     } catch (Exception e) {
       // Ignore this one. This should never go wrong. Stack trace if it does.

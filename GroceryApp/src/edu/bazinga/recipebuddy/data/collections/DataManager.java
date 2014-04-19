@@ -9,12 +9,10 @@ package edu.bazinga.recipebuddy.data.collections;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
@@ -47,7 +45,9 @@ public class DataManager {
     if (instance == null) instance = new DataManager(activity);
     return instance;
   }
-  
+  public static DataManager getInstance() throws RecipeBuddyException {
+    return instance;
+  }
   public ApplicationData getAppData() {
     return appData;
   }
@@ -115,6 +115,8 @@ public class DataManager {
     
     // Try and open the file and write the stream to the file.
     try {
+      File file = activity.getFileStreamPath(FILE_NAME);
+      if (file.exists()) file.delete();
       out = activity.openFileOutput(FILE_NAME, Context.MODE_PRIVATE); //open file
       stream = new BufferedOutputStream(out);                    //create data stream
       stream.write(appData.toJSON().toString().getBytes());
@@ -158,19 +160,4 @@ public class DataManager {
       }
     }
   }
-  
-  /*
-  //testJsonObject()
-  //****TEST**** remove when testing is done
-  //creates dummy data to test file write and read
-  private JSONObject testJsonObject()  {
-    String fileData = " {\"ingredients\":[\"Hot Peppers\",\"Hot Peppers\",\"Hot Peppers\"],\"Rating\":\"Five Stars\",\"Recipe_ID\":\"101015\",\"Recipe_Name\":\"Onion Soup\"} ";
-    JSONObject jsonObjectTest = null;
-    try {
-      jsonObjectTest = new JSONObject(fileData);
-    } catch (JSONException e1) {
-      e1.printStackTrace();    
-    }
-    return jsonObjectTest;
-  }*/
 }

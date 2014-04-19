@@ -13,7 +13,7 @@ public abstract class QueryBuilder {
   protected String normalize(String normalizeStr) {
     return normalizeStr.replaceAll(" ", "+");
   }
-  protected String addParam(String query, String param, String value) {
+  public String addParam(String query, String param, String value) {
     return query + "&" + param + "=" + value; 
   }
 }

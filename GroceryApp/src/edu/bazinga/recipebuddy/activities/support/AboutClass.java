@@ -1,4 +1,4 @@
-package edu.bazinga.recipebuddy.activities;
+package edu.bazinga.recipebuddy.activities.support;
 
 
 import android.app.Activity;
@@ -15,6 +15,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import edu.bazinga.recipebuddy.R;
+import edu.bazinga.recipebuddy.activities.main.MainActivity;
 
 
 

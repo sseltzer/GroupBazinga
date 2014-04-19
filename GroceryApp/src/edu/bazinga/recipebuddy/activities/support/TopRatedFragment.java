@@ -1,9 +1,10 @@
 
-package edu.bazinga.recipebuddy.activities;
+package edu.bazinga.recipebuddy.activities.support;
 
 import java.util.ArrayList;
 
 import edu.bazinga.recipebuddy.R;
+import edu.bazinga.recipebuddy.activities.main.MapsActivity;
 import edu.bazinga.recipebuddy.data.packets.GroceryList;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-
 import edu.bazinga.recipebuddy.data.packets.GroceryItem;
 import edu.bazinga.recipebuddy.data.packets.GroceryList;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -69,7 +69,7 @@ public class TopRatedFragment extends Fragment {
       		{
       			i = new Intent(getActivity(),MapsActivity.class);
       			getActivity().startActivity(i);
-      			getActivity().finish();
+      			//getActivity().finish();
       			// TODO
       			return true;
       		}

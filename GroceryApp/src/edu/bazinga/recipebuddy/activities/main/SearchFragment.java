@@ -1,4 +1,4 @@
-package edu.bazinga.recipebuddy.activities;
+package edu.bazinga.recipebuddy.activities.main;
 
 import java.util.ArrayList;
 
@@ -28,11 +28,15 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 import edu.bazinga.recipebuddy.R;
+import edu.bazinga.recipebuddy.activities.recipe.RecipeUtils;
+import edu.bazinga.recipebuddy.activities.recipe.RecipeViewer;
+import edu.bazinga.recipebuddy.activities.support.AboutClass;
 import edu.bazinga.recipebuddy.api.retrievers.ImageRetriever;
 import edu.bazinga.recipebuddy.api.services.YummlyManager;
 import edu.bazinga.recipebuddy.data.collections.ApplicationData;
 import edu.bazinga.recipebuddy.data.collections.DataManager;
 import edu.bazinga.recipebuddy.data.packets.Recipe;
+import edu.bazinga.recipebuddy.error.RecipeBuddyException;
 
 //Don't use this one
 //import android.app.Fragment;
@@ -52,16 +56,13 @@ public class SearchFragment extends Fragment {
   View rootView;
   LayoutInflater inflater;
 
-  public View onCreateView(LayoutInflater inflater, ViewGroup container,
-      Bundle savedInstanceState) {
+  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
     this.inflater = inflater;
     rootView = inflater.inflate(R.layout.search, container, false);
 
     // initialize
     YM = new YummlyManager();
-    // AD = new ApplicationData();
-    // DM = DataManager.getInstance(this);
 
     search_text = (EditText) rootView.findViewById(R.id.search_bar_text);
 
@@ -86,8 +87,9 @@ public class SearchFragment extends Fragment {
         return false;
       }
     });
-
+    
     Log.d("returning", rootView.toString());
+    setHasOptionsMenu(true);
     return rootView;
   }
   
@@ -96,69 +98,21 @@ public class SearchFragment extends Fragment {
     String str = search_text.getText().toString();
 
     // Query the API and load into recipes
-    recipes = YM.getRecipes(str + "&maxResult=20&requirePictures=true");
+    try {
+      YM.getRecipes(str);
+      recipes = DataManager.getInstance().getAppData().getQueries();
+    } catch (RecipeBuddyException e) {
+      Toast.makeText(getActivity(), "Could not reach database.", Toast.LENGTH_LONG).show();
+    }
 
     // load the recipes into the ListView if results exist
     if (recipes.size() != 0) {
       search_results = (ListView) rootView.findViewById(R.id.search_results);
       search_results.setAdapter(new RecipeAdapter(recipes));
     }
+    
     // else Toast the user - no results were found
     else Toast.makeText(getActivity(), "No results found for " + str, Toast.LENGTH_LONG).show();
-  }
-
-  public boolean onCreateOptionsMenu(Menu menu) {
-    // Inflate the menu; this adds items to the action bar if it is present.
-    MenuInflater inflater = getActivity().getMenuInflater();
-    inflater.inflate(R.menu.mylist_menu, menu);
-    return true;
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    Intent i;
-    switch (item.getItemId()) {
-
-    case R.id.action_settings: // shows the settings screen
-    {
-      // TODO
-      return true;
-    }
-    case R.id.action_about: // shows the about screen
-    {
-      i = new Intent(getActivity(), AboutClass.class); // calls and activity
-                                                       // from a fragment
-      getActivity().startActivity(i);
-      getActivity().finish();
-      return true;
-    }
-    case R.id.action_add: // add new item to list
-    {
-      // TODO
-      return true;
-    }
-    case R.id.action_directions: // takes user to the google map
-    {
-      i = new Intent(getActivity(), MapsActivity.class);
-      getActivity().startActivity(i);
-      getActivity().finish();
-      // TODO
-      return true;
-    }
-    case R.id.sample: // takes you back to the recipes screen
-    {
-      /*
-       * i = new Intent(this, MainActivity.class); startActivity(i); finish();
-       */
-      return true;
-    }
-    case R.id.action_favorite: {
-      // TODO
-      return true;
-    }
-    }
-    return true;
-    //
   }
 
   public class RecipeAdapter extends BaseAdapter {
@@ -224,7 +178,7 @@ public class SearchFragment extends Fragment {
 
       // set the prep time
       TextView cTime = (TextView) row.findViewById(R.id.authorName);
-      cTime.setText(Time(recipe.getTotalTimeInSeconds()));
+      cTime.setText(RecipeUtils.getPrepTime(recipe.getTotalTimeInSeconds()));
 
       // Set the source name
       TextView source = (TextView) row.findViewById(R.id.sourceName);
@@ -267,35 +221,28 @@ public class SearchFragment extends Fragment {
     }
     return bitmap;
   }
-
-  public String Time(String n) {
-    String result = "";
-    if (n.equals("null")) {
-      return result = "Preparation Time not available";
-    } else {
-      double number = Double.parseDouble(n);
-
-      int num = (int) (number);
-
-      int hours = 0;
-      int min = 0;
-
-      min = num / 60;
-
-      if (min > 60) {
-        hours = min / 60;
-        min = min % 60;
-        result = "Preparation Time: " + hours + "hr " + min + "min.";
-      }
-      if (min == 60) {
-        result = "Preparation Time: " + min + "min.";
-      } else {
-        result = "Preparation Time: " + min + "min.";
-      }
-
-      return result;
-    }
-
+  
+  
+  public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    // Inflate the menu; this adds items to the action bar if it is present.
+    inflater = getActivity().getMenuInflater();
+    inflater.inflate(R.menu.mylist_menu, menu);
   }
-
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    Intent i;
+    switch (item.getItemId()) {
+      case R.id.action_about: // shows the about screen
+        i = new Intent(getActivity(), AboutClass.class);
+        getActivity().startActivity(i);
+        return true;
+      case R.id.action_add: // add new item to list
+        return true;
+      case R.id.action_directions: // takes user to the google map
+        i = new Intent(getActivity(), MapsActivity.class);
+        getActivity().startActivity(i);
+        return true;
+    }
+    return true;
+  }
 }
