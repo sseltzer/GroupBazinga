@@ -137,14 +137,20 @@ public class DataManager {
   }
   
   private void createNewFile(Activity activity) throws RecipeBuddyException {
+    
+    appData = new ApplicationData();
+    writeFile(activity);
+    
+    
+    
     FileOutputStream     out      = null;                       //FOS
     BufferedOutputStream stream   = null;                       //BOS
-    
+    /*
     // Try and open the file and write the stream to the file.
     try {
       out = activity.openFileOutput(FILE_NAME, Context.MODE_PRIVATE); //open file
       stream = new BufferedOutputStream(out);                    //create data stream
-      stream.write("".getBytes());
+      stream.write("{[{\"favorites\"}]}".getBytes());
     } catch (Exception e) {
       // If we encounter an exception, wrap the exception as our exception and rethrow it.
       throw new RecipeBuddyException(e);
@@ -158,6 +164,6 @@ public class DataManager {
         // exception, wrap it, and rethrow it. 
         throw new RecipeBuddyException(e);
       }
-    }
+    }*/
   }
 }

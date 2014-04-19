@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import edu.bazinga.recipebuddy.R;
 import edu.bazinga.recipebuddy.activities.main.MainActivity;
 import edu.bazinga.recipebuddy.data.collections.DataManager;
-import edu.bazinga.recipebuddy.data.packets.GroceryList;
 import edu.bazinga.recipebuddy.error.RecipeBuddyException;
 
 
@@ -56,7 +55,5 @@ public class Splash extends Activity {
       Log.d("recipe", e.getMessage());
       e.printStackTrace();
     }
-    
-    for (GroceryList list : dataManager.getAppData().getGroceryList()) Log.d("recipe", list.getListName());
 	}
 }
