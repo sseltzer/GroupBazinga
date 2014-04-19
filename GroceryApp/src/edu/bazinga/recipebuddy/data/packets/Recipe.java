@@ -1,7 +1,9 @@
 package edu.bazinga.recipebuddy.data.packets;
 
+import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
+import edu.bazinga.recipebuddy.activities.recipe.RecipeUtils;
 
 public class Recipe implements Parcelable {
   
@@ -13,7 +15,8 @@ public class Recipe implements Parcelable {
   private String sourceDisplayName = null;
   private String flavors = null;
   private String rating = null;
-  private String bigUrl = null; 
+  private String bigUrl = null;
+  private Bitmap bitmap = null;
   
   
   public static final Parcelable.Creator<Recipe> CREATOR = new Parcelable.Creator<Recipe>() {
@@ -134,5 +137,13 @@ public class Recipe implements Parcelable {
     ret += flavors + "\n";
     ret += rating + "\n";
     return ret;
+  }
+
+  public Bitmap getBitmap() {
+    if (bitmap == null) {
+      if (bigUrl != null) bitmap = RecipeUtils.getBitmap(bigUrl);
+      else if (smallImageUrls != null) bitmap = RecipeUtils.getBitmap(smallImageUrls);
+    }
+    return bitmap;
   }
 }

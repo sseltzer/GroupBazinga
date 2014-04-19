@@ -12,6 +12,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Log;
 
 public class ImageRetriever extends AsyncTask<String, Void, Bitmap> {
   StringBuilder responseBuilder = new StringBuilder();
@@ -19,7 +20,11 @@ public class ImageRetriever extends AsyncTask<String, Void, Bitmap> {
   @Override
   protected Bitmap doInBackground(String... urls) {
     Bitmap bitmap = null;
+    if (urls == null) return bitmap;
     for (String url : urls) {
+      if (url == null || url.equals("")) continue;
+      Log.d("recipeURL: ", url);
+      if (!url.startsWith("http://")) url = "http://" + url;
       try {
         HttpGet httpRequest = null;
         httpRequest = new HttpGet(url);

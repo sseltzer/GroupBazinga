@@ -1,5 +1,9 @@
 package edu.bazinga.recipebuddy.activities.recipe;
 
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
+import edu.bazinga.recipebuddy.api.retrievers.ImageRetriever;
+
 public class RecipeUtils {
   
   public static String getPrepTime(String n) {
@@ -16,5 +20,18 @@ public class RecipeUtils {
       }
       return "Preparation Time: " + min + "min.";
     }
+  }
+  
+  public static Bitmap getBitmap(String url) {
+    Bitmap bitmap = null;
+    try {
+      ImageRetriever ret = new ImageRetriever();
+      AsyncTask<String, Void, Bitmap> task = ret.execute(url);
+      bitmap = task.get();
+    } catch (Exception e) {
+      // Ignore this one. This should never go wrong. Stack trace if it does.
+      e.printStackTrace();
+    }
+    return bitmap;
   }
 }

@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import edu.bazinga.recipebuddy.R;
 import edu.bazinga.recipebuddy.activities.main.listviews.GroceryListView;
+import edu.bazinga.recipebuddy.activities.recipe.GroceryListViewerActivity;
 import edu.bazinga.recipebuddy.activities.support.AboutClass;
 import edu.bazinga.recipebuddy.data.collections.DataManager;
 import edu.bazinga.recipebuddy.data.packets.GroceryList;
@@ -52,7 +53,7 @@ public class GroceryListFragment extends Fragment {
   private AdapterView.OnItemClickListener getOnItemClickListener() {
     return new AdapterView.OnItemClickListener() {
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent i = new Intent(getActivity(), GroceryListItemActivity.class);
+        Intent i = new Intent(getActivity(), GroceryListViewerActivity.class);
         i.putExtra("index", position);
         getActivity().startActivity(i);
       }

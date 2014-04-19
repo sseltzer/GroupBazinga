@@ -1,11 +1,7 @@
 package edu.bazinga.recipebuddy.activities.main;
 
-import java.util.ArrayList;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.os.Bundle;
 //Use this one
 import android.support.v4.app.Fragment;
@@ -29,11 +25,9 @@ import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 import edu.bazinga.recipebuddy.R;
 import edu.bazinga.recipebuddy.activities.recipe.RecipeUtils;
-import edu.bazinga.recipebuddy.activities.recipe.RecipeViewer;
+import edu.bazinga.recipebuddy.activities.recipe.RecipeViewerActivity;
 import edu.bazinga.recipebuddy.activities.support.AboutClass;
-import edu.bazinga.recipebuddy.api.retrievers.ImageRetriever;
 import edu.bazinga.recipebuddy.api.services.YummlyManager;
-import edu.bazinga.recipebuddy.data.collections.ApplicationData;
 import edu.bazinga.recipebuddy.data.collections.DataManager;
 import edu.bazinga.recipebuddy.data.packets.Recipe;
 import edu.bazinga.recipebuddy.error.RecipeBuddyException;
@@ -43,26 +37,23 @@ import edu.bazinga.recipebuddy.error.RecipeBuddyException;
 
 public class SearchFragment extends Fragment {
 
-  ArrayList<Recipe> recipes = new ArrayList<Recipe>();
-  Recipe recipe;
-  ApplicationData AD;
-  DataManager DM;
-  YummlyManager YM;
+  private DataManager dm;
+  private YummlyManager ym;
 
-  ImageView search_icon;
-  EditText search_text;
-  ListView search_results;
+  private ImageView search_icon;
+  private EditText search_text;
+  private ListView search_results;
 
-  View rootView;
-  LayoutInflater inflater;
+  private View rootView;
+  private LayoutInflater inflater;
 
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+    initDataManager();
     this.inflater = inflater;
     rootView = inflater.inflate(R.layout.search, container, false);
 
     // initialize
-    YM = new YummlyManager();
+    ym = new YummlyManager();
 
     search_text = (EditText) rootView.findViewById(R.id.search_bar_text);
 
@@ -89,6 +80,7 @@ public class SearchFragment extends Fragment {
     });
     
     Log.d("returning", rootView.toString());
+    displayList();
     setHasOptionsMenu(true);
     return rootView;
   }
@@ -96,35 +88,23 @@ public class SearchFragment extends Fragment {
   public void doSearch() {
     // Get the query
     String str = search_text.getText().toString();
-
-    // Query the API and load into recipes
+    
     try {
-      YM.getRecipes(str);
-      recipes = DataManager.getInstance().getAppData().getQueries();
+      ym.getRecipes(str);
+      displayList();
     } catch (RecipeBuddyException e) {
       Toast.makeText(getActivity(), "Could not reach database.", Toast.LENGTH_LONG).show();
     }
-
-    // load the recipes into the ListView if results exist
-    if (recipes.size() != 0) {
-      search_results = (ListView) rootView.findViewById(R.id.search_results);
-      search_results.setAdapter(new RecipeAdapter(recipes));
-    }
-    
-    // else Toast the user - no results were found
-    else Toast.makeText(getActivity(), "No results found for " + str, Toast.LENGTH_LONG).show();
   }
 
   public class RecipeAdapter extends BaseAdapter {
-    ArrayList<Recipe> recipes;
 
-    public RecipeAdapter(ArrayList<Recipe> recipeList) {
-      recipes = recipeList;
+    public RecipeAdapter() {
     }
 
     @Override
     public int getCount() {
-      return recipes.size();
+      return dm.getAppData().getQueries().size();
     }
 
     @Override
@@ -142,7 +122,7 @@ public class SearchFragment extends Fragment {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-      recipe = recipes.get(position);
+      Recipe recipe = dm.getAppData().getQueries().get(position);
       View row;
 
       // Creating a new View
@@ -174,7 +154,7 @@ public class SearchFragment extends Fragment {
       }
 
       // set the image
-      food.setImageBitmap(getBitmap(url));
+      food.setImageBitmap(recipe.getBitmap());
 
       // set the prep time
       TextView cTime = (TextView) row.findViewById(R.id.authorName);
@@ -191,13 +171,15 @@ public class SearchFragment extends Fragment {
       // ["lime juice","sugar","water","mint leaves"]
       Log.d("ing", recipe.getIngredients());
 
+      final Recipe eventRecipe = recipe; 
+      
       // set the onclick listener
       row.setOnClickListener(new OnClickListener() {
 
         @Override
         public void onClick(View target) {
-          Intent i = new Intent(getActivity(), RecipeViewer.class);
-          i.putExtra("selected", recipe);
+          Intent i = new Intent(getActivity(), RecipeViewerActivity.class);
+          i.putExtra("selected", eventRecipe);
           startActivity(i);
         }
 
@@ -208,20 +190,24 @@ public class SearchFragment extends Fragment {
     }
 
   }
-
-  private Bitmap getBitmap(String url) {
-    Bitmap bitmap = null;
-    try {
-      ImageRetriever ret = new ImageRetriever();
-      AsyncTask<String, Void, Bitmap> task = ret.execute(url);
-      bitmap = task.get();
-    } catch (Exception e) {
-      // Ignore this one. This should never go wrong. Stack trace if it does.
-      e.printStackTrace();
-    }
-    return bitmap;
-  }
   
+  //////////////////////////////////////Data Manager Calls //////////////////////////////////////
+    
+  public void initDataManager() {
+    try {
+      dm = DataManager.getInstance();
+    } catch (RecipeBuddyException e) {
+      Toast.makeText(getActivity(), "Could not read user file.", Toast.LENGTH_LONG).show();
+    }
+  }
+  public void displayList() {
+    search_results = (ListView) rootView.findViewById(R.id.search_results);
+    search_results.setAdapter(new RecipeAdapter());
+  }
+  ////////////////////////////////////////////////////////////////////////////////////////////////
+
+  
+  ////////////////////////////////////// Options Menu Calls //////////////////////////////////////
   
   public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
     // Inflate the menu; this adds items to the action bar if it is present.
@@ -245,4 +231,5 @@ public class SearchFragment extends Fragment {
     }
     return true;
   }
+  ////////////////////////////////////////////////////////////////////////////////////////////////
 }

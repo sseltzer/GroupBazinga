@@ -58,7 +58,7 @@
         </activity> -->
        <!-- RecipeView -->
         <activity
-            android:name="edu.bazinga.recipebuddy.activities.recipe.RecipeViewer"
+            android:name="edu.bazinga.recipebuddy.activities.recipe.RecipeViewerActivity"
             android:label="@string/title_activity_recipe_viewer" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -88,7 +88,7 @@
         </activity>
        <!-- RecipeView -->
         <activity
-            android:name="edu.bazinga.recipebuddy.activities.main.GroceryListItemActivity"
+            android:name="edu.bazinga.recipebuddy.activities.recipe.GroceryListViewerActivity"
             android:label="@string/title_activity_recipe_viewer" 
            	android:uiOptions="splitActionBarWhenNarrow">
             <intent-filter>

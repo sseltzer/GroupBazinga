@@ -1,4 +1,4 @@
-package edu.bazinga.recipebuddy.activities.main;
+package edu.bazinga.recipebuddy.activities.recipe;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,11 +8,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 import edu.bazinga.recipebuddy.R;
+import edu.bazinga.recipebuddy.activities.main.MapsActivity;
 import edu.bazinga.recipebuddy.activities.support.AboutClass;
 import edu.bazinga.recipebuddy.data.collections.DataManager;
 import edu.bazinga.recipebuddy.error.RecipeBuddyException;
 
-public class GroceryListItemActivity extends Activity {
+public class GroceryListViewerActivity extends Activity {
 
   private DataManager dm;
 
