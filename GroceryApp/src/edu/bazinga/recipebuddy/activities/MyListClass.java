@@ -13,12 +13,15 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -40,7 +43,7 @@ public class MyListClass extends Fragment {
 	  private ListAdapter listAdapter;
 	  private static GroceryList grocerylist = new GroceryList("");
 	  private static ApplicationData applicationList = new ApplicationData();
-	  ArrayList<GroceryList> listNames = new ArrayList<GroceryList>();
+	  private static ArrayList<GroceryList> listNames = new ArrayList<GroceryList>();
 	  
 	 // final Context context = MainActivity.class;
 	  private String inputString = "";
@@ -51,13 +54,16 @@ public class MyListClass extends Fragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
           Bundle savedInstanceState) {
 	  
+	  View myListView = super.onCreateView(inflater, container, savedInstanceState);
 	  // Creates option menu
 	  setHasOptionsMenu(true);	// The onCreateOptionsMenu must not return a boolean in order to work
-      View myListView = inflater.inflate(R.layout.mylist, container, false);
+	  
+	  myListView = inflater.inflate(R.layout.mylist, container, false);
       
       // Setup
        listView = (ListView)myListView.findViewById(R.id.shoppingListView);
        listView.setVisibility(View.VISIBLE);
+       registerForContextMenu(listView);
        
       return myListView;
   }
@@ -112,6 +118,37 @@ public class MyListClass extends Fragment {
 	return true;
 	//
 	}
+  @Override
+  public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+   getActivity().getMenuInflater().inflate(R.menu.mylist_floatingmenu, menu);
+  }
+  @Override
+  public boolean onContextItemSelected(MenuItem item) {
+	  AdapterContextMenuInfo info = (AdapterContextMenuInfo)item.getMenuInfo();
+	  int position = info.position;
+	  //CrimeAdapter adapter = (CrimeAdapter)getListAdapter();
+	  //Crime crime = adapter.getItem(position);
+	  switch (item.getItemId()) {
+	  		case R.id.action_add_item_to_list:
+	  				//CrimeLab.get(getActivity()).deleteCrime(crime);
+	  				//adapter.notifyDataSetChanged();
+	  				return true;
+	  		case R.id.action_delete:
+  				//CrimeLab.get(getActivity()).deleteCrime(crime);
+  				//adapter.notifyDataSetChanged();
+	  			
+  				return true;
+	  		case R.id.action_go_list_contents:
+  				//CrimeLab.get(getActivity()).deleteCrime(crime);
+  				//adapter.notifyDataSetChanged();
+  				return true;
+	  		case R.id.action_edit_list_name:
+	  			EditGroceryListName(position);
+  				return true;
+	  }
+	  return super.onContextItemSelected(item);
+  }
+
   
   public AlertDialog AskForInput()
   {
@@ -132,21 +169,22 @@ public class MyListClass extends Fragment {
   			{
   				inputString = inputText.getText().toString();
   				Log.d("str",inputString);
-  				int size = 0;
+  				
   				//grocerylist = new GroceryList(inputString);
   				grocerylist.setListName(inputString);
   				applicationList.addGroceryList(grocerylist);
   				
   				
-  				//listNames.add(grocerylist.get());
+  				//listNames.addAll(grocerylist.getListName());
   				//listNames.add(inputString);
   				listNames.addAll(applicationList.getGroceryList());
+  				
   				//listNames.add(grocerylist.getListName());
   			
   		       // listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.mylist_adapter, R.id.shoppinglist, applicationList.getGroceryList());
   		       listAdapter = new MyAdapter(R.layout.recipe_list,listNames);
-  		        listView.setAdapter(listAdapter);
-  		        size++;
+  		       listView.setAdapter(listAdapter);
+  		      
   			}
   		})
   		.setNegativeButton("Cancel",
@@ -160,6 +198,58 @@ public class MyListClass extends Fragment {
   		alertD.show();
 		return alertD;
 
+  }
+  // Need to be implemented
+  public AlertDialog EditGroceryListName(int position)
+  {
+	// gets prompt from xml view
+		// We use get activity instead of Context
+	  	LayoutInflater layoutinflater = LayoutInflater.from(getActivity());
+	  	View inputView = layoutinflater.inflate(R.layout.input_prompt_dialog, null);
+	  	
+	  	AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+	  	
+	  	alertDialogBuilder.setView(inputView);
+	  	inputText = (EditText)inputView.findViewById(R.id.input);
+	  	String tmp = " " + position;
+	  	inputText.setText(tmp);
+	  	
+	  	
+	  	alertDialogBuilder
+	  		.setCancelable(false)
+	  		.setPositiveButton("OK", new DialogInterface.OnClickListener(){
+	  			public void onClick(DialogInterface dialog, int id)
+	  			{
+	  				inputString = inputText.getText().toString();
+	  				Log.d("str",inputString);
+	  				
+	  				//grocerylist = new GroceryList(inputString);
+	  				grocerylist.setListName(inputString);
+	  				applicationList.addGroceryList(grocerylist);
+	  				
+	  				
+	  				//listNames.addAll(grocerylist.getListName());
+	  				//listNames.add(inputString);
+	  				listNames.addAll(applicationList.getGroceryList());
+	  				
+	  				//listNames.add(grocerylist.getListName());
+	  			
+	  		       // listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.mylist_adapter, R.id.shoppinglist, applicationList.getGroceryList());
+	  		       listAdapter = new MyAdapter(R.layout.recipe_list,listNames);
+	  		       listView.setAdapter(listAdapter);
+	  		      
+	  			}
+	  		})
+	  		.setNegativeButton("Cancel",
+	  				new DialogInterface.OnClickListener() {
+	  			public void onClick(DialogInterface dialog, int id) {
+	  				dialog.cancel();
+	  			}
+	  		});
+
+	  		AlertDialog alertD = alertDialogBuilder.create();
+	  		alertD.show();
+			return alertD;
   }
   
 
