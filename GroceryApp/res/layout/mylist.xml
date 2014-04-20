@@ -17,7 +17,7 @@
     <ListView
         android:id="@+id/shoppingListView"
         android:layout_width="match_parent"
-        android:layout_height="320dp"
+        android:layout_height="match_parent"
         android:layout_alignLeft="@+id/note_band"
         android:layout_below="@+id/note_band"
         android:divider="#FFFFCC"

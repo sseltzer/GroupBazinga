@@ -2,12 +2,6 @@
 <!-- @Date: April 15, 2013 -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
      
-   <!--  Add Item -->
-    <item
-        android:id="@+id/action_add_item_to_list"
-        android:icon="@drawable/ic_action_add"
-        android:title="@string/action_add_item_to_list"
-        />
     <!-- Edit List Name  -->
 	<item 
 	    android:id="@+id/action_edit_list_name"
@@ -20,9 +14,5 @@
 	    android:icon="@drawable/ic_action_edit"
 	    android:title="@string/action_delte_itme"
 	    />
-	<item 
-	    android:id="@+id/action_go_list_contents"
-	    android:icon="@drawable/ic_action_edit"
-	    android:title="@string/action_go_to_list"
-	    />
+
 </menu>

@@ -17,7 +17,7 @@ import edu.bazinga.recipebuddy.error.RecipeBuddyException;
 public class GroceryListView extends ArrayAdapter<GroceryList> {
   private DataManager dm;
   private Activity activity;
-  private LinearLayout layout;
+ // private LinearLayout layout;
  
   public GroceryListView(Activity activity, int textViewResourceId, ArrayList<GroceryList> objects) throws RecipeBuddyException {
    super(activity, textViewResourceId, objects);
@@ -64,14 +64,18 @@ public class GroceryListView extends ArrayAdapter<GroceryList> {
 	  
 	  if (item == null || item.isEmpty())
 	  {
-		 result = "Grocery List is Empty";
+		  return result = "Grocery List is Empty";
 	  }
 	  else
 	  {
-		  result = "\t" + item + "\t\tQTY: " + qty;
+		  if (qty == null || qty.isEmpty())
+		  {
+			  return result = "\t" + item + "\t\tQty: 0";
+		  }
+		  return result = "\t" + item + "\t\tQTY: " + qty;
 	  }
 	  
-	  return result;
+	
   }
   
 }
