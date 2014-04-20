@@ -4,9 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 //Use this one
 import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,8 +13,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -26,8 +21,6 @@ import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 import edu.bazinga.recipebuddy.R;
 import edu.bazinga.recipebuddy.activities.main.listviews.RecipeListView;
-import edu.bazinga.recipebuddy.activities.recipe.GroceryListViewerActivity;
-import edu.bazinga.recipebuddy.activities.recipe.RecipeViewerActivity;
 import edu.bazinga.recipebuddy.activities.support.AboutClass;
 import edu.bazinga.recipebuddy.api.services.YummlyManager;
 import edu.bazinga.recipebuddy.data.collections.DataManager;
@@ -94,30 +87,6 @@ public class SearchFragment extends Fragment {
       Toast.makeText(getActivity(), "Could not reach database.", Toast.LENGTH_LONG).show();
     }
   }
-  
-  ////////////////////////////////////// Floating Menu Menu Handlers //////////////////////////////////////
-  
-  @Override
-  public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-    Log.d("recipe", "onCreateContextMenu");
-    getActivity().getMenuInflater().inflate(R.menu.search_floatingmenu, menu);
-  }
-  
-  @Override
-  public boolean onContextItemSelected(MenuItem item) {
-    AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-    int position = info.position;
-    Log.d("recipe", "onContextItemSelected");
-    switch (item.getItemId()) {
-      case R.id.action_add_favorite:
-        addToFavorites(position);
-        return true;
-    }
-    return super.onContextItemSelected(item);
-  }
-  
-  ////////////////////////////////////////////////////////////////////////////////////////////////
-
   
   //////////////////////////////////////Data Manager Calls //////////////////////////////////////
     
