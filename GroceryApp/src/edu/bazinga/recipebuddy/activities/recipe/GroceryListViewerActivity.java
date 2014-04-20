@@ -3,6 +3,7 @@ package edu.bazinga.recipebuddy.activities.recipe;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -11,12 +12,15 @@ import edu.bazinga.recipebuddy.R;
 import edu.bazinga.recipebuddy.activities.main.MapsActivity;
 import edu.bazinga.recipebuddy.activities.support.AboutClass;
 import edu.bazinga.recipebuddy.data.collections.DataManager;
+import edu.bazinga.recipebuddy.data.packets.GroceryItem;
 import edu.bazinga.recipebuddy.error.RecipeBuddyException;
 
 public class GroceryListViewerActivity extends Activity {
 
   private DataManager dm;
 
+  private int listIndex;
+  
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -30,11 +34,17 @@ public class GroceryListViewerActivity extends Activity {
       Toast.makeText(this, "Index could not be read.", Toast.LENGTH_LONG).show();
     }
     
+    listIndex = index;
+    getActionBar().setSubtitle(Html.fromHtml("<font color=\"#848484\">" + dm.getAppData().getGroceryList().get(index).getListName() + "</font>"));
+    getActionBar().setTitle(Html.fromHtml("<font face =\"Arial\" color=\"#0174DF\">" + "GROCERY" + "</font><font color=\"#DF7401\">" + " LIST VIEW" + "</font>"));
   }
 
   
   public void addItem() {
-    
+	/*  try {
+		  dm.getAppData().getGroceryList().get(listIndex).addGroceryItem(name);
+	  } 
+    */
   }
   
   

@@ -2,26 +2,67 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
     android:layout_centerHorizontal="true"
-    android:padding="3dp"
-    android:background="#FFFFCC" >
-    
+    android:background="#E6E6E6"
+    android:orientation="horizontal"
+    android:padding="8dp" >
 
-   
-   <!-- Page Title (pageTitle)-->
-   <TextView 
-       android:id="@+id/shoppinglist"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text="@string/about_page"
-       android:textSize="14sp"
-       android:textStyle="bold"
-       android:textColor="#000066"
-       android:typeface="serif"
-       android:layout_marginLeft="10dp"
-       />
-   
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:background="#AEB404"
+        >
+
+        <TextView
+            android:id="@+id/letter_index"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="R"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:typeface="serif"
+            android:layout_gravity="center"/>        
+        </LinearLayout>
+        
+        <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/linearLayout1"
+        android:orientation="vertical" >
+        
+                <!-- shoppingList -->
+
+    		<TextView
+        		android:id="@+id/shoppinglist"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:layout_marginLeft="10dp"
+        		android:text="@string/about_page"
+        		android:textColor="#000012"
+        		android:textSize="18sp"
+        		android:textStyle="bold"
+        		android:typeface="serif" />
+		
+    		<TextView
+        		android:id="@+id/first_item"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:layout_marginLeft="10dp"
+        		android:text="@string/about_page"
+        		android:textColor="#848484"
+        		android:textSize="12sp"
+        		android:textStyle="bold"
+        		android:typeface="serif" />
+        
+    </LinearLayout>
 
 
 </RelativeLayout>

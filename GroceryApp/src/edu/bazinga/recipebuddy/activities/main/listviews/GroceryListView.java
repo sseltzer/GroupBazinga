@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import edu.bazinga.recipebuddy.R;
 import edu.bazinga.recipebuddy.data.collections.DataManager;
@@ -16,6 +17,7 @@ import edu.bazinga.recipebuddy.error.RecipeBuddyException;
 public class GroceryListView extends ArrayAdapter<GroceryList> {
   private DataManager dm;
   private Activity activity;
+  private LinearLayout layout;
  
   public GroceryListView(Activity activity, int textViewResourceId, ArrayList<GroceryList> objects) throws RecipeBuddyException {
    super(activity, textViewResourceId, objects);
@@ -25,9 +27,19 @@ public class GroceryListView extends ArrayAdapter<GroceryList> {
 
   @Override
   public View getView(int position, View convertView, ViewGroup parent) {
-
+	  
     ArrayList<String> List = new ArrayList<String>();
-    for (GroceryList grocery : dm.getAppData().getGroceryList()) List.add(grocery.getListName());
+    ArrayList<String> Ld = new ArrayList<String>();
+    ArrayList<String> fItems = new ArrayList<String>();
+    for (GroceryList grocery : dm.getAppData().getGroceryList()) 
+    	{
+
+    		Ld.add(grocery.getListName().substring(0,1));
+    		fItems.add(StringTest(dm.getAppData().getGroceryList().get(position).getGroceryItems().get(0).getItemName(),
+    		dm.getAppData().getGroceryList().get(position).getGroceryItems().get(0).getQuantity()));
+    		List.add(grocery.getListName());
+    		
+    	}
 
     // Inflate the layout, mainlvitem.xml, in each row.
     LayoutInflater inflater = activity.getLayoutInflater();
@@ -37,7 +49,29 @@ public class GroceryListView extends ArrayAdapter<GroceryList> {
     // the name of each recipe will appear.
     TextView item = (TextView) row.findViewById(R.id.shoppinglist);
     item.setText(List.get(position));
+    TextView item2 = (TextView)row.findViewById(R.id.letter_index);
+    item2.setText(Ld.get(position));
+    TextView item3 = (TextView)row.findViewById(R.id.first_item);
+    item3.setText(fItems.get(position));
+    
 
     return row;
   }
+  
+  public String StringTest(String item, String qty)
+  {
+	  String result = "";
+	  
+	  if (item == null || item.isEmpty())
+	  {
+		 result = "Grocery List is Empty";
+	  }
+	  else
+	  {
+		  result = "\t" + item + "\t\tQTY: " + qty;
+	  }
+	  
+	  return result;
+  }
+  
 }
