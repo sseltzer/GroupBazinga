@@ -30,6 +30,9 @@
     <string name="action_edit_list">Rename List</string>
     <string name="action_add_item_to_list">Add Item</string>
     <string name="action_add_favorite">Add To Favorites</string>
+    <string name="items_prompt">Grocery Items</string>
+    <string name="item_edittext">Item</string>
+    <string name="qty_edittext">Qty</string>
     
 
 </resources>

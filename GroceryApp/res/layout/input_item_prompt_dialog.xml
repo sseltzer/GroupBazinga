@@ -12,17 +12,51 @@
     	android:id="@+id/Label"
     	android:layout_width="wrap_content"
     	android:layout_height="wrap_content"
-    	android:text="@string/prompt"
+    	android:text="@string/items_prompt"
     	android:textAppearance="?android:attr/textAppearanceLarge" />
-    	
-    <EditText
-    	android:id="@+id/input"
-    	android:layout_width="match_parent"
-    	android:inputType="text"
-    	android:layout_height="wrap_content" >
-    	
+
+
+    <LinearLayout
+        android:id="@+id/layout_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <TextView
+    		android:id="@+id/Label2"
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:text="@string/item_edittext"
+    	/>
+        <EditText
+        	android:id="@+id/input_item"
+        	android:layout_width="185dp"
+        	android:layout_height="wrap_content"
+        	android:ems="10"
+        	android:inputType="text" >
+
         <requestFocus />
     </EditText>
+    </LinearLayout>
+        <LinearLayout
+        android:id="@+id/layout_qty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <TextView
+    		android:id="@+id/Label3"
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:text="@string/qty_edittext"
+    	/>
+        <EditText
+        	android:id="@+id/input_qty"
+        	android:layout_width="185dp"
+        	android:layout_height="wrap_content"
+        	android:ems="10"
+        	android:inputType="text" >
+
+        <requestFocus />
+    </EditText>
+    </LinearLayout>
+
 </LinearLayout>
     
     

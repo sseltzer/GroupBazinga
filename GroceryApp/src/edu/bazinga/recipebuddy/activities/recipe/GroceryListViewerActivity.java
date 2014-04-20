@@ -34,7 +34,8 @@ public class GroceryListViewerActivity extends Activity {
   private int listIndex;
   private ListAdapter listAdapter;
   private ListView listview;
-  private EditText inputText;
+  private EditText inputTextItem;
+  private EditText inputTextQty;
   
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,7 @@ public class GroceryListViewerActivity extends Activity {
     }
     
     listIndex = index;
-    getActionBar().show();
+  
     getActionBar().setSubtitle(Html.fromHtml("<font color=\"#848484\">" + dm.getAppData().getGroceryList().get(index).getListName() + "</font>"));
     getActionBar().setTitle(Html.fromHtml("<font face =\"Arial\" color=\"#0174DF\">" + "GROCERY" + "</font><font color=\"#DF7401\">" + " LIST VIEW" + "</font>"));
     listview = (ListView)findViewById(R.id.shoppingListView);
@@ -103,14 +104,15 @@ public class GroceryListViewerActivity extends Activity {
 	  }
   }
   public void getNewItemName() {
-	    View inputView = LayoutInflater.from(this).inflate(R.layout.input_prompt_dialog, null);
-	    inputText = (EditText) inputView.findViewById(R.id.input);
+	    View inputView = LayoutInflater.from(this).inflate(R.layout.input_item_prompt_dialog, null);
+	    inputTextItem = (EditText) inputView.findViewById(R.id.input_item);
+	    inputTextQty = (EditText) inputView.findViewById(R.id.input_qty);
 	    
 	    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 	    alertDialogBuilder.setView(inputView);
 	    alertDialogBuilder.setCancelable(false).setPositiveButton("OK", new DialogInterface.OnClickListener() {
 	      public void onClick(DialogInterface dialog, int id) {
-	        addItem(inputText.getText().toString(), "3");
+	        addItem(inputTextItem.getText().toString(), inputTextQty.getText().toString());
 	        displayItems();
 	      }
 	    }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -122,15 +124,17 @@ public class GroceryListViewerActivity extends Activity {
 	  }
   
   public void renameGroceryItem(final int position) {
-	    View inputView = LayoutInflater.from(this).inflate(R.layout.input_prompt_dialog, null);
-	    inputText = (EditText) inputView.findViewById(R.id.input);
-	    inputText.setText(dm.getAppData().getGroceryList().get(listIndex).getGroceryItems().get(position).getItemName());
+	    View inputView = LayoutInflater.from(this).inflate(R.layout.input_item_prompt_dialog, null);
+	    inputTextItem = (EditText) inputView.findViewById(R.id.input_item);
+	    inputTextItem.setText(dm.getAppData().getGroceryList().get(listIndex).getGroceryItems().get(position).getItemName());
+	    inputTextQty = (EditText) inputView.findViewById(R.id.input_qty);
+	    inputTextQty.setText(dm.getAppData().getGroceryList().get(listIndex).getGroceryItems().get(position).getQuantity());
 	    
 	    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 	    alertDialogBuilder.setView(inputView);
 	    alertDialogBuilder.setCancelable(false).setPositiveButton("OK", new DialogInterface.OnClickListener() {
 	      public void onClick(DialogInterface dialog, int id) {
-	        updateItems(position, inputText.getText().toString());
+	        updateItems(position, inputTextItem.getText().toString(), inputTextQty.getText().toString());
 	        displayItems();
 	      }
 	    }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -143,11 +147,17 @@ public class GroceryListViewerActivity extends Activity {
   
   ////////////////////////////////////// Data Manager Calls //////////////////////////////////////
   
-  protected void updateItems(int position, String string) {
+  protected void updateItems(int position, String item, String qty) {
 	// TODO Auto-generated method stub
+	  try{
+		  dm.getAppData().getGroceryList().get(listIndex).getGroceryItems().get(position).setItemName(item);
+		  dm.getAppData().getGroceryList().get(listIndex).getGroceryItems().get(position).setQuantity(qty);
+		  dm.writeFile(this);
+	  }catch(RecipeBuddyException e){
+		  Toast.makeText(this, "Could not write user file.", Toast.LENGTH_LONG).show();
+	  }
 	
 }
-
 
 public void initDataManager() {
     try {

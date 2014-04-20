@@ -39,7 +39,7 @@ public class GroceryListView extends ArrayAdapter<GroceryList> {
     		if (listName != null && !listName.equals("")) Ld.add(grocery.getListName().substring(0,1));
     		else Ld.add("");
     		if (items.size() > 0) fItems.add(StringTest(items.get(0).getItemName(), items.get(0).getQuantity()));
-    		else fItems.add("");
+    		else fItems.add("Grocery List is Empty");
     		List.add(grocery.getListName());
     		
     	}
@@ -53,7 +53,7 @@ public class GroceryListView extends ArrayAdapter<GroceryList> {
     TextView item = (TextView) row.findViewById(R.id.shoppinglist);
     item.setText(List.get(position));
     TextView item2 = (TextView)row.findViewById(R.id.letter_index);
-    item2.setText(Ld.get(position));
+    item2.setText(Ld.get(position).toUpperCase());
     TextView item3 = (TextView)row.findViewById(R.id.first_item);
     item3.setText(fItems.get(position));
     
