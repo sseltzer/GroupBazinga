@@ -1,5 +1,6 @@
 package edu.bazinga.recipebuddy.activities.recipe;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -49,11 +50,13 @@ public class GroceryListViewerActivity extends Activity {
     }
     
     listIndex = index;
+    getActionBar().show();
     getActionBar().setSubtitle(Html.fromHtml("<font color=\"#848484\">" + dm.getAppData().getGroceryList().get(index).getListName() + "</font>"));
     getActionBar().setTitle(Html.fromHtml("<font face =\"Arial\" color=\"#0174DF\">" + "GROCERY" + "</font><font color=\"#DF7401\">" + " LIST VIEW" + "</font>"));
     listview = (ListView)findViewById(R.id.shoppingListView);
     registerForContextMenu(listview);
     displayItems();
+    
     
   }
 
@@ -118,9 +121,35 @@ public class GroceryListViewerActivity extends Activity {
 	    alertDialogBuilder.create().show();;
 	  }
   
+  public void renameGroceryItem(final int position) {
+	    View inputView = LayoutInflater.from(this).inflate(R.layout.input_prompt_dialog, null);
+	    inputText = (EditText) inputView.findViewById(R.id.input);
+	    inputText.setText(dm.getAppData().getGroceryList().get(listIndex).getGroceryItems().get(position).getItemName());
+	    
+	    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+	    alertDialogBuilder.setView(inputView);
+	    alertDialogBuilder.setCancelable(false).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+	      public void onClick(DialogInterface dialog, int id) {
+	        updateItems(position, inputText.getText().toString());
+	        displayItems();
+	      }
+	    }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+	      public void onClick(DialogInterface dialog, int id) {
+	        dialog.cancel();
+	      }
+	    });
+	    alertDialogBuilder.create().show();;
+	  }
+  
   ////////////////////////////////////// Data Manager Calls //////////////////////////////////////
   
-  public void initDataManager() {
+  protected void updateItems(int position, String string) {
+	// TODO Auto-generated method stub
+	
+}
+
+
+public void initDataManager() {
     try {
       dm = DataManager.getInstance();
     } catch (RecipeBuddyException e) {
@@ -133,9 +162,10 @@ public class GroceryListViewerActivity extends Activity {
   
   public boolean onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
     // Inflate the menu; this adds items to the action bar if it is present.
+	  super.onCreateOptionsMenu(menu);
     inflater = getMenuInflater();
     inflater.inflate(R.menu.mylist_menu, menu);
-    return super.onCreateOptionsMenu(menu);
+    return true;
   }
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
@@ -172,7 +202,8 @@ public class GroceryListViewerActivity extends Activity {
         displayItems();
         return true;
       case R.id.action_edit_list_name:
-        //renameGroceryList(position);
+    	  renameGroceryItem(position);
+    	  displayItems();
         return true;
     }
     return super.onContextItemSelected(item);
