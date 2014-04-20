@@ -2,6 +2,7 @@ package edu.bazinga.recipebuddy.activities.main;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Html;
 import android.widget.LinearLayout;
 import edu.bazinga.recipebuddy.R;
 import edu.bazinga.recipebuddy.api.services.MapsManager;
@@ -18,6 +19,9 @@ public class MapsActivity extends Activity {
     // Grab our content xml (this just contains a linear layout) to get our anchor point for the map.
     setContentView(R.layout.maps_layout);
     
+    getActionBar().setDisplayHomeAsUpEnabled(true); // Takes user back to main activity
+    // Formats the Main title of the activity
+    getActionBar().setTitle(Html.fromHtml("<font face =\"Arial\" color=\"#0174DF\">" + "FIND " + "</font><font color=\"#DF7401\">" + "A STORE NEEAR YOU" + "</font>"));
     layoutView = (LinearLayout) findViewById(R.id.mapLayout);
     mapManager = MapsManager.requestInstance(this, savedInstanceState);
     mapManager.onCreate(this, savedInstanceState);

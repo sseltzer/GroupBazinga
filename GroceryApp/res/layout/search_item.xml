@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_marginRight="5dip"
-        android:padding="2dip" >
+        android:padding="5dp" >
 
         <!-- gbicon.png Image is just a default -->
         <!-- (recipeImage) -->

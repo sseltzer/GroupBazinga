@@ -98,8 +98,9 @@
             
             </intent-filter>
             <meta-data 
-				android:name="android.support.UI_OPTIONS"
-                android:value="splitActionBarWhenNarrow" />
+                android:name="android.support.PARENT_ACTITIVY"
+                android:value="edu.bazinga.recipebuddy.activities.MainActivity"
+                />
                
             
         </activity>

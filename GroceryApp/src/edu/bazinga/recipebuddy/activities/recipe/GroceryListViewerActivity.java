@@ -51,7 +51,7 @@ public class GroceryListViewerActivity extends Activity {
     }
     
     listIndex = index;
-  
+    getActionBar().setDisplayHomeAsUpEnabled(true); // Goes back to main activity
     getActionBar().setSubtitle(Html.fromHtml("<font color=\"#848484\">" + dm.getAppData().getGroceryList().get(index).getListName() + "</font>"));
     getActionBar().setTitle(Html.fromHtml("<font face =\"Arial\" color=\"#0174DF\">" + "GROCERY" + "</font><font color=\"#DF7401\">" + " LIST VIEW" + "</font>"));
     listview = (ListView)findViewById(R.id.shoppingListView);
@@ -170,13 +170,12 @@ public void initDataManager() {
   
   ////////////////////////////////////// Options Menu Calls //////////////////////////////////////
   
-  public boolean onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-    // Inflate the menu; this adds items to the action bar if it is present.
-	  super.onCreateOptionsMenu(menu);
-    inflater = getMenuInflater();
-    inflater.inflate(R.menu.mylist_menu, menu);
-    return true;
-  }
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+  // Inflate the menu; this adds items to the action bar if it is present.
+  getMenuInflater().inflate(R.menu.mylist_menu, menu);
+  return true;
+}
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     Intent i;
@@ -196,6 +195,7 @@ public void initDataManager() {
     return true;
   }
   
+  /////////////////////////////////////// Context Menu Calls ///////////////////////////////////////////
   @Override
   public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
     this.getMenuInflater().inflate(R.menu.mylist_floatingmenu, menu);
