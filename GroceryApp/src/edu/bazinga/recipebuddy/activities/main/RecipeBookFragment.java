@@ -13,7 +13,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 import edu.bazinga.recipebuddy.R;
-import edu.bazinga.recipebuddy.activities.main.listviews.RecipeListView;
+import edu.bazinga.recipebuddy.activities.main.listviews.FavoriteListView;
 import edu.bazinga.recipebuddy.activities.recipe.RecipeViewerActivity;
 import edu.bazinga.recipebuddy.api.services.YummlyManager;
 import edu.bazinga.recipebuddy.data.collections.DataManager;
@@ -59,7 +59,7 @@ public class RecipeBookFragment extends Fragment {
       listNames.add(recipe.getRecipeName());
 
     try {
-      listAdapter = new RecipeListView(getActivity(), R.layout.recipe_list, listNames);
+      listAdapter = new FavoriteListView(getActivity(), R.layout.recipe_list, listNames);
     } catch (RecipeBuddyException e) {
       Toast.makeText(getActivity(), "Could create list adapter.", Toast.LENGTH_LONG).show();
     }

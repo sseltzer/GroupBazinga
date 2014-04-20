@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import edu.bazinga.recipebuddy.R;
 import edu.bazinga.recipebuddy.data.collections.DataManager;
+import edu.bazinga.recipebuddy.data.packets.GroceryItem;
 import edu.bazinga.recipebuddy.data.packets.GroceryList;
 import edu.bazinga.recipebuddy.error.RecipeBuddyException;
 
@@ -33,10 +34,12 @@ public class GroceryListView extends ArrayAdapter<GroceryList> {
     ArrayList<String> fItems = new ArrayList<String>();
     for (GroceryList grocery : dm.getAppData().getGroceryList()) 
     	{
-
-    		Ld.add(grocery.getListName().substring(0,1));
-    		fItems.add(StringTest(dm.getAppData().getGroceryList().get(position).getGroceryItems().get(0).getItemName(),
-    		dm.getAppData().getGroceryList().get(position).getGroceryItems().get(0).getQuantity()));
+        ArrayList<GroceryItem> items = dm.getAppData().getGroceryList().get(position).getGroceryItems();
+        String listName = grocery.getListName();
+    		if (listName != null && !listName.equals("")) Ld.add(grocery.getListName().substring(0,1));
+    		else Ld.add("");
+    		if (items.size() > 0) fItems.add(StringTest(items.get(0).getItemName(), items.get(0).getQuantity()));
+    		else fItems.add("");
     		List.add(grocery.getListName());
     		
     	}

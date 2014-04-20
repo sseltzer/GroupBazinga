@@ -29,6 +29,7 @@
     <string name="action_go_to_list">View List</string>
     <string name="action_edit_list">Rename List</string>
     <string name="action_add_item_to_list">Add Item</string>
+    <string name="action_add_favorite">Add To Favorites</string>
     
 
 </resources>

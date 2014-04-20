@@ -60,11 +60,13 @@ public class GroceryListFragment extends Fragment {
     };
   }
   
+  ////////////////////////////////////// Floating Menu Menu Handlers //////////////////////////////////////
+  
   @Override
   public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
     getActivity().getMenuInflater().inflate(R.menu.mylist_floatingmenu, menu);
   }
-
+  
   @Override
   public boolean onContextItemSelected(MenuItem item) {
     AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
@@ -81,6 +83,8 @@ public class GroceryListFragment extends Fragment {
     }
     return super.onContextItemSelected(item);
   }
+  
+  ////////////////////////////////////////////////////////////////////////////////////////////////
   
   ////////////////////////////////////// Context Menu Handlers //////////////////////////////////////
 
