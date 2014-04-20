@@ -2,8 +2,6 @@ package edu.bazinga.recipebuddy.activities.recipe;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,20 +10,28 @@ import android.widget.TextView;
 import edu.bazinga.recipebuddy.R;
 import edu.bazinga.recipebuddy.activities.main.MainActivity;
 import edu.bazinga.recipebuddy.activities.support.AboutClass;
-import edu.bazinga.recipebuddy.api.retrievers.ImageRetriever;
+import edu.bazinga.recipebuddy.data.collections.DataManager;
 import edu.bazinga.recipebuddy.data.packets.Recipe;
+import edu.bazinga.recipebuddy.error.RecipeBuddyException;
 
 public class RecipeViewerActivity extends Activity {
 
-	
+	private DataManager dm;
 	
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_recipe_viewer);
     
+    try {
+      dm = DataManager.getInstance();
+    } catch (RecipeBuddyException e1) {
+      e1.printStackTrace();
+    }
+    
     getActionBar().setDisplayHomeAsUpEnabled(true);
-    Recipe recipe = getIntent().getExtras().getParcelable("selected");
+    int index = getIntent().getExtras().getInt("index");
+    Recipe recipe = dm.getAppData().getQueries().get(index);
     
     TextView recipeName = (TextView) findViewById(R.id.recipeName);
     TextView time = (TextView) findViewById(R.id.time);

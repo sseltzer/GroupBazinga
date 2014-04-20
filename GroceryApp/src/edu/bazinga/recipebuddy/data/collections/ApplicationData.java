@@ -27,6 +27,9 @@ public class ApplicationData {
   }
   
   
+  public void addFavorite(Recipe recipe) {
+    favorites.add(new FavoriteRecipe(recipe));
+  }
   public void addFavorite(FavoriteRecipe favorite) {
     favorites.add(favorite);
   }

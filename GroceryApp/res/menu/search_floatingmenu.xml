@@ -1,0 +1,10 @@
+<!-- @Author: Sean Seltzer -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!--  Add To Favorites -->
+    <item
+        android:id="@+id/action_add_favorite"
+        android:icon="@drawable/ic_action_add"
+        android:title="@string/action_add_favorite"
+        />
+
+</menu>

@@ -13,6 +13,11 @@ public class FavoriteRecipe {
   private Bitmap image = null;
   
   
+  public FavoriteRecipe(Recipe recipe) {
+    this.id = recipe.getId();
+    this.name = recipe.getRecipeName();
+    this.imageURL = recipe.getBigUrl();
+  }
   public FavoriteRecipe(String id, String name, String imageURL) {
     this.id = id;
     this.name = name;

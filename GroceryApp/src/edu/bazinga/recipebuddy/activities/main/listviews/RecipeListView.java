@@ -1,63 +1,88 @@
 package edu.bazinga.recipebuddy.activities.main.listviews;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
-import android.graphics.Bitmap;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import edu.bazinga.recipebuddy.R;
 import edu.bazinga.recipebuddy.activities.recipe.RecipeUtils;
+import edu.bazinga.recipebuddy.activities.recipe.RecipeViewerActivity;
 import edu.bazinga.recipebuddy.data.collections.DataManager;
 import edu.bazinga.recipebuddy.data.packets.Recipe;
 import edu.bazinga.recipebuddy.error.RecipeBuddyException;
 
-public class RecipeListView extends ArrayAdapter<String> {
-  
+public class RecipeListView extends BaseAdapter {
+
   private DataManager dm;
   private Activity activity;
+  private LayoutInflater inflater;
   
-  public RecipeListView(Activity activity, int textViewResourceId, ArrayList<String> objects) throws RecipeBuddyException {
-    super(activity, textViewResourceId, objects);
+  public RecipeListView(Activity activity, LayoutInflater inflater) throws RecipeBuddyException {
     this.activity = activity;
+    this.inflater = inflater;
     dm = DataManager.getInstance();
    }
+  
+  @Override
+  public int getCount() {
+    return dm.getAppData().getQueries().size();
+  }
 
   @Override
-  public View getView(int position, View convertView, ViewGroup parent) {
+  public Object getItem(int position) {
+    return null;
+    // return recipes.get(position);
+  }
 
-    ArrayList<String> listNames = new ArrayList<String>();
-    ArrayList<Bitmap> bitmapArray = new ArrayList<Bitmap>();
-    ArrayList<String> cookTime = new ArrayList<String>();
-    
-    for (Recipe recipe : dm.getAppData().getQueries()) {
-      listNames.add(recipe.getRecipeName());
-      bitmapArray.add(recipe.getBitmap());
-      cookTime.add(RecipeUtils.getPrepTime(recipe.getTotalTimeInSeconds()));
-    }
-    
-    LayoutInflater inflater = activity.getLayoutInflater();
-    View row = inflater.inflate(R.layout.recipe_list, parent, false);
+  @Override
+  public long getItemId(int position) {
+    return 0;
+  }
 
-    // Declare and define the TextView, "item." This is where
-    // the name of each recipe will appear.
+  @Override
+  public View getView(final int position, View convertView, ViewGroup parent) {
+    if (convertView != null) return (View) convertView;
+    View row = inflater.inflate(R.layout.search_item, parent, false);
+
+    Recipe recipe = dm.getAppData().getQueries().get(position);
+    
+    // set the title
     TextView item = (TextView) row.findViewById(R.id.recipeTitle);
-    item.setText(listNames.get(position));
+    item.setText(recipe.getRecipeName());
 
-    // Declare and define the ImageView, "food." This is where
-    // the food image in each row will appear.
+    // Set the image
     ImageView food = (ImageView) row.findViewById(R.id.foodImage);
-    food.setImageBitmap(bitmapArray.get(position));
+    food.setImageBitmap(recipe.getBitmap());
 
-    // Declare and define the TextView, "cTime." this is where
-    // the cook time of each recipe will appear.
+    // Set the author
     TextView cTime = (TextView) row.findViewById(R.id.authorName);
-    cTime.setText(cookTime.get(position));
+    cTime.setText(RecipeUtils.getPrepTime(recipe.getTotalTimeInSeconds()));
 
+    // Set the source name
+    TextView source = (TextView) row.findViewById(R.id.sourceName);
+    source.setText("From: " + recipe.getSourceDisplayName());
+
+    // Set the rating
+    RatingBar rating = (RatingBar) row.findViewById(R.id.favorate_check);
+    rating.setRating(Float.valueOf(recipe.getRating()));
+    
+    row.setOnClickListener(new OnClickListener() {
+      @Override
+      public void onClick(View target) {
+        Intent i = new Intent(activity, RecipeViewerActivity.class);
+        i.putExtra("index", position);
+        activity.startActivity(i);
+      }
+    });
+
+    // return the view
     return row;
   }
+
 }
