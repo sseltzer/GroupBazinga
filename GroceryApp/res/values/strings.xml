@@ -33,6 +33,7 @@
     <string name="items_prompt">Grocery Items</string>
     <string name="item_edittext">Item</string>
     <string name="qty_edittext">Qty</string>
+    <string name="index_list">A</string>
     
 
 </resources>
