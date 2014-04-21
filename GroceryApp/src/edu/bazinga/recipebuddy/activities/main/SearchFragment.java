@@ -71,7 +71,6 @@ public class SearchFragment extends Fragment {
       }
     });
     search_results = (ListView) rootView.findViewById(R.id.search_results);
-    registerForContextMenu(search_results);
     displayList();
     return rootView;
   }
@@ -98,7 +97,12 @@ public class SearchFragment extends Fragment {
     }
   }
   public void addToFavorites(int index) {
-    dm.getAppData().addFavorite(dm.getAppData().getQueries().get(index));
+    try {
+      dm.getAppData().addFavorite(dm.getAppData().getQueries().get(index));
+      dm.writeFile(getActivity());
+    } catch (RecipeBuddyException e) {
+      Toast.makeText(getActivity(), "Could not save favorite.", Toast.LENGTH_LONG).show();
+    }
   }
   public void displayList() {
     try {

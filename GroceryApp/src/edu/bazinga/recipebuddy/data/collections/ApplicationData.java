@@ -6,21 +6,20 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import edu.bazinga.recipebuddy.data.packets.FavoriteRecipe;
 import edu.bazinga.recipebuddy.data.packets.GroceryList;
 import edu.bazinga.recipebuddy.data.packets.Recipe;
 
 public class ApplicationData {
   
-  private ArrayList<FavoriteRecipe> favorites;
+  private ArrayList<Recipe> favorites;
   private ArrayList<GroceryList> groceryLists;
   private ArrayList<Recipe> queries;
   
   public ApplicationData() {
-    favorites = new ArrayList<FavoriteRecipe>();
+    favorites = new ArrayList<Recipe>();
     groceryLists = new ArrayList<GroceryList>();
   }
-  public ApplicationData(ArrayList<FavoriteRecipe> favorites, ArrayList<GroceryList> groceryLists) {
+  public ApplicationData(ArrayList<Recipe> favorites, ArrayList<GroceryList> groceryLists) {
     this.favorites = favorites;
     this.groceryLists = groceryLists;
     this.queries = new ArrayList<Recipe>();
@@ -28,18 +27,15 @@ public class ApplicationData {
   
   
   public void addFavorite(Recipe recipe) {
-    favorites.add(new FavoriteRecipe(recipe));
+    favorites.add(recipe);
   }
-  public void addFavorite(FavoriteRecipe favorite) {
-    favorites.add(favorite);
-  }
-  public void addFavorites(ArrayList<FavoriteRecipe> favorites) {
+  public void addFavorites(ArrayList<Recipe> favorites) {
     this.favorites.addAll(favorites);
   }
   public void removeFavorites(int i) {
     favorites.remove(i);
   }
-  public ArrayList<FavoriteRecipe> getFavorites() {
+  public ArrayList<Recipe> getFavorites() {
     return favorites;
   }
   
@@ -82,12 +78,12 @@ public class ApplicationData {
   }
   
   public static ApplicationData loadFromJSON(JSONObject jsonObject) throws JSONException {
-    ArrayList<FavoriteRecipe> favorites = new ArrayList<FavoriteRecipe>();
+    ArrayList<Recipe> favorites = new ArrayList<Recipe>();
     ArrayList<GroceryList> groceryLists = new ArrayList<GroceryList>();
     
     JSONArray jsonFavorites = jsonObject.getJSONArray("favorites");
     for (int i = 0; i < jsonFavorites.length(); ++i) {
-      favorites.add(FavoriteRecipe.fromJSON(jsonFavorites.getJSONObject(i)));
+      favorites.add(Recipe.fromJSON(jsonFavorites.getJSONObject(i)));
     }
     JSONArray jsonGroceryLists = jsonObject.getJSONArray("groceryLists");
     for (int i = 0; i < jsonGroceryLists.length(); ++i) {

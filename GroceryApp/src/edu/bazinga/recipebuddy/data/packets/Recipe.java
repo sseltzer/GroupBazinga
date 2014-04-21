@@ -1,11 +1,13 @@
 package edu.bazinga.recipebuddy.data.packets;
 
-import android.graphics.Bitmap;
-import android.os.Parcel;
-import android.os.Parcelable;
-import edu.bazinga.recipebuddy.activities.recipe.RecipeUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public class Recipe implements Parcelable {
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
+import edu.bazinga.recipebuddy.api.retrievers.ImageRetriever;
+
+public class Recipe {
   
   private String id = null;
   private String recipeName = null;
@@ -17,51 +19,6 @@ public class Recipe implements Parcelable {
   private String rating = null;
   private String bigUrl = null;
   private Bitmap bitmap = null;
-  
-  
-  public static final Parcelable.Creator<Recipe> CREATOR = new Parcelable.Creator<Recipe>() {
-    public Recipe createFromParcel(Parcel in) {
-        return new Recipe(in); 
-    }
-
-    public Recipe[] newArray(int size) {
-      return new Recipe[size];
-    }
-  };
-  
-  public Recipe(Parcel in){
-    this.id                 = in.readString();
-    this.recipeName         = in.readString();
-    this.totalTimeInSeconds = in.readString();
-    this.ingredients        = in.readString();
-    this.smallImageUrls     = in.readString();
-    this.sourceDisplayName  = in.readString();
-    this.flavors            = in.readString();
-    this.rating             = in.readString();
-    this.bigUrl             = in.readString();
-  }
-  
-  @Override
-  public int describeContents() {
-    return 0;
-  }
-  
-  @Override
-  public void writeToParcel(Parcel out, int flags) {
-    out.writeString(id);
-    out.writeString(recipeName);
-    out.writeString(totalTimeInSeconds);
-    out.writeString(ingredients);
-    out.writeString(smallImageUrls);
-    out.writeString(sourceDisplayName);
-    out.writeString(flavors);
-    out.writeString(rating);
-    out.writeString(bigUrl);
-  }
-  
-  public Recipe() {
-    
-  }
   
   public String getId() {
     return id;
@@ -126,24 +83,53 @@ public class Recipe implements Parcelable {
     this.bigUrl = bigUrl.replace("\\/", "/").replace("[\"", "").replace("\"]", "");
   }
   
-  public String toString() {
-    String ret = "";
-    ret += id + "\n";
-    ret += recipeName + "\n";
-    ret += totalTimeInSeconds + "\n";
-    ret += ingredients + "\n";
-    ret += smallImageUrls + "\n";
-    ret += sourceDisplayName + "\n";
-    ret += flavors + "\n";
-    ret += rating + "\n";
-    return ret;
+  public String getPrepTime() {
+    if (totalTimeInSeconds == null || totalTimeInSeconds.equals("") || totalTimeInSeconds.equals("null")) {
+      return "Preparation Time is not available";
+    } else {
+      double number = Double.parseDouble(totalTimeInSeconds);
+      int min = (int)number / 60;
+
+      if (min > 60) {
+        int hours = min / 60;
+        min = min % 60;
+        return "Preparation Time: " + hours + "hr " + min + "min.";
+      }
+      return "Preparation Time: " + min + "min.";
+    }
+  }
+  
+  public Bitmap getBitmap() {
+    if (bitmap == null) fetchBitmap(); 
+    return bitmap;
   }
 
-  public Bitmap getBitmap() {
-    if (bitmap == null) {
-      if (bigUrl != null) bitmap = RecipeUtils.getBitmap(bigUrl);
-      else if (smallImageUrls != null) bitmap = RecipeUtils.getBitmap(smallImageUrls);
+  private void fetchBitmap() {
+    if (bigUrl != null) {
+      try {
+        ImageRetriever ret = new ImageRetriever();
+        AsyncTask<String, Void, Bitmap> task = ret.execute(bigUrl);
+        bitmap = task.get();
+      } catch (Exception e) {
+        // Ignore this one. This should never go wrong. Stack trace if it does.
+        e.printStackTrace();
+      }
     }
-    return bitmap;
+  }
+  
+  public JSONObject toJSON() throws JSONException {
+    JSONObject ret = new JSONObject();
+    ret.put("id", id);
+    ret.put("recipeName", recipeName);
+    ret.put("bigUrl", bigUrl);   
+    return ret;
+  }
+  public static Recipe fromJSON(JSONObject jsonObject) throws JSONException {
+    Recipe recipe = new Recipe();
+    recipe.setId(jsonObject.getString("id"));
+    recipe.setRecipeName(jsonObject.getString("recipeName"));
+    recipe.setBigUrl(jsonObject.getString("bigUrl"));
+    recipe.fetchBitmap();
+    return recipe;
   }
 }

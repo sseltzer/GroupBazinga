@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import edu.bazinga.recipebuddy.R;
-import edu.bazinga.recipebuddy.activities.recipe.RecipeUtils;
 import edu.bazinga.recipebuddy.activities.recipe.RecipeViewerActivity;
 import edu.bazinga.recipebuddy.data.collections.DataManager;
 import edu.bazinga.recipebuddy.data.packets.Recipe;
@@ -62,7 +61,7 @@ public class RecipeListView extends BaseAdapter {
 
     // Set the author
     TextView cTime = (TextView) row.findViewById(R.id.authorName);
-    cTime.setText(RecipeUtils.getPrepTime(recipe.getTotalTimeInSeconds()));
+    cTime.setText(recipe.getPrepTime());
 
     // Set the source name
     TextView source = (TextView) row.findViewById(R.id.sourceName);

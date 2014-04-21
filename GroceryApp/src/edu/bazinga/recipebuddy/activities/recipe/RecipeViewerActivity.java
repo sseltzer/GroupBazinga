@@ -41,7 +41,7 @@ public class RecipeViewerActivity extends Activity {
     TextView ingredients = (TextView) findViewById(R.id.ingredients);
     
     recipeName.setText(recipe.getRecipeName());
-    time.setText(RecipeUtils.getPrepTime(recipe.getTotalTimeInSeconds()));
+    time.setText(recipe.getPrepTime());
     ingredients.setText(recipe.getIngredients());
     
     try {
