@@ -3,10 +3,13 @@ package edu.bazinga.recipebuddy.activities.main.listviews;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import edu.bazinga.recipebuddy.R;
 import edu.bazinga.recipebuddy.data.collections.DataManager;
@@ -27,36 +30,33 @@ public class GroceryListView extends ArrayAdapter<GroceryList> {
 
   @Override
   public View getView(int position, View convertView, ViewGroup parent) {
-	  
-    ArrayList<String> List = new ArrayList<String>();
-    ArrayList<String> Ld = new ArrayList<String>();
-    ArrayList<String> fItems = new ArrayList<String>();
-    for (GroceryList grocery : dm.getAppData().getGroceryList()) 
-    	{
-        ArrayList<GroceryItem> items = dm.getAppData().getGroceryList().get(position).getGroceryItems();
-        String listName = grocery.getListName();
-    		if (listName != null && !listName.equals("")) Ld.add(grocery.getListName().substring(0,1));
-    		else Ld.add("");
-    		if (items.size() > 0) fItems.add(StringTest(items.get(0).getItemName(), items.get(0).getQuantity()));
-    		else fItems.add("Grocery List is Empty");
-    		List.add(grocery.getListName());
-    		
-    	}
-
+    
+    GroceryList list = dm.getAppData().getGroceryList().get(position);
+    String listName = list.getListName();
+    String itemStr =  "Grocery List is Empty";
+    if (list.getGroceryItems().size() > 0) {
+      GroceryItem item = list.getGroceryItems().get(0);
+      itemStr = StringTest(item.getItemName(), item.getQuantity());
+    }
+    String letter = "";
+    if (listName != null && !listName.equals("")) letter = listName.substring(0, 1).toUpperCase();
+    int color = Color.parseColor(list.getColor());
+    
+    
     // Inflate the layout, mainlvitem.xml, in each row.
     LayoutInflater inflater = activity.getLayoutInflater();
-    View row = inflater.inflate(R.layout.mylist_adapter, parent, false);
-
+    RelativeLayout row = (RelativeLayout)inflater.inflate(R.layout.mylist_adapter, parent, false);
+    LinearLayout layout = (LinearLayout) row.findViewById(R.id.linearLayout1);
+    layout.setBackgroundColor(color);
     // Declare and define the TextView, "item." This is where
     // the name of each recipe will appear.
     TextView item = (TextView) row.findViewById(R.id.shoppinglist);
-    item.setText(List.get(position));
+    item.setText(listName);
     TextView item2 = (TextView)row.findViewById(R.id.letter_index);
-    item2.setText(Ld.get(position).toUpperCase());
+    item2.setText(letter);
     TextView item3 = (TextView)row.findViewById(R.id.first_item);
-    item3.setText(fItems.get(position));
+    item3.setText(itemStr);
     
-
     return row;
   }
   

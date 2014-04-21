@@ -9,13 +9,15 @@ import org.json.JSONObject;
 public class GroceryList {
   
   private String listName = null;
+  private String color = null;
   private ArrayList<GroceryItem> groceryItems = null;
   
-  public GroceryList(String listName) {
+  public GroceryList(String listName, String color) {
     this.listName = listName;
+    this.color = color;
     groceryItems = new ArrayList<GroceryItem>();
   }
-  public GroceryList(String listName, ArrayList<GroceryItem> groceryItems) {
+  public GroceryList(String listName, String color, ArrayList<GroceryItem> groceryItems) {
     this.listName = listName;
     this.groceryItems = new ArrayList<GroceryItem>(groceryItems);
   }
@@ -25,6 +27,12 @@ public class GroceryList {
   }
   public void setListName(String listName) {
     this.listName = listName;
+  }
+  public String getColor() {
+    return color;
+  }
+  public void setColor(String color) {
+    this.color = color;
   }
   public void addGroceryItem(GroceryItem groceryItem) {
     groceryItems.add(groceryItem);
@@ -44,8 +52,8 @@ public class GroceryList {
     
     JSONArray array = new JSONArray();
     for (int i = 0; i < groceryItems.size(); ++i) array.put(groceryItems.get(i).toJSON());
-     
     ret.put("listName", listName);
+    ret.put("color", color);
     ret.put("groceryItems", array);
     
     return ret;
@@ -53,6 +61,7 @@ public class GroceryList {
   
   public static GroceryList fromJSON(JSONObject jsonObject) throws JSONException {
     String listName = jsonObject.getString("listName");                           // Get the name out of the JSON object and assign our new list object it's name.
+    String color = jsonObject.getString("color");
     
     ArrayList<GroceryItem> groceryItems = new ArrayList<GroceryItem>();           // Create a new collection of our items.
     JSONArray jsonGroceryItems = jsonObject.getJSONArray("groceryItems");         // Get our array of json grocery items .
@@ -60,6 +69,6 @@ public class GroceryList {
       groceryItems.add(GroceryItem.fromJSON(jsonGroceryItems.getJSONObject(i)));  // Create the grocery item out of the json object from the array.
     }
     
-    return new GroceryList(listName, groceryItems);                               // Return our new grocery list.
+    return new GroceryList(listName, color, groceryItems);                        // Return our new grocery list.
   }
 }

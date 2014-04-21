@@ -1,6 +1,5 @@
 package edu.bazinga.recipebuddy.activities.recipe;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -8,17 +7,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 import edu.bazinga.recipebuddy.R;
 import edu.bazinga.recipebuddy.activities.main.MapsActivity;
 import edu.bazinga.recipebuddy.activities.main.listviews.GroceryItemListView;

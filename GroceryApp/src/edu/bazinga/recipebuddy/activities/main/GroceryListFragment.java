@@ -1,5 +1,7 @@
 package edu.bazinga.recipebuddy.activities.main;
 
+import java.util.Random;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -34,6 +36,7 @@ public class GroceryListFragment extends Fragment {
   private ListView listView;
   private ListAdapter listAdapter;
   private EditText inputText;
+  boolean firstLoad = true;
   
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,6 +53,7 @@ public class GroceryListFragment extends Fragment {
     setHasOptionsMenu(true);
     return myListView;
   }
+  
   private AdapterView.OnItemClickListener getOnItemClickListener() {
     return new AdapterView.OnItemClickListener() {
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -104,7 +108,7 @@ public class GroceryListFragment extends Fragment {
         dialog.cancel();
       }
     });
-    alertDialogBuilder.create().show();;
+    alertDialogBuilder.create().show();
   }
 
   public void renameGroceryList(final int position) {
@@ -139,11 +143,25 @@ public class GroceryListFragment extends Fragment {
   }
   public void addNewList(String name) {
     try {
-      dm.getAppData().addGroceryList(new GroceryList(name));
+      Random rnd = new Random(); 
+      int lim = 90;
+      int r = rnd.nextInt(lim);
+      int g = rnd.nextInt(lim);
+      int b = rnd.nextInt(lim);
+      String colorStr = getHex(r, g, b); 
+      dm.getAppData().addGroceryList(new GroceryList(name, colorStr));
       dm.writeFile(getActivity());
     } catch (RecipeBuddyException e) {
       Toast.makeText(getActivity(), "Could not write user file.", Toast.LENGTH_LONG).show();
     }
+  }
+  public String getHex(int... hex) {
+    String ret = "#";
+    for (int i : hex) {
+      if (i < 16) ret += "0";
+      ret += Integer.toHexString(i);
+    }
+    return ret;
   }
   public void updateList(int i, String name) {
     try {
@@ -165,6 +183,10 @@ public class GroceryListFragment extends Fragment {
     Toast.makeText(getActivity(), listName + " deleted.", Toast.LENGTH_LONG).show();
   }
   public void displayList() {
+    if (firstLoad) {
+      firstLoad = false;
+      return;
+    }
     try {
       listAdapter = new GroceryListView(getActivity(), R.layout.mylist_adapter, dm.getAppData().getGroceryList());
       listView.setAdapter(listAdapter);
@@ -174,6 +196,11 @@ public class GroceryListFragment extends Fragment {
   }
   ////////////////////////////////////////////////////////////////////////////////////////////////
   
+  @Override
+  public void onResume() {
+    displayList();
+    super.onResume();
+  }
   
   ////////////////////////////////////// Options Menu Calls //////////////////////////////////////
   
