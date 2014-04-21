@@ -1,5 +1,7 @@
 package edu.bazinga.recipebuddy.data.packets;
 
+import java.util.ArrayList;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -12,10 +14,13 @@ public class Recipe {
   private String id = null;
   private String recipeName = null;
   private String totalTimeInSeconds = null;
-  private String ingredients = null;
+  private ArrayList<String> ingredients = null;
   private String smallImageUrls = null;
   private String sourceDisplayName = null;
-  private String flavors = null;
+  private Flavors flavors = null;
+  private ArrayList<String> course = null;
+  private ArrayList<String> cuisine = null;
+  private ArrayList<String> holiday = null;
   private String rating = null;
   private String bigUrl = null;
   private Bitmap bitmap = null;
@@ -41,11 +46,17 @@ public class Recipe {
     this.totalTimeInSeconds = totalTimeInSeconds;
   }
 
-  public String getIngredients() {
+  public ArrayList<String> getIngredients() {
     return ingredients;
   }
-  public void setIngredients(String ingredients) {
+  public void setIngredients(ArrayList<String> ingredients) {
     this.ingredients = ingredients;
+  }
+  public String getIngredientsAsString() {
+    StringBuilder builder = new StringBuilder();
+    for (String s : ingredients) builder.append(s + ", ");
+    String ingredientStr = builder.toString(); 
+    return ingredientStr.substring(0, ingredientStr.lastIndexOf(","));
   }
 
   public String getSmallURL() {
@@ -62,10 +73,10 @@ public class Recipe {
     this.sourceDisplayName = sourceDisplayName;
   }
 
-  public String getFlavors() {
+  public Flavors getFlavors() {
     return flavors;
   }
-  public void setFlavors(String flavors) {
+  public void setFlavors(Flavors flavors) {
     this.flavors = flavors;
   }
 
@@ -81,6 +92,28 @@ public class Recipe {
   }
   public void setBigUrl(String bigUrl) {
     this.bigUrl = bigUrl.replace("\\/", "/").replace("[\"", "").replace("\"]", "");
+  }
+  
+  public ArrayList<String> getCourse() {
+    if (course == null) course = new ArrayList<String>();
+    return course;
+  }
+  public void setCourse(ArrayList<String> course) {
+    this.course = course;
+  }
+  public ArrayList<String> getCuisine() {
+    if (cuisine == null) cuisine = new ArrayList<String>();
+    return cuisine;
+  }
+  public void setCuisine(ArrayList<String> cuisine) {
+    this.cuisine = cuisine;
+  }
+  public ArrayList<String> getHoliday() {
+    if (holiday == null) holiday = new ArrayList<String>();
+    return holiday;
+  }
+  public void setHoliday(ArrayList<String> holiday) {
+    this.holiday = holiday;
   }
   
   public String getPrepTime() {
@@ -133,3 +166,4 @@ public class Recipe {
     return recipe;
   }
 }
+

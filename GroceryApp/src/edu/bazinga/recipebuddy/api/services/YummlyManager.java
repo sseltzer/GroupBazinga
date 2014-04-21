@@ -11,6 +11,7 @@ import android.util.Log;
 import edu.bazinga.recipebuddy.api.query.YummlyQueryBuilder;
 import edu.bazinga.recipebuddy.api.retrievers.JSONRetriever;
 import edu.bazinga.recipebuddy.data.collections.DataManager;
+import edu.bazinga.recipebuddy.data.packets.Flavors;
 import edu.bazinga.recipebuddy.data.packets.Recipe;
 import edu.bazinga.recipebuddy.error.RecipeBuddyException;
 
@@ -59,17 +60,54 @@ public class YummlyManager {
       JSONObject entries = new JSONObject(jsonResponse);
       JSONArray attribution = entries.getJSONArray("matches");
       Log.d("recipe", "Number of items found: " + attribution.length());
-      Log.d("recipe", "Response: " + jsonResponse);
+      //Log.d("recipe", "Response: " + jsonResponse);
       for (int i = 0; i < attribution.length(); ++i) {
         JSONObject match = attribution.getJSONObject(i);
         Recipe item = new Recipe();
         item.setId(match.getString("id"));
-        item.setIngredients(match.optString("ingredients"));
+        
+        if (!match.isNull("ingredients")) {
+          JSONArray ingredientsArray = match.getJSONArray("ingredients");
+          ArrayList<String> ingredients = new ArrayList<String>();
+          for (int j = 0; j < ingredientsArray.length(); ++j) ingredients.add(ingredientsArray.optString(j));
+          item.setIngredients(ingredients);
+        }
+        
+        if (!match.isNull("flavors")) {
+          JSONObject flavorsObj = match.getJSONObject("flavors");
+          Flavors flavors = new Flavors();
+          flavors.setSour(flavorsObj.optString("sour"));
+          flavors.setSalty(flavorsObj.optString("salty"));
+          flavors.setSweet(flavorsObj.optString("sweet"));
+          flavors.setPiquant(flavorsObj.optString("piquant"));
+          flavors.setMeaty(flavorsObj.optString("meaty"));
+          flavors.setBitter(flavorsObj.optString("bitter"));
+          item.setFlavors(flavors);
+        }
+        
+        if (!match.isNull("courses")) {
+          JSONArray coursesArray = match.getJSONArray("courses");
+          ArrayList<String> courses = new ArrayList<String>();
+          for (int j = 0; j < coursesArray.length(); ++j) courses.add(coursesArray.optString(j));
+          item.setCourse(courses);
+        }
+        if (!match.isNull("cuisine")) {
+          JSONArray cuisineArray = match.getJSONArray("cuisine");
+          ArrayList<String> cuisine = new ArrayList<String>();
+          for (int j = 0; j < cuisineArray.length(); ++j) cuisine.add(cuisineArray.optString(j));
+          item.setCuisine(cuisine);
+        }
+        if (!match.isNull("holiday")) {
+          JSONArray holidayArray = match.getJSONArray("holiday");
+          ArrayList<String> holiday = new ArrayList<String>();
+          for (int j = 0; j < holidayArray.length(); ++j) holiday.add(holidayArray.optString(j));
+          item.setHoliday(holiday);
+        }
+        
         item.setTotalTimeInSeconds(match.optString("totalTimeInSeconds"));
         item.setRecipeName(match.optString("recipeName"));
         item.setSmallImageUrls(match.optString("smallImageUrls"));
         item.setSourceDisplayName(match.optString("sourceDisplayName"));
-        item.setFlavors(match.optString("flavors"));
         item.setRating(match.optString("rating"));
         JSONObject bigUrl = match.optJSONObject("imageUrlsBySize");
         if (bigUrl != null) item.setBigUrl(bigUrl.optString("90"));

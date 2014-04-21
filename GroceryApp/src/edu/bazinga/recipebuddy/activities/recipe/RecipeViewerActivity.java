@@ -42,7 +42,7 @@ public class RecipeViewerActivity extends Activity {
     
     recipeName.setText(recipe.getRecipeName());
     time.setText(recipe.getPrepTime());
-    ingredients.setText(recipe.getIngredients());
+    ingredients.setText(recipe.getIngredientsAsString());
     
     try {
       ImageView imageView = (ImageView) findViewById(R.id.recipeImage);
