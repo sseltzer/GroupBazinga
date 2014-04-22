@@ -9,7 +9,7 @@
 
 
     <LinearLayout
-        android:id="@+id/linearlayout1"
+        android:id="@+id/groceryListRowLayout"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_centerVertical="true"

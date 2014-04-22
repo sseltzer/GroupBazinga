@@ -46,7 +46,7 @@ public class GroceryListView extends ArrayAdapter<GroceryList> {
     // Inflate the layout, mainlvitem.xml, in each row.
     LayoutInflater inflater = activity.getLayoutInflater();
     RelativeLayout row = (RelativeLayout)inflater.inflate(R.layout.mylist_adapter, parent, false);
-    LinearLayout layout = (LinearLayout) row.findViewById(R.id.linearLayout1);
+    LinearLayout layout = (LinearLayout) row.findViewById(R.id.groceryListRowLayout);
     layout.setBackgroundColor(color);
     // Declare and define the TextView, "item." This is where
     // the name of each recipe will appear.
