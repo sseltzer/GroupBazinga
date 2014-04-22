@@ -16,8 +16,7 @@ public class ApplicationData {
   private ArrayList<Recipe> queries;
   
   public ApplicationData() {
-    favorites = new ArrayList<Recipe>();
-    groceryLists = new ArrayList<GroceryList>();
+    this(new ArrayList<Recipe>(), new ArrayList<GroceryList>());
   }
   public ApplicationData(ArrayList<Recipe> favorites, ArrayList<GroceryList> groceryLists) {
     this.favorites = favorites;
