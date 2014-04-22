@@ -1,5 +1,7 @@
 package edu.bazinga.recipebuddy.activities.recipe;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +16,8 @@ import edu.bazinga.recipebuddy.R;
 import edu.bazinga.recipebuddy.activities.main.MainActivity;
 import edu.bazinga.recipebuddy.activities.support.AboutClass;
 import edu.bazinga.recipebuddy.data.collections.DataManager;
+import edu.bazinga.recipebuddy.data.packets.GroceryItem;
+import edu.bazinga.recipebuddy.data.packets.GroceryList;
 import edu.bazinga.recipebuddy.data.packets.Recipe;
 import edu.bazinga.recipebuddy.error.RecipeBuddyException;
 

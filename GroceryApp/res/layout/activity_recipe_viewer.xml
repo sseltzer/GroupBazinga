@@ -9,56 +9,89 @@
     tools:context=".RecipeViewerActivity" >
 
     <TextView
-        android:id="@+id/time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/recipeImage"
-        android:layout_below="@+id/recipeImage"
-        android:layout_marginTop="5dp"
-        android:text="Cooking Time"
-        android:ems="10" />
-
-    <ImageView
-        android:id="@+id/recipeImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/recipeName"
-        android:layout_centerHorizontal="true"
-        android:contentDescription="@string/recipeImage"
-        android:minHeight="140dp"
-        android:minWidth="140dp"
-        android:src="@drawable/ic_launcher" />
-
-    <TextView
         android:id="@+id/recipeName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="1dp"
+        android:ems="10"
         android:text="Title"
-        android:textColor="#084B8A"
         android:textAlignment="center"
-        android:textSize="20sp"
-        android:ems="10" />
+        android:textColor="#084B8A"
+        android:textSize="20sp" />
 
-    <ImageView
-        android:id="@+id/imageView1"
+    <RatingBar
+        android:id="@+id/ratings"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="80dip"
+        android:layout_height="85dip"
+        android:layout_alignRight="@+id/recipeName"
+        android:layout_alignTop="@+id/recipeImage"
+        android:numStars="5"
+        android:stepSize="0.5" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_alignLeft="@+id/recipeName"
-        android:layout_below="@+id/time"
-        android:background="#084B8A"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@id/recipeImage"
+        android:layout_marginLeft="18dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/source_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:ems="10"
+            android:text="Source" />
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#084B8A" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:ems="10"
+            android:text="Cooking Time" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/ingridients_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/imageView1"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_marginTop="16dp"
         android:text="@string/ingridents_"
-        android:textColor="#084B8A"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#084B8A" />
+
+    <TextView
+        android:id="@+id/cuisine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ingredients"
+        android:layout_below="@+id/ingredients"
+        android:layout_marginTop="19dp"
+        android:text="Cuisine"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#084B8A" />
+
+    <TextView
+        android:id="@+id/cuisine_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/cuisine"
+        android:layout_below="@+id/cuisine"
+        android:ems="10"
+        android:text="cuasine" />
 
     <TextView
         android:id="@+id/ingredients"
@@ -66,8 +99,18 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/ingridients_title"
         android:layout_below="@+id/ingridients_title"
-        android:layout_marginTop="15dp"
         android:ems="10"
         android:text="ingridients" />
+
+    <ImageView
+        android:id="@+id/recipeImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/recipeName"
+        android:layout_toLeftOf="@+id/ratings"
+        android:contentDescription="@string/recipeImage"
+        android:minHeight="140dp"
+        android:minWidth="140dp"
+        android:src="@drawable/ic_launcher" />
 
 </RelativeLayout>
