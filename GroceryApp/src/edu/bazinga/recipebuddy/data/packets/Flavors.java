@@ -1,12 +1,15 @@
 package edu.bazinga.recipebuddy.data.packets;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Flavors {
-  private String sour;
-  private String salty;
-  private String sweet;
-  private String piquant;
-  private String meaty;
-  private String bitter;
+  private String sour = "";
+  private String salty = "";
+  private String sweet = "";
+  private String piquant = "";
+  private String meaty = "";
+  private String bitter = "";
   
   public int getSour() {
     return Integer.parseInt(sour);
@@ -43,5 +46,26 @@ public class Flavors {
   }
   public void setBitter(String bitter) {
     this.bitter = bitter;
+  }
+  
+  public JSONObject toJSON() throws JSONException {
+    JSONObject ret = new JSONObject();
+    ret.put("sour",    sour);
+    ret.put("salty",   salty);
+    ret.put("sweet",   sweet);
+    ret.put("piquant", piquant);
+    ret.put("meaty",   meaty);
+    ret.put("bitter",  bitter);
+    return ret;
+  }
+  public static Flavors fromJSON(JSONObject jsonObject) throws JSONException {
+    Flavors flavors = new Flavors();
+    flavors.setSour   (jsonObject.getString("sour"));
+    flavors.setSalty  (jsonObject.getString("salty"));
+    flavors.setSweet  (jsonObject.getString("sweet"));
+    flavors.setPiquant(jsonObject.getString("piquant"));
+    flavors.setMeaty  (jsonObject.getString("meaty"));
+    flavors.setBitter (jsonObject.getString("bitter"));
+    return flavors;
   }
 }

@@ -104,6 +104,8 @@ public class GroceryListViewerActivity extends Activity {
   public void getNewItemName() {
 	    View inputView = LayoutInflater.from(this).inflate(R.layout.input_item_prompt_dialog, null);
 	    inputTextItem = (EditText) inputView.findViewById(R.id.input_item);
+	    inputTextItem.setFocusable(true);
+	    inputTextItem.requestFocus();
 	    inputTextQty = (EditText) inputView.findViewById(R.id.input_qty);
 	    
 	    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -196,7 +198,7 @@ public boolean onCreateOptionsMenu(Menu menu) {
   /////////////////////////////////////// Context Menu Calls ///////////////////////////////////////////
   @Override
   public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-    this.getMenuInflater().inflate(R.menu.mylist_floatingmenu, menu);
+    this.getMenuInflater().inflate(R.menu.item_floatingmenu, menu);
   }
 
   @Override
@@ -205,11 +207,11 @@ public boolean onCreateOptionsMenu(Menu menu) {
     int position = info.position;
     
     switch (item.getItemId()) {
-      case R.id.action_delete:
+      case R.id.action_delete_item:
         deleteItem(position);
         displayItems();
         return true;
-      case R.id.action_edit_list_name:
+      case R.id.action_edit_item:
     	  renameGroceryItem(position);
     	  displayItems();
         return true;

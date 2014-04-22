@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import edu.bazinga.recipebuddy.R;
+import edu.bazinga.recipebuddy.activities.recipe.FavoriteViewerActivity;
 import edu.bazinga.recipebuddy.activities.recipe.RecipeViewerActivity;
 import edu.bazinga.recipebuddy.data.collections.DataManager;
 import edu.bazinga.recipebuddy.data.packets.Recipe;
@@ -50,7 +51,7 @@ public class FavoriteListView extends BaseAdapter {
     View row = inflater.inflate(R.layout.search_item, parent, false);
 
     Recipe recipe = dm.getAppData().getFavorites().get(position);
-    
+
     // set the title
     TextView item = (TextView) row.findViewById(R.id.recipeTitle);
     item.setText(recipe.getRecipeName());
@@ -65,16 +66,16 @@ public class FavoriteListView extends BaseAdapter {
 
     // Set the source name
     TextView source = (TextView) row.findViewById(R.id.sourceName);
-    source.setText("From: " + "nobody");
+    source.setText("From: " + recipe.getSourceDisplayName());
 
     // Set the rating
     RatingBar rating = (RatingBar) row.findViewById(R.id.favorate_check);
-    rating.setRating(Float.valueOf(3));
+    rating.setRating(Float.valueOf(recipe.getRating()));
     
     row.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View target) {
-        Intent i = new Intent(activity, RecipeViewerActivity.class);
+        Intent i = new Intent(activity, FavoriteViewerActivity.class);
         i.putExtra("index", position);
         activity.startActivity(i);
       }

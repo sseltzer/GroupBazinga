@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import edu.bazinga.recipebuddy.R;
 import edu.bazinga.recipebuddy.activities.main.MainActivity;
 import edu.bazinga.recipebuddy.activities.support.AboutClass;
@@ -15,7 +14,7 @@ import edu.bazinga.recipebuddy.data.collections.DataManager;
 import edu.bazinga.recipebuddy.data.packets.Recipe;
 import edu.bazinga.recipebuddy.error.RecipeBuddyException;
 
-public class RecipeViewerActivity extends Activity {
+public class FavoriteViewerActivity extends Activity {
 
 	private DataManager dm;
 	int index;
@@ -34,7 +33,7 @@ public class RecipeViewerActivity extends Activity {
     
     getActionBar().setDisplayHomeAsUpEnabled(true);
     index = getIntent().getExtras().getInt("index");
-    Recipe recipe = dm.getAppData().getQueries().get(index);
+    Recipe recipe = dm.getAppData().getFavorites().get(index);
     
     TextView recipeName = (TextView) findViewById(R.id.recipeName);
     TextView time = (TextView) findViewById(R.id.time);
@@ -55,15 +54,6 @@ public class RecipeViewerActivity extends Activity {
     return true;
   }
   
-  public void addToFavorites() {
-    try {
-      dm.getAppData().addFavorite(dm.getAppData().getQueries().get(index));
-      dm.writeFile(this);
-    } catch (RecipeBuddyException e) {
-      Toast.makeText(this, "Could not save favorite.", Toast.LENGTH_LONG).show();
-    }
-  }
-  
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     // Inflate the menu; this adds items to the action bar if it is present.
@@ -75,7 +65,6 @@ public class RecipeViewerActivity extends Activity {
   {   
   	switch(menuItem.getItemId()){
   	  case R.id.action_add_favorite:
-  	    addToFavorites();
   	    break;
   		case android.R.id.home:
   			Intent intent = new Intent(this, MainActivity.class);

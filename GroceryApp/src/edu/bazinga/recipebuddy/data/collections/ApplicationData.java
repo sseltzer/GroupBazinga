@@ -70,6 +70,8 @@ public class ApplicationData {
     JSONArray groceryListsArray = new JSONArray();
     for (int i = 0; i < groceryLists.size(); ++i) groceryListsArray.put(groceryLists.get(i).toJSON());
 
+    ret.put("version", DataManager.FILE_VERSION);
+    
     ret.put("favorites", favoritesArray);
     ret.put("groceryLists", groceryListsArray);
     

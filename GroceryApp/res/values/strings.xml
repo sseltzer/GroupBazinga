@@ -7,7 +7,7 @@
     <string name="title">Main</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="listTitle">Recipes</string>
-    <string name="title_activity_recipe_viewer">RecipeViewer</string>
+    <string name="title_activity_recipe_viewer">Recipe Viewer</string>
     <string name="recipeImage">Recipe Image</string>
     <string name="menu_insert">Add Item</string>
     <string name="app_version">Version 1.0.1</string>
@@ -28,8 +28,11 @@
     <string name="action_delte_itme">Delete</string>
     <string name="action_go_to_list">View List</string>
     <string name="action_edit_list">Rename List</string>
+    <string name="action_edit_item_string">Edit Item</string>
     <string name="action_add_item_to_list">Add Item</string>
     <string name="action_add_favorite">Add To Favorites</string>
+    <string name="action_remove_favorite_string">Remove From Favorites</string>
+    <string name="action_add_favorite_list_string">Add To Grocery List</string>
     <string name="items_prompt">Grocery Items</string>
     <string name="item_edittext">Item</string>
     <string name="qty_edittext">Qty</string>

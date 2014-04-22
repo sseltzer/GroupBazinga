@@ -44,9 +44,5 @@ public class MainActivity extends FragmentActivity {
     // Search tab
     Tab tab3 = actionBar.newTab().setIcon(icon_tabs[2]).setTag("search").setTabListener(new FragmentTabListener<SearchFragment>(R.id.main_fragment, this, "third", SearchFragment.class));
     actionBar.addTab(tab3);
-    
-    // Maps Tab
-    Tab tab4 = actionBar.newTab().setIcon(icon_tabs[3]).setTag("recipes").setTabListener(new FragmentTabListener<RecipeBookFragment>(R.id.main_fragment, this, "fourth", RecipeBookFragment.class));
-    actionBar.addTab(tab4);
   }
 }

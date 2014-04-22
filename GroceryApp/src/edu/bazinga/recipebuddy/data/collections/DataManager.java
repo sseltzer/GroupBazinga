@@ -25,7 +25,7 @@ public class DataManager {
   private static DataManager instance = null;         // Reference to data object
   private final String FILE_NAME = "RecipeBuddy.txt"; // Internal file name for proprietary data
   private ApplicationData appData = null;             // Data Structure used to segment internal data from JSON Object
-  private static final String FILE_VERSION = "1";
+  public static final String FILE_VERSION = "1";
   /**
    * Constructor used to load data from file
    * @param activity
@@ -89,6 +89,7 @@ public class DataManager {
       JSONObject jsonObject = new JSONObject(fileData);
       String versionStr = jsonObject.optString("version");
       if (!versionStr.equals(FILE_VERSION)) {
+        Log.d("recipe", "version mismatch - file version: " + versionStr + " app version: " + FILE_VERSION);
         createNewFile(activity);
         return;
       }

@@ -60,24 +60,11 @@ public class GroceryListView extends ArrayAdapter<GroceryList> {
     return row;
   }
   
-  public String StringTest(String item, String qty)
-  {
-	  String result = "";
-	  
-	  if (item == null || item.isEmpty())
-	  {
-		  return result = "Grocery List is Empty";
-	  }
-	  else
-	  {
-		  if (qty == null || qty.isEmpty())
-		  {
-			  return result = "\t" + item + "\t\tQty: 0";
-		  }
-		  return result = "\t" + item + "\t\tQTY: " + qty;
-	  }
-	  
-	
+  public String StringTest(String item, String qty) {
+    if (item == null || item.isEmpty()) return "Grocery List is Empty";
+    else {
+    if (qty == null || qty.isEmpty()) return "\t" + item + "\t\tQty: 0";
+      return "\t" + item + "\t\tQTY: " + qty;
+    }
   }
-  
 }

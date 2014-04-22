@@ -4,16 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ContextMenu.ContextMenuInfo;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 import edu.bazinga.recipebuddy.R;
 import edu.bazinga.recipebuddy.activities.main.listviews.FavoriteListView;
 import edu.bazinga.recipebuddy.activities.support.AboutClass;
@@ -34,10 +34,8 @@ public class RecipeBookFragment extends Fragment {
     this.inflater = inflater;
     setHasOptionsMenu(true);
     
-    rootView = inflater.inflate(R.layout.search, container, false);
-    
-    Toast.makeText(getActivity(),"Favorites", Toast.LENGTH_SHORT);
-    listView = (ListView) rootView.findViewById(R.id.search_results);
+    rootView = inflater.inflate(R.layout.favorites, container, false);
+    listView = (ListView) rootView.findViewById(R.id.favorites_list);
     listView.setVisibility(View.VISIBLE);
 
     registerForContextMenu(listView);
@@ -55,8 +53,13 @@ public class RecipeBookFragment extends Fragment {
       Toast.makeText(getActivity(), "Could not read user file.", Toast.LENGTH_LONG).show();
     }
   }
-  public void addToFavorites(int index) {
-    dm.getAppData().addFavorite(dm.getAppData().getQueries().get(index));
+  public void removeFromFavorites(int index) {
+    try {
+      dm.getAppData().removeFavorites(index);
+      dm.writeFile(getActivity());
+    } catch (RecipeBuddyException e) {
+      Toast.makeText(getActivity(), "Could not save favorite.", Toast.LENGTH_LONG).show();
+    }
   }
   public void displayList() {
     try {
@@ -66,7 +69,31 @@ public class RecipeBookFragment extends Fragment {
     }
   }
   ////////////////////////////////////////////////////////////////////////////////////////////////
+  
+  //////////////////////////////////////Context Menu Handlers //////////////////////////////////////
+  
+  @Override
+  public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+    getActivity().getMenuInflater().inflate(R.menu.favorites_floatingmenu, menu);
+  }
 
+  @Override
+  public boolean onContextItemSelected(MenuItem item) {
+    AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+    int position = info.position;
+    
+    switch (item.getItemId()) {
+      case R.id.action_add_favorite_list:
+        return true;
+      case R.id.action_remove_favorite:
+        removeFromFavorites(position);
+        displayList();
+        return true;
+    }
+    return super.onContextItemSelected(item);
+  }
+  
+  ////////////////////////////////////////////////////////////////////////////////////////////////
   
   ////////////////////////////////////// Options Menu Calls //////////////////////////////////////
   
@@ -74,7 +101,7 @@ public class RecipeBookFragment extends Fragment {
     // Inflate the menu; this adds items to the action bar if it is present.
     inflater = getActivity().getMenuInflater();
     inflater.inflate(R.menu.mylist_menu, menu);
-    menu.getItem(0).setVisible(false);
+    menu.getItem(1).setVisible(false);
   }
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
@@ -94,27 +121,4 @@ public class RecipeBookFragment extends Fragment {
     return true;
   }
   ////////////////////////////////////////////////////////////////////////////////////////////////
-  
-  @Override
-  public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-    getActivity().getMenuInflater().inflate(R.menu.mylist_floatingmenu, menu);
-  }
-
-  @Override
-  public boolean onContextItemSelected(MenuItem item) {
-    AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-    int position = info.position;
-    
-    switch (item.getItemId()) {
-      case R.id.action_delete:
-        //deleteItem(position);
-        //displayItems();
-        return true;
-      case R.id.action_edit_list_name:
-    	  //renameGroceryItem(position);
-    	  //displayItems();
-        return true;
-    }
-    return super.onContextItemSelected(item);
-  }
 }

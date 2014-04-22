@@ -120,7 +120,7 @@ public class SearchFragment extends Fragment {
     // Inflate the menu; this adds items to the action bar if it is present.
     inflater = getActivity().getMenuInflater();
     inflater.inflate(R.menu.mylist_menu, menu);
-    menu.getItem(0).setVisible(false);
+    menu.getItem(1).setVisible(false);
   }
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {

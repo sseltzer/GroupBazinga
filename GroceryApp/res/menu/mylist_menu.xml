@@ -2,20 +2,20 @@
    <!--  About Button -->
     <item
         android:id="@+id/action_about"
-        android:orderInCategory="200"
-        android:title="@string/about_page"/>
+        android:title="@string/about_page"
+        android:orderInCategory="3"/>
    <!--  Add Button -->
     <item
         android:id="@+id/action_add"
         android:icon="@drawable/ic_action_add"
         android:title="@string/action_add"
         android:showAsAction="ifRoom"
-        />
+        android:orderInCategory="2"/>
     <!-- Store Search Button -->
 	<item 
 	    android:id="@+id/action_directions"
 	    android:icon="@drawable/ic_action_directions"
 	    android:title="@string/action_directions"
 	    android:showAsAction="ifRoom"
-	    /> 
+	    android:orderInCategory="1"/>
 </menu>
