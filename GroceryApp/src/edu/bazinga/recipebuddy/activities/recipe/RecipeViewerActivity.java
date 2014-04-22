@@ -3,9 +3,11 @@ package edu.bazinga.recipebuddy.activities.recipe;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import edu.bazinga.recipebuddy.R;
@@ -32,17 +34,27 @@ public class RecipeViewerActivity extends Activity {
       e1.printStackTrace();
     }
     
+    getActionBar().setTitle(Html.fromHtml("<font face =\"Arial\" color=\"#0174DF\">" + "RECIPE" + "</font><font color=\"#DF7401\">" + " BUDDY" + "</font>"));
+    getActionBar().setSubtitle(Html.fromHtml("<font color=\"#848484\">" + "Recipe Viewer" + "</font>"));
     getActionBar().setDisplayHomeAsUpEnabled(true);
     index = getIntent().getExtras().getInt("index");
     Recipe recipe = dm.getAppData().getQueries().get(index);
     
+    
+    RatingBar ratingbar = (RatingBar)findViewById(R.id.ratings);
+    ratingbar.setRating(Float.valueOf(recipe.getRating()));
+    TextView recipeSource = (TextView)findViewById(R.id.source_text);
+    recipeSource.setText("Source: " + recipe.getSourceDisplayName());
     TextView recipeName = (TextView) findViewById(R.id.recipeName);
     TextView time = (TextView) findViewById(R.id.time);
     TextView ingredients = (TextView) findViewById(R.id.ingredients);
-    
+    TextView cuisine = (TextView)findViewById(R.id.cuisine_text);
+    cuisine.setText(FormatCuisine());
     recipeName.setText(recipe.getRecipeName());
     time.setText(recipe.getPrepTime());
-    ingredients.setText(recipe.getIngredientsAsString());
+    ingredients.setText(FormatIngridients());
+   //ingredients.setText(recipe.getIngredientsAsString());
+    
     
     try {
       ImageView imageView = (ImageView) findViewById(R.id.recipeImage);
@@ -59,6 +71,7 @@ public class RecipeViewerActivity extends Activity {
     try {
       dm.getAppData().addFavorite(dm.getAppData().getQueries().get(index));
       dm.writeFile(this);
+      Toast.makeText(this, "Added to favorites.", Toast.LENGTH_LONG).show();
     } catch (RecipeBuddyException e) {
       Toast.makeText(this, "Could not save favorite.", Toast.LENGTH_LONG).show();
     }
@@ -90,4 +103,27 @@ public class RecipeViewerActivity extends Activity {
   	}
   	return true;
   }
+  public String FormatIngridients()
+  {
+	  String result = "";
+	  for(String ingridient : dm.getAppData().getQueries().get(index).getIngredients())
+	  {
+		  
+		 result = result + (Html.fromHtml("<font face =\"Arial\" color=\"#0080FF\">" + "&#149" +" "+ "</font><font color=\"#DF7401\">" + ingridient + "</font>") + "\n");
+		  
+	  }
+	  return result;
+  }
+  public String FormatCuisine()
+  {
+	  String result = "";
+	  for(String cuisine : dm.getAppData().getQueries().get(index).getCuisine())
+	  {
+		  
+		 result = result + (Html.fromHtml("<font face =\"Arial\" color=\"#0080FF\">" + "&#149" +" "+ "</font><font color=\"#DF7401\">" + cuisine+ "</font>") + "\n");
+		  
+	  }
+	  return result;
+  }
 }
+
