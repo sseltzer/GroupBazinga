@@ -7,18 +7,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class GroceryList {
-  
   private String listName = null;
   private String color = null;
   private ArrayList<GroceryItem> groceryItems = null;
   
   public GroceryList(String listName, String color) {
-    this.listName = listName;
-    this.color = color;
-    groceryItems = new ArrayList<GroceryItem>();
+    this(listName, color, new ArrayList<GroceryItem>());
   }
   public GroceryList(String listName, String color, ArrayList<GroceryItem> groceryItems) {
     this.listName = listName;
+    this.color = color;
     this.groceryItems = new ArrayList<GroceryItem>(groceryItems);
   }
   

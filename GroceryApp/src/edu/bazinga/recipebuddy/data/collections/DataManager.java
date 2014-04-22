@@ -25,7 +25,7 @@ public class DataManager {
   private static DataManager instance = null;         // Reference to data object
   private final String FILE_NAME = "RecipeBuddy.txt"; // Internal file name for proprietary data
   private ApplicationData appData = null;             // Data Structure used to segment internal data from JSON Object
-
+  private static final String FILE_VERSION = "1";
   /**
    * Constructor used to load data from file
    * @param activity
@@ -71,7 +71,6 @@ public class DataManager {
     if (!file.exists()) {
       Log.d("recipe", "file does not exist: " + FILE_NAME);
       createNewFile(activity);
-      appData = new ApplicationData();
       return;
     }
     
@@ -85,6 +84,14 @@ public class DataManager {
       in = new BufferedReader(inputStreamReader);                                           // Add buffer to the input stream.
       fileData = in.readLine();                                                             // Read the first line from the file.
       Log.d("recipe", "file data: " + fileData);
+      
+      JSONObject jsonObject = new JSONObject(fileData);
+      String versionStr = jsonObject.optString("version");
+      if (!versionStr.equals(FILE_VERSION)) {
+        createNewFile(activity);
+        return;
+      }
+      
       appData = ApplicationData.loadFromJSON(new JSONObject(fileData));                     // Load internal data from JSON Object.
     } catch (Exception e) {
       // If we encounter an exception, wrap the exception as our exception and rethrow it.
