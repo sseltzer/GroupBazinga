@@ -36,7 +36,6 @@ public class RecipeBookFragment extends Fragment {
     
     rootView = inflater.inflate(R.layout.search, container, false);
     
-    Toast.makeText(getActivity(),"Favorites", Toast.LENGTH_SHORT);
     listView = (ListView) rootView.findViewById(R.id.search_results);
     listView.setVisibility(View.VISIBLE);
 
