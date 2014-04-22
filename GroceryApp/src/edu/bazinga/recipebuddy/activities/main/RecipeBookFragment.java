@@ -43,6 +43,11 @@ public class RecipeBookFragment extends Fragment {
     return rootView;
   }
   
+  @Override
+  public void onResume() {
+    displayList();
+    super.onResume();
+  }
   
   ////////////////////////////////////// Data Manager Calls //////////////////////////////////////
   
@@ -57,6 +62,7 @@ public class RecipeBookFragment extends Fragment {
     try {
       dm.getAppData().removeFavorites(index);
       dm.writeFile(getActivity());
+      Toast.makeText(getActivity(), "Removed from favorites.", Toast.LENGTH_LONG).show();
     } catch (RecipeBuddyException e) {
       Toast.makeText(getActivity(), "Could not save favorite.", Toast.LENGTH_LONG).show();
     }

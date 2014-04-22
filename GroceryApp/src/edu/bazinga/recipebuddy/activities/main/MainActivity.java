@@ -9,6 +9,8 @@ import edu.bazinga.recipebuddy.R;
 import edu.bazinga.recipebuddy.activities.fragments.FragmentTabListener;
 
 public class MainActivity extends FragmentActivity {
+  
+  public static int tab = 0;
 
   // FragmentCollectionPackage FCPackage;
   private int icon_tabs[] = {
@@ -22,7 +24,7 @@ public class MainActivity extends FragmentActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     setupTabs();
-
+    
     // Formats main title
     getActionBar().setTitle(Html.fromHtml("<font face =\"Arial\" color=\"#0174DF\">" + "RECIPE" + "</font><font color=\"#DF7401\">" + " BUDDY" + "</font>"));
   }
@@ -44,5 +46,11 @@ public class MainActivity extends FragmentActivity {
     // Search tab
     Tab tab3 = actionBar.newTab().setIcon(icon_tabs[2]).setTag("search").setTabListener(new FragmentTabListener<SearchFragment>(R.id.main_fragment, this, "third", SearchFragment.class));
     actionBar.addTab(tab3);
+  }
+  
+  @Override
+  protected void onResume() {
+    getActionBar().selectTab(getActionBar().getTabAt(tab));
+    super.onResume();
   }
 }

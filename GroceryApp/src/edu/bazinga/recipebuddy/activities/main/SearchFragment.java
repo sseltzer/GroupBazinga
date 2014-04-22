@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 //Use this one
 import android.support.v4.app.Fragment;
+import android.view.ContextMenu;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -17,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 import edu.bazinga.recipebuddy.R;
@@ -71,6 +74,7 @@ public class SearchFragment extends Fragment {
       }
     });
     search_results = (ListView) rootView.findViewById(R.id.search_results);
+    registerForContextMenu(search_results);
     displayList();
     return rootView;
   }
@@ -87,6 +91,28 @@ public class SearchFragment extends Fragment {
     }
   }
   
+  //////////////////////////////////////Context Menu Handlers //////////////////////////////////////
+  
+  @Override
+  public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+    getActivity().getMenuInflater().inflate(R.menu.search_floatingmenu, menu);
+  }
+
+  @Override
+  public boolean onContextItemSelected(MenuItem item) {
+    AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+    int position = info.position;
+    
+    switch (item.getItemId()) {
+      case R.id.action_add_favorite_search:
+        addToFavorites(position);
+        return true;
+    }
+    return super.onContextItemSelected(item);
+  }
+  
+  ////////////////////////////////////////////////////////////////////////////////////////////////
+  
   //////////////////////////////////////Data Manager Calls //////////////////////////////////////
     
   public void initDataManager() {
@@ -100,6 +126,7 @@ public class SearchFragment extends Fragment {
     try {
       dm.getAppData().addFavorite(dm.getAppData().getQueries().get(index));
       dm.writeFile(getActivity());
+      Toast.makeText(getActivity(), "Added to favorites.", Toast.LENGTH_LONG).show();
     } catch (RecipeBuddyException e) {
       Toast.makeText(getActivity(), "Could not save favorite.", Toast.LENGTH_LONG).show();
     }

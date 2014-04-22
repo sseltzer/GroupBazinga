@@ -26,10 +26,8 @@ public class ApplicationData {
   
   
   public void addFavorite(Recipe recipe) {
+    for (Recipe curFav : favorites) if (curFav.getId().equals(recipe.getId())) return;
     favorites.add(recipe);
-  }
-  public void addFavorites(ArrayList<Recipe> favorites) {
-    this.favorites.addAll(favorites);
   }
   public void removeFavorites(int i) {
     favorites.remove(i);

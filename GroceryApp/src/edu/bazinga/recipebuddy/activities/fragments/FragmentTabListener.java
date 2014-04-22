@@ -1,5 +1,6 @@
 package edu.bazinga.recipebuddy.activities.fragments;
 
+import edu.bazinga.recipebuddy.activities.main.MainActivity;
 import android.app.ActionBar.Tab;
 import android.app.ActionBar.TabListener;
 import android.support.v4.app.Fragment;
@@ -39,6 +40,7 @@ public class FragmentTabListener<T extends Fragment> implements TabListener {
   public void onTabSelected(Tab tab, android.app.FragmentTransaction ft) {
     FragmentTransaction sft = mActivity.getSupportFragmentManager().beginTransaction();
     // Check if the fragment is already initialized
+    MainActivity.tab = tab.getPosition();
     switch (tab.getPosition()) {
     case 0:
       // My List

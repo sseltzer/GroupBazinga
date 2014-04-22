@@ -1,7 +1,5 @@
 package edu.bazinga.recipebuddy.activities.recipe;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,8 +14,6 @@ import edu.bazinga.recipebuddy.R;
 import edu.bazinga.recipebuddy.activities.main.MainActivity;
 import edu.bazinga.recipebuddy.activities.support.AboutClass;
 import edu.bazinga.recipebuddy.data.collections.DataManager;
-import edu.bazinga.recipebuddy.data.packets.GroceryItem;
-import edu.bazinga.recipebuddy.data.packets.GroceryList;
 import edu.bazinga.recipebuddy.data.packets.Recipe;
 import edu.bazinga.recipebuddy.error.RecipeBuddyException;
 
@@ -40,7 +36,6 @@ public class RecipeViewerActivity extends Activity {
     
     getActionBar().setTitle(Html.fromHtml("<font face =\"Arial\" color=\"#0174DF\">" + "RECIPE" + "</font><font color=\"#DF7401\">" + " BUDDY" + "</font>"));
     getActionBar().setSubtitle(Html.fromHtml("<font color=\"#848484\">" + "Recipe Viewer" + "</font>"));
-    getActionBar().setDisplayHomeAsUpEnabled(true);
     index = getIntent().getExtras().getInt("index");
     Recipe recipe = dm.getAppData().getQueries().get(index);
     

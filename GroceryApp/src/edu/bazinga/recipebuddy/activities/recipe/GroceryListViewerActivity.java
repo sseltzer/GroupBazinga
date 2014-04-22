@@ -49,7 +49,6 @@ public class GroceryListViewerActivity extends Activity {
     }
     
     listIndex = index;
-    getActionBar().setDisplayHomeAsUpEnabled(true); // Goes back to main activity
     getActionBar().setSubtitle(Html.fromHtml("<font color=\"#848484\">" + dm.getAppData().getGroceryList().get(index).getListName() + "</font>"));
     getActionBar().setTitle(Html.fromHtml("<font face =\"Arial\" color=\"#0174DF\">" + "GROCERY" + "</font><font color=\"#DF7401\">" + " LIST VIEW" + "</font>"));
     listview = (ListView)findViewById(R.id.shoppingListView);

@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import edu.bazinga.recipebuddy.R;
 import edu.bazinga.recipebuddy.activities.main.MainActivity;
 import edu.bazinga.recipebuddy.activities.support.AboutClass;
@@ -31,7 +32,6 @@ public class FavoriteViewerActivity extends Activity {
       e1.printStackTrace();
     }
     
-    getActionBar().setDisplayHomeAsUpEnabled(true);
     index = getIntent().getExtras().getInt("index");
     Recipe recipe = dm.getAppData().getFavorites().get(index);
     
@@ -54,17 +54,28 @@ public class FavoriteViewerActivity extends Activity {
     return true;
   }
   
+  public void removeFromFavorites(int index) {
+    try {
+      dm.getAppData().removeFavorites(index);
+      dm.writeFile(this);
+      Toast.makeText(this, "Removed from favorites.", Toast.LENGTH_LONG).show();
+    } catch (RecipeBuddyException e) {
+      Toast.makeText(this, "Could not save favorite.", Toast.LENGTH_LONG).show();
+    }
+  }
+  
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     // Inflate the menu; this adds items to the action bar if it is present.
-    getMenuInflater().inflate(R.menu.recipe_viewer, menu);
+    getMenuInflater().inflate(R.menu.favorite_viewer, menu);
     return true;
   }
   @Override
   public boolean onOptionsItemSelected(MenuItem menuItem)
   {   
   	switch(menuItem.getItemId()){
-  	  case R.id.action_add_favorite:
+  	  case R.id.action_remove_favorite:
+  	    removeFromFavorites(index);
   	    break;
   		case android.R.id.home:
   			Intent intent = new Intent(this, MainActivity.class);

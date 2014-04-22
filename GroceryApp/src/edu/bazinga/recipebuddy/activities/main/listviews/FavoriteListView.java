@@ -12,7 +12,6 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import edu.bazinga.recipebuddy.R;
 import edu.bazinga.recipebuddy.activities.recipe.FavoriteViewerActivity;
-import edu.bazinga.recipebuddy.activities.recipe.RecipeViewerActivity;
 import edu.bazinga.recipebuddy.data.collections.DataManager;
 import edu.bazinga.recipebuddy.data.packets.Recipe;
 import edu.bazinga.recipebuddy.error.RecipeBuddyException;

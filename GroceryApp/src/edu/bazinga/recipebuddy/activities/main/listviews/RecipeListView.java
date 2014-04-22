@@ -2,6 +2,7 @@ package edu.bazinga.recipebuddy.activities.main.listviews;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -35,8 +36,7 @@ public class RecipeListView extends BaseAdapter {
 
   @Override
   public Object getItem(int position) {
-    return null;
-    // return recipes.get(position);
+    return dm.getAppData().getQueries().get(position);
   }
 
   @Override
@@ -50,7 +50,7 @@ public class RecipeListView extends BaseAdapter {
     View row = inflater.inflate(R.layout.search_item, parent, false);
 
     Recipe recipe = dm.getAppData().getQueries().get(position);
-    
+    Log.d("recipe", recipe.getId());
     // set the title
     TextView item = (TextView) row.findViewById(R.id.recipeTitle);
     item.setText(recipe.getRecipeName());
