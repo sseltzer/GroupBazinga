@@ -5,6 +5,7 @@
     android:background="#FFFFCC"
     android:orientation="horizontal"
     android:padding="3dp" 
+    android:longClickable="true"
     xmlns:android="http://schemas.android.com/apk/res/android" 
     >
 
@@ -64,11 +65,11 @@
         android:id="@+id/sourceName"
         android:layout_width="wrap_content"
         android:layout_height="40dip"
+        android:layout_alignRight="@+id/favorate_check"
         android:layout_below="@id/recipeTitle"
         android:layout_marginTop="2dip"
-        android:layout_marginRight="40dip"
-        android:paddingLeft="20dip"
         android:layout_toRightOf="@id/authorName"
+        android:paddingLeft="20dip"
         android:text="source"
         android:textColor="#404040"
         android:textSize="12sp"

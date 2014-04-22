@@ -3,14 +3,17 @@ package edu.bazinga.recipebuddy.activities.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import edu.bazinga.recipebuddy.R;
 import edu.bazinga.recipebuddy.activities.main.listviews.FavoriteListView;
 import edu.bazinga.recipebuddy.activities.support.AboutClass;
@@ -33,8 +36,11 @@ public class RecipeBookFragment extends Fragment {
     
     rootView = inflater.inflate(R.layout.search, container, false);
     
-    
+    Toast.makeText(getActivity(),"Favorites", Toast.LENGTH_SHORT);
     listView = (ListView) rootView.findViewById(R.id.search_results);
+    listView.setVisibility(View.VISIBLE);
+
+    registerForContextMenu(listView);
     displayList();
     return rootView;
   }
@@ -88,4 +94,27 @@ public class RecipeBookFragment extends Fragment {
     return true;
   }
   ////////////////////////////////////////////////////////////////////////////////////////////////
+  
+  @Override
+  public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+    getActivity().getMenuInflater().inflate(R.menu.mylist_floatingmenu, menu);
+  }
+
+  @Override
+  public boolean onContextItemSelected(MenuItem item) {
+    AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+    int position = info.position;
+    
+    switch (item.getItemId()) {
+      case R.id.action_delete:
+        //deleteItem(position);
+        //displayItems();
+        return true;
+      case R.id.action_edit_list_name:
+    	  //renameGroceryItem(position);
+    	  //displayItems();
+        return true;
+    }
+    return super.onContextItemSelected(item);
+  }
 }

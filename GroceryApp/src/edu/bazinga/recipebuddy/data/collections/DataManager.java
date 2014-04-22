@@ -68,6 +68,7 @@ public class DataManager {
     
 
     File file = activity.getFileStreamPath(FILE_NAME);
+    //file.delete();
     if (!file.exists()) {
       Log.d("recipe", "file does not exist: " + FILE_NAME);
       createNewFile(activity);

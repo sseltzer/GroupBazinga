@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="5dp"
-        android:layout_toRightOf="@+id/groceryListRowLayout"
+        android:layout_toRightOf="@id/groceryListRowLayout"
         android:orientation="vertical" >
         
                 <!-- shoppingList -->
