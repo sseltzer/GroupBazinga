@@ -91,6 +91,7 @@ public class RecipeBookFragment extends Fragment {
     switch (item.getItemId()) {
       case R.id.action_add_favorite_list:
           i = new Intent(getActivity(), Add_to_grocerylist.class);
+          i.putExtra("index", position);
           getActivity().startActivity(i);
         return true;
       case R.id.action_remove_favorite:
