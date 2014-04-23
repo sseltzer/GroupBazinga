@@ -1,0 +1,31 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFCC"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/note_band"
+        
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/noteband" 
+        android:contentDescription="TODO"/>
+
+    <ListView
+        android:id="@+id/grocery_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignLeft="@+id/note_band"
+        android:layout_below="@+id/note_band"
+        android:divider="#FFFFCC"
+        android:dividerHeight="3dp"
+        android:padding="5dp"
+         >
+
+    </ListView>
+
+
+</RelativeLayout>

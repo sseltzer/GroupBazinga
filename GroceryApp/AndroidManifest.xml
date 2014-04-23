@@ -129,6 +129,17 @@
                 android:name="android.support.PARENT_ACTITIVY"
                 android:value="edu.bazinga.recipebuddy.activities.MainActivity"/>
         </activity>
+        <!-- Add_to_grocerylist -->
+        <activity 
+            android:name="edu.bazinga.recipebuddy.activities.main.Add_to_grocerylist"
+            android:label="@string/maps_page">
+           <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+			<meta-data 
+                android:name="android.support.PARENT_ACTITIVY"
+                android:value="edu.bazinga.recipebuddy.activities.MainActivity"/>
+        </activity>
         
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"

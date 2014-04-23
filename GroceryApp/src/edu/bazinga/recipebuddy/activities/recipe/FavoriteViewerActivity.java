@@ -85,7 +85,6 @@ public class FavoriteViewerActivity extends Activity {
   		case R.id.action_about:
   			Intent i = new Intent(this, AboutClass.class);
   			startActivity(i);
-  			finish();
   			return true;
   	}
   	return true;
