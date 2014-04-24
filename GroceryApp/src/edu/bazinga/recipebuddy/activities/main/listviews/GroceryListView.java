@@ -33,10 +33,10 @@ public class GroceryListView extends ArrayAdapter<GroceryList> {
     
     GroceryList list = dm.getAppData().getGroceryList().get(position);
     String listName = list.getListName();
-    String itemStr =  "Grocery List is Empty";
+    String itemStr =  "This list is Empty.";
     if (list.getGroceryItems().size() > 0) {
       GroceryItem item = list.getGroceryItems().get(0);
-      itemStr = StringTest(item.getItemName(), item.getQuantity());
+      itemStr = formatDisplay(item.getItemName(), list.getGroceryItems().size());
     }
     String letter = "";
     if (listName != null && !listName.equals("")) letter = listName.substring(0, 1).toUpperCase();
@@ -60,11 +60,8 @@ public class GroceryListView extends ArrayAdapter<GroceryList> {
     return row;
   }
   
-  public String StringTest(String item, String qty) {
-    if (item == null || item.isEmpty()) return "Grocery List is Empty";
-    else {
-    if (qty == null || qty.isEmpty()) return "\t" + item + "\t\tQty: 0";
-      return "\t" + item + "\t\tQTY: " + qty;
-    }
+  public String formatDisplay(String item, int qty) {
+    if (item == null || item.isEmpty()) return "This list is Empty.";
+    return "\tThis list has " + qty + " items.";
   }
 }

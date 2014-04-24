@@ -3,6 +3,7 @@ package edu.bazinga.recipebuddy.activities.main.listviews;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,27 +29,22 @@ public class GroceryItemListView extends ArrayAdapter<GroceryItem> {
   @Override
   public View getView(int position, View convertView, ViewGroup parent) {
 	  
-    ArrayList<String> items = new ArrayList<String>();
-    ArrayList<String> quantity = new ArrayList<String>();
-    for (GroceryItem item : dm.getAppData().getGroceryList().get(i).getGroceryItems()) 
-    	{
-
-    		quantity.add(item.getQuantity());
-    		items.add(item.getItemName());
-    	}
-
+    GroceryItem item = dm.getAppData().getGroceryList().get(i).getGroceryItems().get(position);
     // Inflate the layout, mainlvitem.xml, in each row.
     LayoutInflater inflater = activity.getLayoutInflater();
     View row = inflater.inflate(R.layout.itemlist_adapter, parent, false);
 
     // Declare and define the TextView, "item." This is where
     // the name of each recipe will appear.
-    TextView item = (TextView) row.findViewById(R.id.list_item);
-    item.setText(items.get(position));
-    TextView item2 = (TextView)row.findViewById(R.id.item_quantity);
-    item2.setText(quantity.get(position));
+    TextView name = (TextView) row.findViewById(R.id.list_item);
+    name.setText(item.getItemName());
+    TextView qty = (TextView)row.findViewById(R.id.item_quantity);
+    qty.setText(item.getQuantity());
 
-    
+    if (item.getStrikeAsBoolean()) {
+      name.setPaintFlags(name.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+      qty.setPaintFlags(qty.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+    }
     return row;
   }
   

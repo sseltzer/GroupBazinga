@@ -111,7 +111,7 @@ public class YummlyManager {
         item.setRating(match.optString("rating"));
         JSONObject bigUrl = match.optJSONObject("imageUrlsBySize");
         if (bigUrl != null) item.setBigUrl(bigUrl.optString("90"));
-        else item.setBigUrl("");
+        else item.setBigUrl("http://puu.sh/8jwBE.jpg");
         list.add(item);
       }
     } catch (JSONException e) {

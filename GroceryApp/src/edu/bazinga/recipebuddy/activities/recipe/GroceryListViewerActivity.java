@@ -42,11 +42,7 @@ public class GroceryListViewerActivity extends Activity {
     
     setContentView(R.layout.mylist);
     int index = getIntent().getIntExtra("index", -1);
-    if (index > -1) {
-      Toast.makeText(this, "Viewing List: " + dm.getAppData().getGroceryList().get(index).getListName(), Toast.LENGTH_LONG).show();
-    } else {
-      Toast.makeText(this, "Index could not be read.", Toast.LENGTH_LONG).show();
-    }
+    if (index < 0) Toast.makeText(this, "Index could not be read.", Toast.LENGTH_LONG).show();
     
     listIndex = index;
     getActionBar().setSubtitle(Html.fromHtml("<font color=\"#848484\">" + dm.getAppData().getGroceryList().get(index).getListName() + "</font>"));
@@ -61,7 +57,7 @@ public class GroceryListViewerActivity extends Activity {
   
   public void addItem(String name, String qty) {
 	try {
-		  dm.getAppData().getGroceryList().get(listIndex).addGroceryItem(new GroceryItem(name,qty));
+		  dm.getAppData().getGroceryList().get(listIndex).addGroceryItem(new GroceryItem(name, qty, false));
 		  dm.writeFile(this);
 	  } catch (RecipeBuddyException e) {
 		  Toast.makeText(this, "Could not write user file.", Toast.LENGTH_LONG).show();
@@ -90,7 +86,18 @@ public class GroceryListViewerActivity extends Activity {
 	  }
 	  Toast.makeText(this, itemName + " deleted", Toast.LENGTH_LONG).show();
   }
-  
+  public void toggleStrike(int i)
+  {
+    String itemName = dm.getAppData().getGroceryList().get(listIndex).getGroceryItems().get(i).getItemName();
+    try{
+      dm.getAppData().getGroceryList().get(listIndex).getGroceryItems().get(i).toggleStrike();
+      dm.writeFile(this);
+    }catch (RecipeBuddyException e) {
+      Toast.makeText(this, "Could not write user file.", Toast.LENGTH_LONG).show();
+      return;
+    }
+    Toast.makeText(this, itemName + " deleted", Toast.LENGTH_LONG).show();
+  }
   public void displayItems()
   {
 	  try{
@@ -206,6 +213,10 @@ public boolean onCreateOptionsMenu(Menu menu) {
     int position = info.position;
     
     switch (item.getItemId()) {
+      case R.id.action_strike:
+        toggleStrike(position);
+        displayItems();
+        return true;
       case R.id.action_delete_item:
         deleteItem(position);
         displayItems();

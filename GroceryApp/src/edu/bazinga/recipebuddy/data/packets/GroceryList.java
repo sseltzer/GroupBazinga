@@ -6,6 +6,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import edu.bazinga.recipebuddy.activities.support.NameFormatter;
+
 public class GroceryList {
   private String listName = null;
   private String color = null;
@@ -15,7 +17,7 @@ public class GroceryList {
     this(listName, color, new ArrayList<GroceryItem>());
   }
   public GroceryList(String listName, String color, ArrayList<GroceryItem> groceryItems) {
-    this.listName = listName;
+    this.listName = NameFormatter.format(listName);
     this.color = color;
     this.groceryItems = new ArrayList<GroceryItem>(groceryItems);
   }
@@ -24,7 +26,7 @@ public class GroceryList {
     return listName;
   }
   public void setListName(String listName) {
-    this.listName = listName;
+    this.listName = NameFormatter.format(listName);
   }
   public String getColor() {
     return color;
@@ -32,8 +34,20 @@ public class GroceryList {
   public void setColor(String color) {
     this.color = color;
   }
-  public void addGroceryItem(GroceryItem groceryItem) {
-    groceryItems.add(groceryItem);
+  public void addGroceryItem(GroceryItem newItem) {
+    for (GroceryItem item : groceryItems) {
+      if (item.getItemName().equals(newItem.getItemName())) {
+        try {
+          int qty1 = Integer.parseInt(item.getQuantity());
+          int qty2 = Integer.parseInt(newItem.getQuantity());
+          item.setQuantity(qty1 + qty2 + "");
+          return;
+        } catch(Exception e) {
+          return;
+        }
+      }
+    }
+    groceryItems.add(newItem);
   }
   public void addGroceryItems(ArrayList<GroceryItem> groceryItems) {
     this.groceryItems.addAll(groceryItems);

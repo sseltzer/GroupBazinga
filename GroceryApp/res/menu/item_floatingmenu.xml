@@ -3,6 +3,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
      
     <!-- Edit List Name  -->
+   	<item 
+	    android:id="@+id/action_strike"
+	    android:icon="@drawable/ic_action_edit"
+	    android:title="@string/action_strike_string"
+	    />
 	<item 
 	    android:id="@+id/action_edit_item"
 	    android:icon="@drawable/ic_action_edit"

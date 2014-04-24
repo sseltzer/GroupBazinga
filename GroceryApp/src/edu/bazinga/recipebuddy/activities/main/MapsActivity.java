@@ -20,7 +20,7 @@ public class MapsActivity extends Activity {
     setContentView(R.layout.maps_layout);
     
     // Formats the Main title of the activity
-    getActionBar().setTitle(Html.fromHtml("<font face =\"Arial\" color=\"#0174DF\">" + "FIND " + "</font><font color=\"#DF7401\">" + "A STORE NEEAR YOU" + "</font>"));
+    getActionBar().setTitle(Html.fromHtml("<font face =\"Arial\" color=\"#0174DF\">" + "FIND " + "</font><font color=\"#DF7401\">" + "A STORE NEAR YOU" + "</font>"));
     layoutView = (LinearLayout) findViewById(R.id.mapLayout);
     mapManager = MapsManager.requestInstance(this, savedInstanceState);
     mapManager.onCreate(this, savedInstanceState);
